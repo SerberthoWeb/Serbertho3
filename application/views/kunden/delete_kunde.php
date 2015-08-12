@@ -18,7 +18,7 @@
         <?php echo $row->fname . ' ' . $row->lname; ?>
         <br /><br />
         <?php echo form_submit('submit', $this->lang->line('common_form_elements_action_delete'), 'class="btn btn-primary"'); ?>
-        or <? echo anchor('kunden',$this->lang->line('common_form_elements_cancel'));?>
+        <?php echo anchor('kunden',$this->lang->line('common_form_elements_cancel'), 'class="btn btn-primary"');?>
         <?php echo form_hidden('id', $row->kunde_id); ?>
     <?php endforeach; ?>
 <?php echo form_close() ; ?>

@@ -15,9 +15,9 @@
 	<div class="span8"> 
 		<?php echo form_open('reiseort/edit_reise','role="form" class="form"') ; ?>
 	    <div class="form-group">
-	      <?php echo form_error('ort'); ?>
-	      <label for="ort"><?php echo $this->lang->line('ort');?></label>
-	      <?php echo form_input($ort); ?>
+	      <?php echo form_error('reiseort'); ?>
+	      <label for="ort"><?php echo $this->lang->line('reiseort');?></label>
+	      <?php echo form_input($reiseort); ?>
 	    </div>
 	    <div class="form-group">
 	      <?php echo form_error('kzbeschreib'); ?>
@@ -40,4 +40,3 @@
 		<?php echo form_close() ; ?>
 	</div>
 
-</div>

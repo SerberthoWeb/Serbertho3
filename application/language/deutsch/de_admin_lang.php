@@ -143,24 +143,27 @@ $lang['common_form_elements_new_reise'] = "Neue Reise erstellen";
 
 
 //Tour
-$lang['tour_form_instruction_edit'] = "Bluuuuub";
+
 $lang['common_form_elements_new_tour'] = "Neue Tour erfassen";
 
-$lang['tour_form_instruction_edit'] = "Tour bearbeiten";
 $lang['tour_teilnehmer_liste'] = "Teilnehmerliste";
 $lang['tour_gesamt_kosten'] = "Gesamtkosten";
-$lang['ort'] = "Reiseort";
+$lang['reiseort'] = "Reiseort";
+$lang['tour_title'] = "Tourname";
+$lang['reiseabfahrt'] = "Reiseabfahrt";
+$lang['rückfahrtsankunft'] = "Rückfahrtsankunft";
+$lang['reiseleiter'] = "Reiseleiter";
 $lang['teilnehmerliste'] = "Teilnehmerlistennummer";
-
-
-
+$lang['teilnehmerliste'] = "Teilnehmerlistennummer";
 
 
 //PDF
 $lang['common_form_elements_make_pdf'] = "PDF erstellen";
 
 
-
+//Kostenstelle
+$lang['kostenstelle_name'] = "Bezeichnung der Kostenstelle";
+$lang['kosten_form_instruction_new'] = "Kostenstelle erfassen";
 
 //Form instruction
 $lang['kosten_form_instruction_save'] = "Kosten erfassen";

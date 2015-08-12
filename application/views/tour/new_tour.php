@@ -10,7 +10,7 @@
 <div class="page-header">
   <h1><?php echo $page_heading ; ?></h1>
 </div> 
-  <p class="lead"><?php echo $this->lang->line('tour_form_instruction_edit');?></p>
+  <p class="lead"><?php echo $this->lang->line('common_form_elements_new_tour');?></p>
   <div class="span8"> 
 <?php echo form_open('tour/new_tour','role="form" class="form"') ; ?>
       
@@ -38,7 +38,7 @@
     
    <!-- Abfahrt -->   
       
-  <label for="start_d"><?php echo $this->lang->line('reiseankunft');?></label>
+  <label for="start_d"><?php echo $this->lang->line('reiseabfahrt');?></label>
     <div class="row">
       <div class="form-group">
         <div class="col-md-2">
@@ -81,7 +81,7 @@
        <!-- Ankunft -->          
       
       
-    <label for="sunset_d"><?php echo $this->lang->line('job_sunset_date');?></label>
+    <label for="sunset_d"><?php echo $this->lang->line('rückfahrtsankunft');?></label>
     <div class="row">
       <div class="form-group">
         <div class="col-md-2">
@@ -129,7 +129,7 @@
 
    <div class="form-group">
       <?php echo form_error('usr_id'); ?>
-      <label for="usr_id"><?php echo $this->lang->line('usr_id');?></label>
+      <label for="usr_id"><?php echo $this->lang->line('reiseleiter');?></label>
       <select name="usr_id" class="form-control">
       <?php foreach ($users->result() as $row) : ?>
         <option value="<?php echo $row->usr_id ; ?>"><?php echo $row->usr_lname . ' ' . $row->usr_fname ; ?></option>
@@ -139,11 +139,12 @@
 
 
     <div class="form-group">
+        <br/>
       <button type="submit" class="btn btn-primary"><?php echo $this->lang->line('common_form_elements_go');?></button>   <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/tour';return false;"><?php echo $this->lang->line('common_form_elements_cancel');?></button> 
     </div> 
 <?php echo form_close() ; ?>
   </div>
-</div>
+
 
 
 

@@ -30,9 +30,7 @@
                     
 
                           
-		          <td><?php echo anchor('tour/edit_tour/'.
-		            $row->tour_id,$this->lang->line('common_form_elements_action_edit')) . 
-		            ' ' . anchor('tour/delete_tour/'.
+		          <td><?php echo anchor('tour/delete_tour/'.
 		            $row->tour_id,$this->lang->line('common_form_elements_action_delete')) ; ?>
 		      	  </td>
 		        </tr>	        

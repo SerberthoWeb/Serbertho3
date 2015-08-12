@@ -10,7 +10,7 @@
 <div class="page-header">
   <h1><?php echo $page_heading ; ?></h1>
 </div> 
-	<p class="lead"><?php echo $this->lang->line('kunde_form_instruction_edit');?></p>
+	<p class="lead"><?php echo $this->lang->line('kunde_form_instruction_new');?></p>
 
 	<div class="span8"> 
 		<?php echo form_open('kunden/edit_kunde','role="form" class="form"') ; ?>
@@ -54,9 +54,9 @@
 	  
 
 	    <div class="form-group">
-	      <button type="submit" class="btn btn-primary"><?php echo $this->lang->line('common_form_elements_go');?></button> oder <?php echo anchor('kunden',$this->lang->line('common_form_elements_cancel'));?>
+                <br/>
+	      <button type="submit" class="btn btn-primary"><?php echo $this->lang->line('common_form_elements_go');?></button>  <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/kunden';return false;"><?php echo $this->lang->line('common_form_elements_cancel');?></button> 
 	    </div>
 		<?php echo form_close() ; ?>
 	</div>
 
-</div>

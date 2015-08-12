@@ -4,8 +4,8 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="input-group">
-            <input type="text" class="form-control" name="search_string" placeholder="<?php echo $this->lang->line('jobs_view_search'); ?>">
-            <span class="input-group-btn">
+              <input type="text" style=" width: 90%; float: left;" class="form-control" name="search_string" placeholder="<?php echo $this->lang->line('jobs_view_search'); ?>">
+            <span class="input-group-btn" style="float: left;">
               <button class="btn btn-default" type="submit"><?php echo $this->lang->line('jobs_view_search'); ?></button>
             </span>
           </div><!-- /input-group -->

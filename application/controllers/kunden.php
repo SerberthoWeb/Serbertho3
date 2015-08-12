@@ -126,7 +126,7 @@ public function edit_kunde() {
       $id = $this->uri->segment(3); 
     }
     
-    $data['page_heading'] = 'Kunde bearbeiten';                
+    $data['page_heading'] = 'Kunde';                
     //Bestätigung beginnt
     if ($this->form_validation->run() == FALSE) {      
       $query = $this->Kunden_model->get_kunde_details($id);

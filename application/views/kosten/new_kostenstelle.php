@@ -2,7 +2,7 @@
 <div class="page-header">
  <h1><?php echo $page_heading ; ?></h1>
 </div> 
-  <p class="lead"><?php echo $this->lang->line('kosten_form_instruction_save');?></p>
+  <p class="lead"><?php echo $this->lang->line('kosten_form_instruction_new');?></p>
   <div class="span8"> 
 <?php echo form_open('kosten/new_kostenstelle','role="form" class="form"') ; ?> 
 
@@ -14,10 +14,11 @@
     </div>    
       
           <div class="form-group">
+              <br/>
       <button type="submit" class="btn btn-primary"><?php echo $this->lang->line('common_form_elements_go');?></button>   <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/kosten/kostenstelle';return false;"><?php echo $this->lang->line('common_form_elements_cancel');?></button> 
     </div> 
 <?php echo form_close() ; ?>
   </div>
-</div>
+
 
 

@@ -15,10 +15,10 @@
         <p><?php echo validation_errors(); ?></p>
     <?php endif; ?>
     <?php foreach ($query->result() as $row) : ?>
-        <?php echo $row->reiseabfahrt ; ?>
+        <?php echo $row->tour_title ; ?>
         <br /><br />
         <?php echo form_submit('submit', $this->lang->line('common_form_elements_action_delete'), 'class="btn btn-primary"'); ?>
-        or <? echo anchor('tour',$this->lang->line('common_form_elements_cancel'));?>
+        <?php echo anchor('tour',$this->lang->line('common_form_elements_cancel'), 'class="btn btn-primary"');?>
         <?php echo form_hidden('id', $row->tour_id); ?>
     <?php endforeach; ?>
 <?php echo form_close() ; ?>

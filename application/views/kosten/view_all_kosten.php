@@ -1,21 +1,21 @@
 <h2><?php echo $page_heading ; ?></h2>
-
+<br/>
  <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/kosten/new_kosten';return false;"><?php echo $this->lang->line('common_form_elements_new_kosten');?></button>         
              <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/kosten/kostenstelle';return false;"><?php echo $this->lang->line('common_form_elements_kostenstelle');?></button>          
-            <button class="btn btn-primary" style="float: right;" onClick="window.location.href = '<?php echo base_url();?>index.php/makepdf/kosten';return false;"><?php echo $this->lang->line('common_form_elements_make_pdf');?></button>
+            <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/makepdf/kosten';return false;"><?php echo $this->lang->line('common_form_elements_make_pdf');?></button>
 
-<br/>
+
   
     <?php echo form_open('kosten/index') ; ?>
-      
+      <br/>
         <div class="col-lg-12">
           <div class="input-group">
-            <input type="text" class="form-control" name="search_string" placeholder="<?php echo $this->lang->line('jobs_view_search'); ?>">
-            <span class="input-group-btn">
+            <input type="text" style=" width: 90%; float: left;" class="form-control" name="search_string" placeholder="<?php echo $this->lang->line('jobs_view_search'); ?>">
+            <span class="input-group-btn" style="float: left;">
               <button class="btn btn-default" type="submit"><?php echo $this->lang->line('jobs_view_search'); ?></button>
             </span>
           </div><!-- /input-group -->
-        </div><!-- /.col-lg-6 -->
+        </div>
  
     <?php echo form_close() ; ?>
 

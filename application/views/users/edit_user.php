@@ -69,9 +69,9 @@
 	    <?php echo form_hidden($id); ?>
 
 	    <div class="form-group">
-	      <button type="submit" class="btn btn-primary"><?php echo $this->lang->line('common_form_elements_go');?></button><button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/users';return false;"><?php echo $this->lang->line('common_form_elements_cancel');?></button> 
+                <br/>
+	      <button type="submit" class="btn btn-primary"><?php echo $this->lang->line('common_form_elements_go');?></button>  <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/users';return false;"><?php echo $this->lang->line('common_form_elements_cancel');?></button> 
 	    </div>
 		<?php echo form_close() ; ?>
 	</div>
-
-</div>
+     
