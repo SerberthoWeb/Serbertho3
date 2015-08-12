@@ -4,7 +4,7 @@
  * Bereitet die Daten für die PDF-Ausgabe vor.
  */-->
 
-
+<h2><?php echo $page_heading ; ?></h2>
 <div class="table">
 <table class="table">
     <thead>
