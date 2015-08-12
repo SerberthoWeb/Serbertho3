@@ -17,8 +17,8 @@
     <?php foreach ($query->result() as $row) : ?>
         <?php echo $row->usr_fname . ' ' . $row->usr_lname; ?>
         <br /><br />
-        <?php echo form_submit('submit', $this->lang->line('common_form_elements_action_delete'), 'class="btn btn-success"'); ?>
-        <button class="btn btn-success" onClick="window.location.href = '<?php echo base_url();?>index.php/users';return false;"><?php echo $this->lang->line('common_form_elements_cancel');?></button>
+        <?php echo form_submit('submit', $this->lang->line('common_form_elements_action_delete'), 'class="btn btn-primary"'); ?>
+        <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/users';return false;"><?php echo $this->lang->line('common_form_elements_cancel');?></button>
         <?php echo form_hidden('id', $row->usr_id); ?>
     <?php endforeach; ?>
 <?php echo form_close() ; ?>

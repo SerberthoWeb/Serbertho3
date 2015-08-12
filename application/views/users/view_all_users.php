@@ -39,8 +39,8 @@
 		<?php endif; ?>
                      <div class="form-group">
     
-                <button class="btn btn-success" onClick="window.location.href = '<?php echo base_url();?>index.php/users/new_user';return false;"><?php echo $this->lang->line('usr_new_user');?></button>     
-                  <button class="btn btn-success" style="float: right;" onClick="window.location.href = '<?php echo base_url();?>index.php/makepdf/users';return false;"><?php echo $this->lang->line('common_form_elements_make_pdf');?></button> 
+                <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/users/new_user';return false;"><?php echo $this->lang->line('usr_new_user');?></button>     
+                  <button class="btn btn-primary" style="float: right;" onClick="window.location.href = '<?php echo base_url();?>index.php/makepdf/users';return false;"><?php echo $this->lang->line('common_form_elements_make_pdf');?></button> 
  </div>
                      </tbody>
 

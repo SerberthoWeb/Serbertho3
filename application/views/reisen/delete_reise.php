@@ -17,7 +17,7 @@
     <?php foreach ($query->result() as $row) : ?>
         <?php echo $row->ort; ?>
         <br /><br />
-        <?php echo form_submit('submit', $this->lang->line('common_form_elements_action_delete'), 'class="btn btn-success"'); ?>
+        <?php echo form_submit('submit', $this->lang->line('common_form_elements_action_delete'), 'class="btn btn-primary"'); ?>
         or <?php echo anchor('reisen/reisen',$this->lang->line('common_form_elements_cancel'));?>
         <?php echo form_hidden('id', $row->reiseort_id); ?>
     <?php endforeach; ?>

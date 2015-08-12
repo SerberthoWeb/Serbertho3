@@ -22,7 +22,7 @@
 			<?php foreach ($query->result() as $row) : ?>
 		        <tr>
 		          <td><?php echo $row->reiseort_id ; ?></td>
-		          <td><?php echo $row->ort; ?></td>
+		          <td><?php echo $row->reiseort; ?></td>
 		          <td><?php echo $row->kzbeschreib ; ?></td>
                           <td><?php echo $row->preis ; ?></td>
 
@@ -40,7 +40,7 @@
 		<?php endif; ?>
                 
                     <div class="form-group">
-      <button class="btn btn-success" onClick="window.location.href = '<?php echo base_url();?>index.php/reisen/new_reise';return false;"><?php echo $this->lang->line('common_form_elements_new_reise');?></button>         
+      <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/reisen/new_reise';return false;"><?php echo $this->lang->line('common_form_elements_new_reise');?></button>         
     </div>
     
 	</tbody>
