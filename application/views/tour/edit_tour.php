@@ -35,7 +35,7 @@
 	  
 
 	    <div class="form-group">
-	      <button type="submit" class="btn btn-success"><?php echo $this->lang->line('common_form_elements_go');?></button> oder <?php echo anchor('kunden',$this->lang->line('common_form_elements_cancel'));?>
+	      <button type="submit" class="btn btn-primary"><?php echo $this->lang->line('common_form_elements_go');?></button> oder <?php echo anchor('kunden',$this->lang->line('common_form_elements_cancel'));?>
 	    </div>
 		<?php echo form_close() ; ?>
 	</div>

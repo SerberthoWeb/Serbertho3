@@ -54,7 +54,7 @@
 	    <?php echo form_hidden($id); ?>
 
 	    <div class="form-group">
-	      <button type="submit" class="btn btn-success"><?php echo $this->lang->line('common_form_elements_go');?></button><button type="submit" class="btn btn-success"><?php echo anchor('users',$this->lang->line('common_form_elements_cancel'));?><button type="submit" class="btn btn-success"><?php echo anchor('me/change_password/','Change Password') ; ?>
+	      <button type="submit" class="btn btn-primary"><?php echo $this->lang->line('common_form_elements_go');?></button><button type="submit" class="btn btn-primary"><?php echo anchor('users',$this->lang->line('common_form_elements_cancel'));?><button type="submit" class="btn btn-primary"><?php echo anchor('me/change_password/','Change Password') ; ?>
 	    </div>
 		<?php echo form_close() ; ?>
 	</div>

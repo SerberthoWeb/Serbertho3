@@ -7,7 +7,7 @@
     <div class="col-sm-12 blog-main">
       <div class="blog-post">
 
-                      <button class="btn btn-success" style="float: right;" onClick="window.location.href = '<?php echo base_url();?>index.php/kosten/new_kosten';return false;"><?php echo $this->lang->line('common_form_elements_make_pdf');?></button>
+                      <button class="btn btn-primary" style="float: right;" onClick="window.location.href = '<?php echo base_url();?>index.php/kosten/new_kosten';return false;"><?php echo $this->lang->line('common_form_elements_make_pdf');?></button>
 
                       
 
