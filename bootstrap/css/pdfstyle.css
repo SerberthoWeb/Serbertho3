@@ -1,0 +1,16 @@
+/* 
+    Document   : pdfstyle
+    Created on : 10.08.2015, 16:09:28
+    Author     : Serkan
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+.table{
+    align: center;
+    background: red;
+    
+}
