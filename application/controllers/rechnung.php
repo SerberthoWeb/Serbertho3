@@ -53,7 +53,7 @@ $page_data['page_heading'] = 'Übersicht';
     $page_data['query'] = $this->Rechnung_model->get_uebersicht($page_data['tour_id']);
     
 
-    if ($page_data['query']->num_rows() == 1) {
+    if ($page_data['query']->num_rows() != 0) {
       foreach ($page_data['query']->result() as $row) {
         $page_data['tour_title'] = $row->tour_title;
         $page_data['tour_id'] = $row->tour_id;

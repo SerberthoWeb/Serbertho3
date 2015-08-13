@@ -1,3 +1,4 @@
+<h2><?php echo $page_heading ; ?></h2>
 <div class="page-header">
   <h1>
     <?php echo form_open('rechnung/index') ; ?>

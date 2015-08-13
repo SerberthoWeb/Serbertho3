@@ -1,11 +1,11 @@
 <h2><?php echo $page_heading ; ?></h2>
-<br/>
+<br/>    
  <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/kosten/new_kosten';return false;"><?php echo $this->lang->line('common_form_elements_new_kosten');?></button>         
              <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/kosten/kostenstelle';return false;"><?php echo $this->lang->line('common_form_elements_kostenstelle');?></button>          
             <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/makepdf/kosten';return false;"><?php echo $this->lang->line('common_form_elements_make_pdf');?></button>
 
 
-  
+      
     <?php echo form_open('kosten/index') ; ?>
       <br/>
         <div class="col-lg-12">
@@ -16,9 +16,9 @@
             </span>
           </div><!-- /input-group -->
         </div>
- 
-    <?php echo form_close() ; ?>
 
+    <?php echo form_close() ; ?>
+     
 
 
 <!--/*
@@ -29,6 +29,7 @@
 
 
 <table class="table table-bordered">
+    <br/><br/>
     <thead>
         <tr>
 <!--          <th>#</th>-->
