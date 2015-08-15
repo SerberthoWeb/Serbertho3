@@ -33,6 +33,7 @@ class Reise_model extends CI_Model {
       }  
    }
    
+
    //----------------------------------------------------------------------------
    
    
@@ -82,8 +83,8 @@ class Reise_model extends CI_Model {
   //----------------------------------------------------------------------------
       
       
-  function count_results($ort) {
-    $this->db->where('reiseort', $ort);
+  function count_results($reiseort) {
+    $this->db->where('reiseort', $reiseort);
     $this->db->from('reiseort');
     return $this->db->count_all_results();
   } 

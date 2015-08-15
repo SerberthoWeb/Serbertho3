@@ -49,9 +49,20 @@
 	      <label for="email"><?php echo $this->lang->line('email');?></label>
 	      <?php echo form_input($email); ?>
 	    </div>   
+     
+            
+                      <div class="form-group">
+      <?php echo form_error('tour_id'); ?>
+      <label for="tour_id"><?php echo $this->lang->line('reise');?></label>
+      <select name="tour_id" class="form-control">
+      <?php foreach ($tour->result() as $row) : ?>
+        <option value="<?php echo $row->tour_id ; ?>"><?php echo $row->tour_title ; ?></option>
+      <?php endforeach ; ?>
+      </select>
+    </div>    
 	    
 
-	  
+	       <?php echo form_hidden($id); ?>
 
 	    <div class="form-group">
                 <br/>

@@ -36,7 +36,7 @@
           <th>Kostenstelle</th>
           <th>Reise</th>
           <th>Kosten</th>
-           <th>Datum</th>
+           <th>Erfassungsdatum</th>
 
 	              
         </tr>

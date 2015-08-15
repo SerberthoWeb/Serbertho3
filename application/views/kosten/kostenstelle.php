@@ -2,7 +2,7 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-        <th>#</th>
+      
           <th>Kostenstelle</th>
           <th>Aktionen</th>
 	              
@@ -12,13 +12,11 @@
     	<?php if ($query->num_rows() > 0) : ?>
 			<?php foreach ($query->result() as $row) : ?>
 		        <tr>
-<td><?php echo $row->kostenstelle_id ; ?></td>
 		          <td><?php echo $row->kostenstelle_name ; ?></td>
-                           <td><?php echo anchor('kostenstelle/delete_kostenstelle/'.
+                          <td><?php echo anchor('kostenstelle/delete_kostenstelle/'.
 		            $row->kostenstelle_id,$this->lang->line('common_form_elements_action_delete')); ?>
 		      	  </td>
-
-		        </tr>	        
+                        </tr>	        
 		    <?php endforeach ; ?>
 		<?php else : ?>
 	        <tr>

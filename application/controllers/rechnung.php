@@ -51,7 +51,9 @@ $page_data['page_heading'] = 'Übersicht';
     }
 
     $page_data['query'] = $this->Rechnung_model->get_uebersicht($page_data['tour_id']);
-    
+    $page_data['querykunden'] = $this->Rechnung_model->get_uebersicht_kunden($page_data['tour_id']);
+     $page_data['querykosten'] = $this->Rechnung_model->get_gesamtkosten($page_data['tour_id']);
+    $page_data['queryeinnahmen'] = $this->Rechnung_model->get_preis($page_data['tour_id']);
 
     if ($page_data['query']->num_rows() != 0) {
       foreach ($page_data['query']->result() as $row) {
@@ -66,7 +68,7 @@ $page_data['page_heading'] = 'Übersicht';
       redirect('rechnung');    
     }
    
-   
+   $page_data['page_heading'] = 'Übersicht';
     $this->load->view('common/header');
     $this->load->view('nav/top_nav');
     $this->load->view('rechnung/apply', $page_data); 
@@ -179,7 +181,7 @@ $page_data['page_heading'] = 'Übersicht';
        
    
 }
-/* End of file jobs.php */
-/* Location: ./application/controllers/jobs.php */
+/* End of file rechnung.php */
+/* Location: ./application/controllers/rechnung.php */
   
   

@@ -17,7 +17,7 @@
       
           <div class="form-group">
       <?php echo form_error('kostenstelle_id'); ?>
-      <label for="kostenstelle_id"><?php echo $this->lang->line('type');?></label>
+      <label for="kostenstelle_id"><?php echo $this->lang->line('kostenstelle');?></label>
       <select name="kostenstelle_id" class="form-control">
       <?php foreach ($kostenstelle->result() as $row) : ?>
         <option value="<?php echo $row->kostenstelle_id ; ?>"><?php echo $row->kostenstelle_name ; ?></option>
@@ -35,7 +35,7 @@
 
           <div class="form-group">
       <?php echo form_error('tour_id'); ?>
-      <label for="tour_id"><?php echo $this->lang->line('type');?></label>
+      <label for="tour_id"><?php echo $this->lang->line('reise');?></label>
       <select name="tour_id" class="form-control">
       <?php foreach ($tour->result() as $row) : ?>
         <option value="<?php echo $row->tour_id ; ?>"><?php echo $row->tour_title ; ?></option>

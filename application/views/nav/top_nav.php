@@ -22,21 +22,21 @@
             <?php endif ; ?>
               
             <?php if ($this->session->userdata('usr_access_level') == 2) : ?>
-              <li <?php if ($this->uri->segment(2) == 'me') {echo 'class="active"';} ; ?>><?php echo anchor('users/me', $this->lang->line('top_nav_profil')) ; ?></li>
+              <li <?php if ($this->uri->segment(1) == 'me') {echo 'class="active"';} ; ?>><?php echo anchor('users/me', $this->lang->line('top_nav_profil')) ; ?></li>
               
             <?php else : ?>
 
             <?php endif ; ?> 
               
-              <li <?php if ($this->uri->segment(2) == 'kosten') {echo 'class="active"';} ; ?>><?php echo anchor('kosten', $this->lang->line('top_nav_kosten')) ; ?></li>
-              <li <?php if ($this->uri->segment(2) == 'kunden') {echo 'class="active"';} ; ?>><?php echo anchor('kunden', $this->lang->line('top_nav_kunden')) ; ?></li>
+              <li <?php if ($this->uri->segment(1) == 'kosten') {echo 'class="active"';} ; ?>><?php echo anchor('kosten', $this->lang->line('top_nav_kosten')) ; ?></li>
+              <li <?php if ($this->uri->segment(1) == 'kunden') {echo 'class="active"';} ; ?>><?php echo anchor('kunden', $this->lang->line('top_nav_kunden')) ; ?></li>
 
-              <li <?php if ($this->uri->segment(2) == 'reisen') {echo 'class="active"';} ; ?>><?php echo anchor('reisen', $this->lang->line('top_nav_reisen')) ; ?></li>
+              <li <?php if ($this->uri->segment(1) == 'reisen') {echo 'class="active"';} ; ?>><?php echo anchor('reisen', $this->lang->line('top_nav_reisen')) ; ?></li>
 
-              <li <?php if ($this->uri->segment(2) == '') {echo 'class="active"';} ; ?>><?php echo anchor('tour', $this->lang->line('top_nav_tour')) ; ?></li>
+              <li <?php if ($this->uri->segment(1) == 'tour') {echo 'class="active"';} ; ?>><?php echo anchor('tour', $this->lang->line('top_nav_tour')) ; ?></li>
         
               
-              <li <?php if ($this->uri->segment(2) == '') {echo 'class="active"';} ; ?>><?php echo anchor('rechnung', $this->lang->line('top_nav_Kosten_erfassen')) ; ?></li>
+              <li <?php if ($this->uri->segment(1) == 'rechnung') {echo 'class="active"';} ; ?>><?php echo anchor('rechnung', $this->lang->line('top_nav_Kosten_erfassen')) ; ?></li>
                   
               
               

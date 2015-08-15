@@ -21,7 +21,9 @@
   <tr>
     <td><?php echo  $row->tour_title ; ?><br />
     </td>
-    <td>Reiseabfahrt: <?php echo $row->reiseabfahrt ; ?><br />Gesamtkosten &pound;
+        <td>Abfahrt: <?php echo  $row->reiseabfahrt ; ?><br />
+    </td>
+        <td>Rückankunft: <?php echo  $row->reiseankunft ; ?><br />
     </td>
     <td><?php echo anchor ('rechnung/apply/'.$row->tour_id, $this->lang->line('jobs_view_apply')) ; ?>
     </td>                    

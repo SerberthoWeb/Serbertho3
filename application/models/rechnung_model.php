@@ -45,23 +45,19 @@ if ($search_string == null) {
 //
 //              `tour`.`tour_id` = ? 
 //              ";
-  $query = "SELECT * FROM `tour`, `reiseort`, `users`, `kosten`, `kostenstelle` WHERE 
+  $query = "SELECT * FROM `tour`, `reiseort`, `users`, `kosten`, `kostenstelle`  WHERE 
       `reiseort`.`reiseort_id` = `tour`.`reiseort_id` AND 
       `users`.`usr_id` = `tour`.`usr_id` AND 
       `kosten`.`tour_id` = `tour`.`tour_id` AND 
       `kostenstelle`.`kostenstelle_id` = `kosten`.`kostenstelle_id` AND 
-     
 
-
-
-
-      `tour`.`tour_id` =  ".$tour_id ;
+      `tour`.`tour_id` =  ".$tour_id ;  //anfällig für hacken - mit ? geschützt - abklären
               
                 
         
-//  $result = $this->db->query($query, array($tour_id));
+// $result = $this->db->query($query, array($tour_id));
   
- $result = $this->db->query($query);
+$result = $this->db->query($query);
      
      
     if ($result) {
@@ -70,11 +66,78 @@ if ($search_string == null) {
       return false;
     }    
   } 
+     //---------------------------------------------------------------------------- 
+  
+  
+  
+      function get_uebersicht_kunden($tour_id) {
 
+  $query = "SELECT * FROM `tour`, `kunde` WHERE 
+      
+      `kunde`.`tour_id` = `tour`.`tour_id` AND 
+     
 
-    
+      `tour`.`tour_id` =  ".$tour_id ;  //anfällig für hacken - mit ? geschützt - abklären
+                    
+ $result = $this->db->query($query, array($tour_id));
+
+     
+    if ($result) {
+      return $result;
+    } else {
+      return false;
+    }    
+  } 
+
       //---------------------------------------------------------------------------- 
 
+        function get_gesamtkosten($tour_id) {
+
+$query = "SELECT `kosten`,
+            SUM(`kosten`) AS TotalKosten
+            FROM `kosten`
+            WHERE `kosten`.`tour_id` = ?
+            GROUP BY `tour_id`";
+   
+      
+$result = $this->db->query($query, array($tour_id));
+
+     
+    if ($result) {
+      return $result;
+    } else {
+      return false;
+    }    
+  } 
+   
+
+  
+   //---------------------------------------------------------------------------- 
+  
+  
+  
+          function get_preis($tour_id) {
+
+$query = "SELECT * FROM `tour`, `reiseort` WHERE 
+         `reiseort`.`reiseort_id` = `tour`.`tour_id` AND 
+`tour`.`tour_id` =  ".$tour_id ;
+   
+      
+$result = $this->db->query($query, array($tour_id));
+
+     
+    if ($result) {
+      return $result;
+    } else {
+      return false;
+    }    
+  } 
+  
+
+  
+   //---------------------------------------------------------------------------- 
+  
+  
   
     function get_reiseort() {
     return $this->db->get('reiseort');
@@ -91,23 +154,7 @@ if ($search_string == null) {
   //---------------------------------------------------------------------------- 
   
 
-  function get_gesamtkosten($id) {
-      $this->db->where('kosten_id', $id);   
-      $result = $this->db->get('kosten');
-      
-    if ($result) {      
-        return $result;    
-        
-    } else {      
-        return false;    
-        
-    }
-  }
-  
  
-    
-  
-   //---------------------------------------------------------------------------- 
   
 
           
@@ -131,13 +178,7 @@ if ($search_string == null) {
   
   
    //---------------------------------------------------------------------------- 
-  function save_kosten($save_data) {
-    if ($this->db->insert('kosten', $save_data)) {
-      return $this->db->insert_id();
-    } else {
-      return false;
-    }
-  }
+
   
   
   

@@ -31,7 +31,11 @@
       <label for="plz"><?php echo $this->lang->line('plz');?></label>
       <?php echo form_input($plz); ?>
     </div>   
-
+	    <div class="form-group">
+	    	<?php echo form_error('ort'); ?>
+	      <label for="ort"><?php echo $this->lang->line('ort');?></label>
+	      <?php echo form_input($ort); ?>
+	    </div> 
 
 
     <div class="form-group">
@@ -44,6 +48,15 @@
       <?php echo form_input($email); ?>
     </div>   
 
+                <div class="form-group">
+      <?php echo form_error('tour_id'); ?>
+      <label for="tour_id"><?php echo $this->lang->line('reise');?></label>
+      <select name="tour_id" class="form-control">
+      <?php foreach ($tour->result() as $row) : ?>
+        <option value="<?php echo $row->tour_id ; ?>"><?php echo $row->tour_title ; ?></option>
+      <?php endforeach ; ?>
+      </select>
+    </div>    
 
     <div class="form-group">
       <button type="submit" class="btn btn-primary"><?php echo $this->lang->line('common_form_elements_go');?></button>   <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/kunden';return false;"><?php echo $this->lang->line('common_form_elements_cancel');?></button> 

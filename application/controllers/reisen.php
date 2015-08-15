@@ -87,7 +87,7 @@ public function new_reise() {
       );
 
       if ($this->Reise_model->process_create_reise($data)) {
-        redirect('reiseort');
+        redirect('reisen');
       } else {
 
       }
@@ -102,6 +102,7 @@ public function new_reise() {
 
 public function edit_reise() {
   //Validationsregeln setzen
+    $this->form_validation->set_rules('reiseort_id', $this->lang->line('reiseort_id'), 'required|min_length[1]|max_length[125]');
      $this->form_validation->set_rules('reiseort', $this->lang->line('reiseort'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('kzbeschreib', $this->lang->line('kzbeschreib'), 'required|min_length[1]|max_length[500]');
     $this->form_validation->set_rules('preis', $this->lang->line('preis'), 'required|min_length[1]|max_length[125]');
@@ -136,7 +137,6 @@ public function edit_reise() {
       $data['reiseort'] = array('name' => 'reiseort', 'class' => 'form-control', 'id' => 'reiseort', 'value' => set_value('reiseort', $reiseort), 'maxlength'   => '100', 'size' => '35');
       $data['kzbeschreib'] = array('name' => 'kzbeschreib', 'class' => 'form-control', 'id' => 'kzbeschreib', 'value' => set_value('kzbeschreib', $kzbeschreib), 'maxlength'   => '3000', 'rows' => '6', 'cols' => '35');
       $data['preis'] = array('name' => 'preis', 'class' => 'form-control', 'id' => 'preis', 'value' => set_value('preis', $preis), 'maxlength'   => '100', 'size' => '35');
-
       $data['id'] = array('reiseort_id' => set_value('reiseort_id', $reiseort_id));
       
       $this->load->view('common/header', $data);

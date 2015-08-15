@@ -64,6 +64,7 @@ class Users_model extends CI_Model {
     
  }
  
+ 
  //----------------------------------------------------------------------------
  
  
@@ -179,27 +180,7 @@ class Users_model extends CI_Model {
 //----------------------------------------------------------------------------
   
   
-  //Test Sortierung
   
- 
-public function usersdata($per_page,$offset,$sortfield,$order) {
-		
-		$this->db->select('*')->from('users');
-		$this->db->order_by("$sortfield", "$order");
-		$this->db->limit($per_page,$offset);
-		$query_result = $this->db->get();		
-		
-		if($query_result->num_rows() > 0) {
-			foreach ($query_result->result_array() as $row)
-			{
-				$sdata[] = array('firstName' => $row['usr_fname'],'lastName' => $row['usr_uname'],'email' => $row['usr_email'],'id' => $row['usr_id']);
-			}				
-			return $sdata;
-		} else {
-			return false;	
-		}
-	}
-
 }
 
 

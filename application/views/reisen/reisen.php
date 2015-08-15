@@ -23,7 +23,7 @@
 			<?php foreach ($query->result() as $row) : ?>
 		        <tr>
 		          <td><?php echo $row->reiseort_id ; ?></td>
-		          <td><?php echo $row->ort; ?></td>
+		          <td><?php echo $row->reiseort; ?></td>
 		          <td><?php echo $row->kzbeschreib ; ?></td>
                           <td><?php echo $row->preis ; ?></td>
 		          <td><?php echo anchor('reiseort/edit_reise/'.

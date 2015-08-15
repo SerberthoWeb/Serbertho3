@@ -132,6 +132,11 @@ $lang['common_form_elements_new_reise'] = "Neue Reise erstellen";
 
 
 //Kosten
+$lang['kosten'] = "Kosten";
+$lang['kostenstelle'] = "Kostenstelle";
+$lang['reise'] = "Reiseort";
+$lang['datum'] = "Erfassungsdatum";
+
 
 
 

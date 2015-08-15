@@ -267,43 +267,7 @@ public function edit_user() {
   
   //--------------------------------------------------------------------------
 
-//Test mit Sortierung
-  
-  
-
-public function users($page_num=1,$sortfield='id',$order='asc') {		
-		
-	$this->load->model('Users_model');	//first i loaded the model	
-	
-	//pagination
-	/* Get the page number from the URI (/index.php/pagination/index/{pageid}) */
-	$page_number = $this->uri->segment(2);	// it returns the 3rd segement from the url.In my requirement http://localhost:8080/ci/admin/users/2 is the url,  user 2 is page number(3rd segment)
-	 
-	$config['base_url'] = base_url().'users/'; // page url, where we can display all users
-	
-	
-	$config['per_page'] = 10; // set this value how many users per page.
-	//$config['num_links'] = 5; // this allow the pagination with 5 links,like 1,2,3,4,5
-	if(empty($page_number)) $page_number = 1;
-	$offset = ($page_number-1) * $config['per_page'];
-	
-	$config['use_page_numbers'] = TRUE; // set this value true,so that page number value will be like users/1 , users/2 , users/3 etc, otherwise it will be like users/10 , users/20 , users/30 etc
-	
-	$data["usersdata"] = $this->Users_model->usersdata($config['per_page'],$offset,$sortfield,$order); // here i calling the model function with perpage , offset , sortfield and order		
-	$config['total_rows'] = $this->db->count_all('users'); // it returns total count of records of tbl_users table.
-	
-	$config['full_tag_open'] = '<div id="pagination">';
-	$config['full_tag_close'] = '</div>';		
-	
-	$this->pagination->cur_page = $offset;
-			
-	$this->pagination->initialize($config);
-	$data['page_links'] = $this->pagination->create_links(); // It will returns the pagination links
-	//var_dump(var_dump($config));	
-		
-	$this->load->view('userspage',$data);
-}
 
   
-  
 }
+

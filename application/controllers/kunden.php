@@ -51,7 +51,11 @@ public function new_kunde() {
     $this->form_validation->set_rules('ort', $this->lang->line('ort'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('telnr', $this->lang->line('telnr'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('email', $this->lang->line('email'), 'required|min_length[1]|max_length[255]|valid_email|is_unique[kunde.email]');
+    $this->form_validation->set_rules('tour_id', $this->lang->line('tour_id'), 'required|min_length[1]|max_length[125]');
     
+    
+  
+    $data['tour'] = $this->Kunden_model->get_tour();
     $data['page_heading'] = 'Neuen Kunden anlegen';
     
     
@@ -74,10 +78,8 @@ public function new_kunde() {
       $this->load->view('nav/top_nav', $data);
       $this->load->view('kunden/new_kunde',$data);
       $this->load->view('common/footer', $data);
+      
     } else { // Validation bestanden
-    
-        
-
       $data = array(
         'fname' => $this->input->post('fname'),
         'lname' => $this->input->post('lname'),
@@ -86,13 +88,15 @@ public function new_kunde() {
         'ort' => $this->input->post('ort'),
         'telnr' => $this->input->post('telnr'),
         'email' => $this->input->post('email'),
+        'tour_id' => $this->input->post('tour_id'),
 
       );
 
       if ($this->Kunden_model->process_create_kunde($data)) {
         redirect('kunden');
       } else {
-
+        $this->session->set_flashdata('flash_message', $this->lang->line('save_success_fail'));
+        redirect ('kunden'); 
       }
     }        
   }
@@ -105,6 +109,7 @@ public function new_kunde() {
 
 public function edit_kunde() {
   //Validationsregeln setzen
+     $this->form_validation->set_rules('kunde_id', $this->lang->line('kunde_id'), 'required|min_length[1]|max_length[125]');
      $this->form_validation->set_rules('fname', $this->lang->line('fname'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('lname', $this->lang->line('lname'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('strasse', $this->lang->line('strasse'), 'required|min_length[1]|max_length[125]');
@@ -112,7 +117,7 @@ public function edit_kunde() {
     $this->form_validation->set_rules('ort', $this->lang->line('ort'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('telnr', $this->lang->line('telnr'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('email', $this->lang->line('email'), 'required|min_length[1]|max_length[255]|valid_email|is_unique[users.usr_email]');
-  
+     $this->form_validation->set_rules('tour_id', $this->lang->line('tour_id'), 'required|min_length[1]|max_length[125]');   
   //Der Primärschlüssel des Kunden (kunden.kunde_id) wird an den Edit link angehängt und an
   //die edit_kunde() Funktion angehängt, um nachzuschauen dass der kunde in der Tabelle ist.
   //Die get_kunde_details($id) Funktion des kunden_model nimmt einen Parameterwert von $id -
@@ -129,7 +134,12 @@ public function edit_kunde() {
     $data['page_heading'] = 'Kunde';                
     //Bestätigung beginnt
     if ($this->form_validation->run() == FALSE) {      
+        
+        
       $query = $this->Kunden_model->get_kunde_details($id);
+  
+      
+      
       foreach ($query->result() as $row) {
         $kunde_id = $row->kunde_id;
         $fname = $row->fname;
@@ -139,7 +149,7 @@ public function edit_kunde() {
         $ort = $row->ort;
         $telnr = $row->telnr;
         $email = $row->email;
-      
+      $tour_id = $row->tour_id;
       }
       
       
@@ -150,8 +160,10 @@ public function edit_kunde() {
       $data['ort'] = array('name' => 'ort', 'class' => 'form-control', 'id' => 'ort', 'value' => set_value('ort', $ort), 'maxlength'   => '100', 'size' => '35');
       $data['telnr'] = array('name' => 'telnr', 'class' => 'form-control', 'id' => 'telnr', 'value' => set_value('telnr', $telnr), 'maxlength'   => '100', 'size' => '35');
       $data['email'] = array('name' => 'email', 'class' => 'form-control', 'id' => 'email', 'value' => set_value('email', $email), 'maxlength'   => '100', 'size' => '35');
+      $data['tour_id'] = array('name' => 'tour_id', 'class' => 'form-control', 'id' => 'tour_id', 'value' => set_value('tour_id', $tour_id), 'maxlength'   => '100', 'size' => '35');
       $data['id'] = array('kunde_id' => set_value('kunde_id', $kunde_id));
       
+      $data['tour'] = $this->Kunden_model->get_tour();
       $this->load->view('common/header', $data);
       $this->load->view('nav/top_nav', $data);
       $this->load->view('kunden/edit_kunde', $data);
@@ -168,6 +180,7 @@ public function edit_kunde() {
         'ort' => $this->input->post('ort'),
         'telnr' => $this->input->post('telnr'),
         'email' => $this->input->post('email'),
+        'tour_id' => $this->input->post('tour_id'),
       );
     
     //Sobald alles hinzugefügt wurde, werden die Kundendetails geupdatet durch
