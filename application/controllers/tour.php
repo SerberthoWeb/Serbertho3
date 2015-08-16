@@ -61,6 +61,7 @@ public function new_tour() {
    $this->form_validation->set_rules('sunset_d', $this->lang->line('sunset_d'), 'min_length[1]|max_length[2]');
     $this->form_validation->set_rules('sunset_m', $this->lang->line('sunset_m'), 'min_length[1]|max_length[2]');
     $this->form_validation->set_rules('sunset_y', $this->lang->line('sunset_y'), 'min_length[1]|max_length[4]');
+    $this->form_validation->set_rules('preis', $this->lang->line('preis'), 'required|min_length[1]|max_length[125]');
    
     $this->form_validation->set_rules('usr_id', $this->lang->line('usr_id'), 'required|min_length[1]|max_length[125]');
     
@@ -82,7 +83,7 @@ public function new_tour() {
     
     if ($this->form_validation->run() == FALSE) {
         $page_data['tour_title'] = array('name' => 'tour_title', 'class' => 'form-control', 'id' => 'tour_title', 'value' => set_value('tour_title', ''), 'maxlength'   => '100', 'size' => '35');
-      
+       $page_data['preis'] = array('name' => 'preis', 'class' => 'form-control', 'id' => 'preis', 'value' => set_value('preis', ''), 'maxlength'   => '100', 'size' => '35');
      $page_data['start_d']              = array('name' => 'start_d', 'class' => 'form-control', 'id' => 'start_d', 'value' => set_value('start_d', ''), 'maxlength'   => '100', 'size' => '35');
       $page_data['start_m']              = array('name' => 'start_m', 'class' => 'form-control', 'id' => 'start_m', 'value' => set_value('start_m', ''), 'maxlength'   => '100', 'size' => '35');
       $page_data['start_y']              = array('name' => 'start_y', 'class' => 'form-control', 'id' => 'start_y', 'value' => set_value('start_y', ''), 'maxlength'   => '100', 'size' => '35');
@@ -102,6 +103,7 @@ public function new_tour() {
       $save_data = array(
           'tour_title' => $this->input->post('tour_title'),
         'reiseort_id' => $this->input->post('reiseort_id'),
+          'preis' => $this->input->post('preis'),
         'reiseabfahrt' => $this->input->post('start_y') .'-'.$this->input->post('start_m').'-'.$this->input->post('start_d'),
         'reiseankunft' => $this->input->post('sunset_y') .'-'.$this->input->post('sunset_m').'-'.$this->input->post('sunset_d'),
         

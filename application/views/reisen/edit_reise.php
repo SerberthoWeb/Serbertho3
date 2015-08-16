@@ -25,14 +25,6 @@
 	      <?php echo form_textarea($kzbeschreib); ?>
 	    </div>    
             
-            
-	    <div class="form-group">
-	    	<?php echo form_error('preis'); ?>
-	      <label for="preis"><?php echo $this->lang->line('preis');?></label>
-	      <?php echo form_input($preis); ?>
-	    </div>  
-	    
-	  
 	      <?php echo form_hidden($id); ?>
 
 	    <div class="form-group">

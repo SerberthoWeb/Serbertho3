@@ -8,6 +8,7 @@
       
     <?php echo form_open('kosten/index') ; ?>
       <br/>
+      
         <div class="col-lg-12">
           <div class="input-group">
             <input type="text" style=" width: 90%; float: left;" class="form-control" name="search_string" placeholder="<?php echo $this->lang->line('jobs_view_search'); ?>">
@@ -36,6 +37,7 @@
           <th>Kostenstelle</th>
           <th>Reise</th>
           <th>Kosten</th>
+          <th>Rechnungsnummer</th>
            <th>Erfassungsdatum</th>
 
 	              
@@ -49,6 +51,7 @@
 		          <td><?php echo $row->kostenstelle_name ; ?></td>
 		          <td><?php echo $row->tour_title ; ?></td>
                           <td><?php echo $row->kosten ; ?></td>
+                          <td><?php echo $row->r_nummer ; ?></td>
                           <td><?php echo $row->datum ; ?></td>
 
 		        </tr>	        

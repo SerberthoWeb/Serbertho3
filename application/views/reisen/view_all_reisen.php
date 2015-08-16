@@ -10,10 +10,10 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-          <th>#</th>
+     
           <th>Reiseort</th>
           <th>Kurzbeschreibung</th>
-          <th>Preis</th>
+  
 	      <td>Aktionen</td>                     
         </tr>
     </thead>	
@@ -21,10 +21,10 @@
     	<?php if ($query->num_rows() > 0) : ?>
 			<?php foreach ($query->result() as $row) : ?>
 		        <tr>
-		          <td><?php echo $row->reiseort_id ; ?></td>
+		       
 		          <td><?php echo $row->reiseort; ?></td>
 		          <td><?php echo $row->kzbeschreib ; ?></td>
-                          <td><?php echo $row->preis ; ?></td>
+                
 
 		          <td><?php echo anchor('reisen/edit_reise/'.
 		            $row->reiseort_id,$this->lang->line('common_form_elements_action_edit')) . 

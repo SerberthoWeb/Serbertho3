@@ -32,6 +32,11 @@
       <?php echo form_input($kosten); ?>
     </div>     
 
+    <div class="form-group">
+      <?php echo form_error('r_nummer'); ?>
+      <label for="r_nummer"><?php echo $this->lang->line('r_nummer');?></label>
+      <?php echo form_input($r_nummer); ?>
+    </div>     
 
           <div class="form-group">
       <?php echo form_error('tour_id'); ?>
@@ -42,6 +47,10 @@
       <?php endforeach ; ?>
       </select>
     </div>    
+      
+      
+      
+      <!--Erfassung Datum-->
       
        <label for="start_d"><?php echo $this->lang->line('datum');?></label>
     <div class="row">

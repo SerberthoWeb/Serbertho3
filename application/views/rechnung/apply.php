@@ -1,4 +1,3 @@
-<h2><?php echo $page_heading ; ?></h2>     
 
  <?php if ($this->session->flashdata('flash_message')) : ?>
     <div class="alert alert-info" role="alert"><?php echo $this->session->flashdata('flash_message');?></div>
@@ -56,16 +55,67 @@
     
     
     
+  
+                
+                
+                
+                
+                
+        <!--Kostenübersicht-->        
+                
+
+<h3>Rechnungsübersicht</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+<!--          <th>#</th>-->
+          <th>Kostenstelle</th>
+           <th>Erfassungsdatum</th>
+           <th>Rechnungsnummer</th>
+          <th>Kosten</th>
+          
+         
+
+	              
+        </tr>
+    </thead>	
+    <tbody>
+    	<?php if ($query->num_rows() > 0) : ?>
+			<?php foreach ($query->result() as $row) : ?>
+		        <tr>
+                              <?php //echo $row->kosten_id ; ?></td>
+		          <td><?php echo $row->kostenstelle_name ; ?></td>
+                          <td><?php echo $row->datum ; ?></td>
+                          <td><?php echo $row->r_nummer ; ?></td>
+                          <td><?php echo $row->kosten ; ?></td>
+                          
+
+		        </tr>
+                        
+                        <?php endforeach ; ?>
+		<?php else : ?>
+	        <tr>
+	          <td colspan="5" class="info">Keine Kosten erfasst!</td>
+	        </tr>			
+		<?php endif; ?>
+                    <div class="form-group"> 
+                          <button class="btn btn-primary" style="float: left;" onClick="window.location.href = '<?php echo base_url();?>index.php/makepdf/users';return false;"><?php echo $this->lang->line('common_form_elements_make_pdf');?></button> 
+                    <br/> <br/>
+                    </div>
     
+	</tbody>
+</table>
+    
+   
     <!--Gesamtkosten-->
     
- <h3>Gesamtkosten</h3>
+
     <table class="table table-bordered">
 	
     <tbody>
     	<?php if ($querykosten->num_rows() > 0) : ?>
 			<?php foreach ($querykosten->result() as $row) : ?>
-        
+       
              <td>Gesamtkosten
               </td>
               <td><?php echo $row->TotalKosten ; ?>
@@ -81,71 +131,28 @@
                     </div>
 	</tbody>
 </table>
-                
-          <h3>Gesamtkosten</h3>
+               
+    
+    <!-- Einnahmen -->
+    
+          
     <table class="table table-bordered">
 	
     <tbody>
-    	<?php if ($queryeinnahmen->num_rows() > 0) : ?>
-			<?php foreach ($queryeinnahmen->result() as $row) : ?>
+           	<?php if ($queryeinnahmen->num_rows() > 0) : ?>
+          <?php $row = $queryeinnahmen->result()[0];?>
         
-             <td>Gesamtkosten
+             <td>Gesamteinnahmen
               </td>
-              <td><?php echo $row->TotalEinnahmen ; ?>
+              <td><?php echo $row->TotalKosten ; ?>
               </td>   
-              <tr>
-                        <?php endforeach ; ?>
-		<?php else : ?>
-	        <tr>
-	          <td colspan="5" class="info">Keine Kosten erfasst!</td>
-	        </tr>			
+              <tr>		
 		<?php endif; ?>
-                    <div class="form-group">      
+                    <div class="form-group">   
+                        
                     </div>
 	</tbody>
-</table>       
-                
-                
-                
-                
-                
-        <!--Kostenübersicht-->        
-                
-
-<h3>Kostenübersicht</h3>
-<table class="table table-bordered">
-    <thead>
-        <tr>
-<!--          <th>#</th>-->
-          <th>Kostenstelle</th>
-          <th>Kosten</th>
-          <th>Erfassungsdatum</th>
-
-	              
-        </tr>
-    </thead>	
-    <tbody>
-    	<?php if ($query->num_rows() > 0) : ?>
-			<?php foreach ($query->result() as $row) : ?>
-		        <tr>
-                              <?php //echo $row->kosten_id ; ?></td>
-		          <td><?php echo $row->kostenstelle_name ; ?></td>
-                          <td><?php echo $row->kosten ; ?></td>
-                          <td><?php echo $row->datum ; ?></td>
-
-		        </tr>	        
-                        <?php endforeach ; ?>
-		<?php else : ?>
-	        <tr>
-	          <td colspan="5" class="info">Keine Kosten erfasst!</td>
-	        </tr>			
-		<?php endif; ?>
-                    <div class="form-group">      
-                    </div>
-	</tbody>
-</table>
-    
-    
+</table>          
     
 
 <!-- Kundenübersicht -->
@@ -182,6 +189,8 @@
 	          <td colspan="5" class="info">Keine Kosten erfasst!</td>
 	        </tr>			
 		<?php endif; ?>
+   <button class="btn btn-primary" style="float: left;" onClick="window.location.href = '<?php echo base_url();?>index.php/makepdf/users';return false;"><?php echo $this->lang->line('common_form_elements_make_pdf');?></button> 
+                    <br/> <br/>
                     <div class="form-group">      
                     </div>
 	</tbody>

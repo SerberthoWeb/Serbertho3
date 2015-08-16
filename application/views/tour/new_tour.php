@@ -121,7 +121,11 @@
    <br/>   
       
    
-
+    <div class="form-group">
+      <?php echo form_error('preis'); ?>
+      <label for="preis"><?php echo $this->lang->line('preis');?></label>
+      <?php echo form_input($preis); ?>
+    </div>
 
 
    

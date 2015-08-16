@@ -78,9 +78,9 @@ $lang['usr_lname'] = "Nachname";
 $lang['usr_uname'] = "Username";
 $lang['usr_email'] = "Email";
 $lang['usr_confirm_email'] = "Email bestätigen";
-$lang['usr_add1'] = "Addresse 1";
+$lang['usr_add1'] = "Adresse";
 $lang['usr_town_city'] = "Stadt";
-$lang['usr_zip_pcode'] = "Postleitzahl";
+$lang['usr_zip_pcode'] = "PLZ";
 $lang['usr_access_level'] = "User Berechtigungslevel";
 $lang['is_active'] = "User aktiv?";
 $lang['usr_new_user'] = "Neuen User erstellen";
@@ -136,7 +136,7 @@ $lang['kosten'] = "Kosten";
 $lang['kostenstelle'] = "Kostenstelle";
 $lang['reise'] = "Reiseort";
 $lang['datum'] = "Erfassungsdatum";
-
+$lang['r_nummer'] = "Rechnungsnummer";
 
 
 

@@ -14,17 +14,13 @@ class Kosten_model extends CI_Model {
       if ($search_string == null) {
     $query = "SELECT * FROM `kosten`, `kostenstelle`, `tour` WHERE 
               `kostenstelle`.`kostenstelle_id` = `kosten`.`kostenstelle_id` AND  
-              `tour`.`tour_id` = `kosten`.`tour_id`
+              `tour`.`tour_id` = `kosten`.`tour_id`           
               ";
     } else {
       $query = "SELECT * FROM `kosten`, `kostenstelle`, `tour`  WHERE 
               `kostenstelle`.`kostenstelle_id` = `kosten`.`kostenstelle_id` AND
-             `kostenstelle`.`kostenstelle_name` LIKE ? 
-         
-
-
-
-             
+             `kostenstelle`.`kostenstelle_name` LIKE ? AND
+             `tour`.`tour_id` = `kosten`.`tour_id`
              "; 
       
     }

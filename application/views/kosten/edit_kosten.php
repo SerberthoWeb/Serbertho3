@@ -14,41 +14,8 @@
 
 	<div class="span8"> 
 		<?php echo form_open('kosten/edit_kosten','role="form" class="form"') ; ?>
-	    <div class="form-group">
-	      <?php echo form_error('fname'); ?>
-	      <label for="fname"><?php echo $this->lang->line('fname');?></label>
-	      <?php echo form_input($fname); ?>
-	    </div>
-	    <div class="form-group">
-	      <?php echo form_error('lname'); ?>
-	      <label for="lname"><?php echo $this->lang->line('lname');?></label>
-	      <?php echo form_input($lname); ?>
-	    </div>        
-	    <div class="form-group">
-	    	<?php echo form_error('strasse'); ?>
-	      <label for="strasse"><?php echo $this->lang->line('strasse');?></label>
-	      <?php echo form_input($strasse); ?>
-	    </div>  
-	    <div class="form-group">
-	    	<?php echo form_error('plz'); ?>
-	      <label for="plz"><?php echo $this->lang->line('plz');?></label>
-	      <?php echo form_input($plz); ?>
-	    </div>
-	    <div class="form-group">
-	    	<?php echo form_error('ort'); ?>
-	      <label for="ort"><?php echo $this->lang->line('ort');?></label>
-	      <?php echo form_input($ort); ?>
-	    </div> 
-	    <div class="form-group">
-	    	<?php echo form_error('telnr'); ?>
-	      <label for="telnr"><?php echo $this->lang->line('telnr');?></label>
-	      <?php echo form_input($telnr); ?>
-	    </div> 
-	    <div class="form-group">
-	      <?php echo form_error('email'); ?>	    	
-	      <label for="email"><?php echo $this->lang->line('email');?></label>
-	      <?php echo form_input($email); ?>
-	    </div>   
+	 
+            
 	    
 
 	  

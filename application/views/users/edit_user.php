@@ -44,16 +44,17 @@
 	      <label for="usr_add1"><?php echo $this->lang->line('usr_add1');?></label>
 	      <?php echo form_input($usr_add1); ?>
 	    </div>  
+                <div class="form-group">
+	    	<?php echo form_error('usr_zip_pcode'); ?>
+	      <label for="usr_zip_pcode"><?php echo $this->lang->line('usr_zip_pcode');?></label>
+	      <?php echo form_input($usr_zip_pcode); ?>
+	    </div>   
 	    <div class="form-group">
 	    	<?php echo form_error('usr_town_city'); ?>
 	      <label for="usr_town_city"><?php echo $this->lang->line('usr_town_city');?></label>
 	      <?php echo form_input($usr_town_city); ?>
 	    </div>         
-	    <div class="form-group">
-	    	<?php echo form_error('usr_zip_pcode'); ?>
-	      <label for="usr_zip_pcode"><?php echo $this->lang->line('usr_zip_pcode');?></label>
-	      <?php echo form_input($usr_zip_pcode); ?>
-	    </div>        
+	     
 	    <div class="form-group">
 	    	<?php echo form_error('usr_access_level'); ?>
 	      <label id="usr_access_level" for="usr_access_level"><?php echo $this->lang->line('usr_access_level');?></label>

@@ -14,6 +14,7 @@
           <th>Reiseort</th>
           <th>Reiseabfahrt</th>
           <th>Reiseankunft</th>
+          <th>Preis</th>
          
 
 	      <td>Aktionen</td>                     
@@ -27,7 +28,7 @@
 		          <td><?php echo $row->reiseort ; ?></td>
 		          <td><?php echo $row->reiseabfahrt ; ?></td>
                           <td><?php echo $row->reiseankunft ; ?></td>
-                    
+                          <td><?php echo $row->preis ; ?></td>
 
                           
 		          <td><?php echo anchor('tour/delete_tour/'.

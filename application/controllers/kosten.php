@@ -60,6 +60,7 @@ $page_data['page_heading'] = 'Kostenübersicht';
     $this->form_validation->set_rules('kostenstelle_id', $this->lang->line('job_desc'), 'required|min_length[1]|max_length[11]');
     $this->form_validation->set_rules('kosten', $this->lang->line('kosten'), 'required|min_length[1]|max_length[11]');
     $this->form_validation->set_rules('tour_id', $this->lang->line('tour_id'), 'required|min_length[1]|max_length[125]');
+     $this->form_validation->set_rules('r_nummer', $this->lang->line('r_nummer'), 'required|min_length[1]|max_length[11]');
     $this->form_validation->set_rules('start_d', $this->lang->line('start_d'), 'min_length[1]|max_length[2]');
     $this->form_validation->set_rules('start_m', $this->lang->line('start_m'), 'min_length[1]|max_length[2]');
     $this->form_validation->set_rules('start_y', $this->lang->line('start_y'), 'min_length[1]|max_length[4]');
@@ -72,6 +73,7 @@ $page_data['page_heading'] = 'Kostenübersicht';
      
     if ($this->form_validation->run() == FALSE) {
         $page_data['kosten'] = array('name' => 'kosten', 'class' => 'form-control', 'id' => 'kosten', 'value' => set_value('kosten', ''), 'maxlength'   => '100', 'size' => '35');
+         $page_data['r_nummer'] = array('name' => 'r_nummer', 'class' => 'form-control', 'id' => 'r_nummer', 'value' => set_value('r_nummer', ''), 'maxlength'   => '100', 'size' => '35');
         $page_data['start_d']              = array('name' => 'start_d', 'class' => 'form-control', 'id' => 'start_d', 'value' => set_value('start_d', ''), 'maxlength'   => '100', 'size' => '35');
         $page_data['start_m']              = array('name' => 'start_m', 'class' => 'form-control', 'id' => 'start_m', 'value' => set_value('start_m', ''), 'maxlength'   => '100', 'size' => '35');
         $page_data['start_y']              = array('name' => 'start_y', 'class' => 'form-control', 'id' => 'start_y', 'value' => set_value('start_y', ''), 'maxlength'   => '100', 'size' => '35');
@@ -87,6 +89,7 @@ $page_data['page_heading'] = 'Kostenübersicht';
       $save_data = array(
         'kostenstelle_id' => $this->input->post('kostenstelle_id'),
         'kosten' => $this->input->post('kosten'),
+        'r_nummer' => $this->input->post('r_nummer'),
         'tour_id' => $this->input->post('tour_id'),
         'datum' => $this->input->post('start_y').'-'.$this->input->post('start_m').'-'.$this->input->post('start_d'),
         );
@@ -101,21 +104,8 @@ $page_data['page_heading'] = 'Kostenübersicht';
     }    
   } 
    //---------------------------------------------------------------------------------
+
   
-  
-    public function uebersicht() {
-  $data['page_heading'] = 'Tourübersicht';
-  $data['query'] = $this->Kosten_model->get_reisen();
-  $this->load->view('common/header', $data);
-  $this->load->view('nav/top_nav', $data);
-  $this->load->view('kosten/uebersicht', $data);
-  $this->load->view('common/footer', $data);
-} 
-   
-    
-    
-   //---------------------------------------------------------------------------------
-    
         public function new_kostenstelle() {
             
             

@@ -52,7 +52,7 @@ public function new_reise() {
    // Setzt Validationsregeln
     $this->form_validation->set_rules('reiseort', $this->lang->line('reiseort'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('kzbeschreib', $this->lang->line('kzbeschreib'), 'required|min_length[1]|max_length[3000]');
-    $this->form_validation->set_rules('preis', $this->lang->line('preis'), 'required|min_length[1]|max_length[125]');
+   
 
     
     $data['page_heading'] = 'Neuen Reiseort anlegen';
@@ -66,7 +66,7 @@ public function new_reise() {
     if ($this->form_validation->run() == FALSE) {
       $data['reiseort'] = array('name' => 'reiseort', 'class' => 'form-control', 'id' => 'reiseort', 'value' => set_value('reiseort', ''), 'maxlength'   => '100', 'size' => '35');
       $data['kzbeschreib'] = array('name' => 'kzbeschreib', 'class' => 'form-control', 'id' => 'kzbeschreib', 'value' => set_value('kzbeschreib', ''), 'maxlength'   => '3000', 'rows' => '6', 'cols' => '35');
-      $data['preis'] = array('name' => 'preis', 'class' => 'form-control', 'id' => 'strasse', 'preis' => set_value('preis', ''), 'maxlength'   => '100', 'size' => '35');
+      
      
 
 
@@ -81,8 +81,6 @@ public function new_reise() {
       $data = array(
         'reiseort' => $this->input->post('reiseort'),
         'kzbeschreib' => $this->input->post('kzbeschreib'),
-        'preis' => $this->input->post('preis'),
-  
 
       );
 
@@ -129,14 +127,13 @@ public function edit_reise() {
         $reiseort_id = $row->reiseort_id;
         $reiseort = $row->reiseort;
         $kzbeschreib = $row->kzbeschreib;
-        $preis = $row->preis;
+       
       
       }
       
       
       $data['reiseort'] = array('name' => 'reiseort', 'class' => 'form-control', 'id' => 'reiseort', 'value' => set_value('reiseort', $reiseort), 'maxlength'   => '100', 'size' => '35');
       $data['kzbeschreib'] = array('name' => 'kzbeschreib', 'class' => 'form-control', 'id' => 'kzbeschreib', 'value' => set_value('kzbeschreib', $kzbeschreib), 'maxlength'   => '3000', 'rows' => '6', 'cols' => '35');
-      $data['preis'] = array('name' => 'preis', 'class' => 'form-control', 'id' => 'preis', 'value' => set_value('preis', $preis), 'maxlength'   => '100', 'size' => '35');
       $data['id'] = array('reiseort_id' => set_value('reiseort_id', $reiseort_id));
       
       $this->load->view('common/header', $data);
@@ -150,7 +147,6 @@ public function edit_reise() {
       $data = array(
         'reiseort' => $this->input->post('reiseort'),
         'kzbeschreib' => $this->input->post('kzbeschreib'),
-        'preis' => $this->input->post('preis'),
 
       );
     
