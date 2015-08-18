@@ -5,9 +5,9 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="input-group">
-              <input type="text" style=" width: 90%; float: left;" class="form-control" name="search_string" placeholder="<?php echo $this->lang->line('jobs_view_search'); ?>">
+              <input type="text" style=" width: 90%; float: left;" class="form-control" name="search_string" placeholder="<?php echo $this->lang->line('rechnung_view_search_tour'); ?>">
             <span class="input-group-btn" style="float: left;">
-              <button class="btn btn-default" type="submit"><?php echo $this->lang->line('jobs_view_search'); ?></button>
+                 <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
             </span>
           </div><!-- /input-group -->
         </div><!-- /.col-lg-6 -->
@@ -25,7 +25,7 @@
     </td>
         <td>Rückankunft: <?php echo  $row->reiseankunft ; ?><br />
     </td>
-    <td><?php echo anchor ('rechnung/apply/'.$row->tour_id, $this->lang->line('jobs_view_apply')) ; ?>
+    <td><?php echo anchor ('rechnung/apply/'.$row->tour_id, $this->lang->line('rechnung_view_apply')) ; ?>
     </td>                    
   </tr>
 <?php endforeach ; ?>

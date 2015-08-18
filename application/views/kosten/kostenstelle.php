@@ -28,7 +28,7 @@
  
     
        <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/kosten/new_kostenstelle';return false;"><?php echo $this->lang->line('common_form_elements_kostenstelle');?></button>               
-                   
+       <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/kosten';return false;"><?php echo $this->lang->line('common_form_elements_cancel');?></button>              
                     
                     </div>
 	</tbody>

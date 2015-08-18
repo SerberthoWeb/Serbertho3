@@ -6,7 +6,7 @@
  * informiert ihn über sein Password. EMail-Script ist unter /views/email_scripts/welcome.txt
  */-->
 
-<?php echo validation_errors() ; ?>
+
 <div class="page-header">
   <h1><?php echo $page_heading ; ?></h1>
 </div> 
@@ -30,39 +30,48 @@
     </div>   
     
     <div class="form-group">
+        <?php echo form_error('usr_email'); ?>
       <label for="usr_email"><?php echo $this->lang->line('usr_email');?></label>
       <?php echo form_input($usr_email); ?>
     </div>   
     <div class="form-group">
+        <?php echo form_error('confirm_email'); ?>
       <label for="usr_confirm_email"><?php echo $this->lang->line('usr_confirm_email');?></label>
       <?php echo form_input($usr_confirm_email); ?>
     </div>   
 
     <div class="form-group">
+        <?php echo form_error('usr_add1'); ?>
       <label for="usr_add1"><?php echo $this->lang->line('usr_add1');?></label>
       <?php echo form_input($usr_add1); ?>
     </div>  
       
           <div class="form-group">
-      <label for="usr_zip_pcode"><?php echo $this->lang->line('usr_zip_pcode');?></label>
-      <?php echo form_input($usr_zip_pcode); ?>
+               <?php echo form_error('usr_plz'); ?>
+      <label for="usr_plz"><?php echo $this->lang->line('usr_plz');?></label>
+      <?php echo form_input($usr_plz); ?>
     </div>          
 
     <div class="form-group">
+             <?php echo form_error('usr_town_city'); ?>
       <label for="usr_town_city"><?php echo $this->lang->line('usr_town_city');?></label>
       <?php echo form_input($usr_town_city); ?>
     </div>         
-
+   <div class="form-group">
+             <?php echo form_error('usr_phone'); ?>
+      <label for="usr_phone"><?php echo $this->lang->line('usr_phone');?></label>
+      <?php echo form_input($usr_phone); ?>
+    </div>         
     <div class="form-group">
+                 <?php echo form_error('usr_access_level'); ?>
       <label for="usr_access_level"><?php echo $this->lang->line('usr_access_level');?></label>
-      <?php echo form_dropdown('usr_access_level', $usr_access_level, 'large'); ?>
+      <?php echo form_dropdown('usr_access_level', $usr_access_level, 'large'); ?>  1 = Admin, 2 = User
     </div>  
-
     <div class="form-group">
+                 <?php echo form_error('usr_is_active'); ?>
       <label for="usr_is_active"><?php echo $this->lang->line('usr_is_active');?></label>
-      <input type="radio" name="usr_is_active" value="<?php echo set_value('usr_is_active') ; ?>" /> Active
-      <input type="radio" name="usr_is_active" value="<?php echo set_value('usr_is_active') ; ?>" /> Inactive
-     </div>      
+      <?php echo form_dropdown('usr_is_active', $usr_is_active, 'large'); ?>  1 = Aktiv, 2 = Inaktiv
+    </div>     
 
     <div class="form-group">
       <button type="submit" class="btn btn-primary"><?php echo $this->lang->line('common_form_elements_go');?></button>     <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/users';return false;"><?php echo $this->lang->line('common_form_elements_cancel');?></button> 

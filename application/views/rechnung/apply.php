@@ -31,7 +31,7 @@
               </td>
               <td><?php echo $row->reiseankunft ; ?>
               </td> 
-              <td>Natelnummer
+              <td>Mobiltelefon
               </td>
               <td><?php echo $row->usr_phone ; ?>
               </td>               

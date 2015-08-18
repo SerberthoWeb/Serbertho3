@@ -71,7 +71,7 @@ $lang['email_subject_reset_password'] = "Passwort zurücksetzen.";
 
 // User
 $lang['usr_form_instruction_new'] = "Neue Userdetails";
-$lang['usr_form_instruction_edit'] = "Userdetails bearbeiten";
+$lang['usr_form_instruction_edit'] = "Neuer User";
 $lang['usr_id'] = "ID";
 $lang['usr_fname'] = "Vorname";
 $lang['usr_lname'] = "Nachname";
@@ -80,10 +80,14 @@ $lang['usr_email'] = "Email";
 $lang['usr_confirm_email'] = "Email bestätigen";
 $lang['usr_add1'] = "Adresse";
 $lang['usr_town_city'] = "Stadt";
-$lang['usr_zip_pcode'] = "PLZ";
-$lang['usr_access_level'] = "User Berechtigungslevel";
+$lang['usr_plz'] = "PLZ";
+$lang['usr_access_level'] = "User Berechtigungslevel:  ";
+$lang['usr_is_active'] = "User Aktivlevel: ";
 $lang['is_active'] = "User aktiv?";
 $lang['usr_new_user'] = "Neuen User erstellen";
+$lang['usr_phone'] = "Mobiltelefon";
+
+
 
 // Passwort vergessen
 $lang['forgot_pwd_success_heading'] = "Email gesendet:";
@@ -115,7 +119,7 @@ $lang['ort'] = "Stadt";
 $lang['telnr'] = "Telefonnummer";
 $lang['email'] = "Email";
 $lang['common_form_elements_new_kunde'] = "Kunde erfassen";
-
+$lang['kunden_view_search'] = "Nachname";
 
 //Reiseort
 $lang['ort'] = "Stadt";
@@ -137,15 +141,17 @@ $lang['kostenstelle'] = "Kostenstelle";
 $lang['reise'] = "Reiseort";
 $lang['datum'] = "Erfassungsdatum";
 $lang['r_nummer'] = "Rechnungsnummer";
-
-
+$lang['kosten_view_apply'] = "Anschauen";
+$lang['kosten_view_search_ks'] = "Kostenstelle";
+$lang['kosten_view_search_rn'] = "Rechnungsnummer";
 
 
 //Rechnung
+$lang['rechnung_view_search_tour'] = "Reisename";
+$lang['rechnung_view_apply'] = "Anschauen";
 
-
-
-
+//Währungsrechnung
+$lang['euro'] = "Euro";
 
 //Tour
 
@@ -176,56 +182,6 @@ $lang['kosten_form_instruction_save'] = "Kosten erfassen";
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Jobs
-$lang['top_nav_jobscreate'] = "Create";
-$lang['top_nav_jobs'] = "Jobs";
-
-
-// Jobs - view.php
-$lang['jobs_view_apply'] = "Anschauen";
-$lang['jobs_view_search'] = "Suchen";
-
-// Jobs - create.php
-$lang['job_create_form_instruction_1'] = "Füge die Informationen hinzu";
-
-$lang['job_title'] = "Titel";
-$lang['job_desc'] = "Beschreibung";
-$lang['type'] = "Job type";
-$lang['cat'] = "Category";
-$lang['loc'] = "Location";
-$lang['job_start_date'] = "Start date";
-$lang['job_rate'] = "Kosten";
-$lang['job_advertiser_name'] = "Ansprechperson";
-$lang['job_advertiser_email'] = "Email-Adresse";
-$lang['job_advertiser_phone'] = "Telefonnummer";
-$lang['job_sunset_date'] = "Ankunftdatum";
-$lang['job_sunset_date_help'] = "blub";
-
-$lang['save_success_okay'] = "Dein blub wurde hinzugefügt";
-$lang['save_success_fail'] = "Die Speicherung ist fehlgeschlagen";
-
-// Jobs - Apply
-$lang['apply_instruction_1'] = "Fülle das Formular aus ";
-$lang['app_name'] = "Dein Name ";
-$lang['app_email'] = "Deine Email-Adresse ";
-$lang['app_phone'] = "Deine Telfonnummer ";
-$lang['app_cover_note'] = "Anschrift ";
-$lang['app_success_okay'] = "Ihre Anwendung wurde gesendet ";
-$lang['app_success_fail'] = "Ihre Anwendung kann zu diesem Zeitpunkt nicht gesendet werden ";
-$lang['app_job_no_longer_exists'] = "Unfortunately we are unable to process your application as the job is no linger active";
 
 
 

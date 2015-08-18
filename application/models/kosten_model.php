@@ -20,6 +20,7 @@ class Kosten_model extends CI_Model {
       $query = "SELECT * FROM `kosten`, `kostenstelle`, `tour`  WHERE 
               `kostenstelle`.`kostenstelle_id` = `kosten`.`kostenstelle_id` AND
              `kostenstelle`.`kostenstelle_name` LIKE ? AND
+             
              `tour`.`tour_id` = `kosten`.`tour_id`
              "; 
       
@@ -38,7 +39,33 @@ class Kosten_model extends CI_Model {
      
    //---------------------------------------------------------------------------- 
   
-
+  function get_kosten_rn($search_string) {
+      if ($search_string == null) {
+    $query = "SELECT * FROM `kosten`, `kostenstelle`, `tour` WHERE 
+              `kostenstelle`.`kostenstelle_id` = `kosten`.`kostenstelle_id` AND  
+              `tour`.`tour_id` = `kosten`.`tour_id`           
+              ";
+    } else {
+      $query = "SELECT * FROM `kosten`, `kostenstelle`, `tour`  WHERE 
+              `kostenstelle`.`kostenstelle_id` = `kosten`.`kostenstelle_id` AND
+             `kosten`.`r_nummer` LIKE ? AND
+             
+             `tour`.`tour_id` = `kosten`.`tour_id`
+             "; 
+      
+    }
+    
+    $result = $this->db->query($query, array($search_string, $search_string));
+    if ($result) {
+      return $result;
+    } else {
+      return false;
+    }    
+  }
+  
+  
+    //---------------------------------------------------------------------------- 
+  
           
             function process_create_kosten($data) {    
       if ($this->db->insert('kosten', $data)) {      
@@ -119,4 +146,34 @@ class Kosten_model extends CI_Model {
  
     //---------------------------------------------------------------------------- 
  
+ 
+   function get_kosten_details($id) {    
+      $this->db->where('kosten_id', $id);   
+      $result = $this->db->get('kosten');
+      
+    if ($result) {      
+        return $result;    
+        
+    } else {      
+        return false;    
+        
+    }
+    
+ }
+ 
+    //---------------------------------------------------------------------------- 
+ 
+ 
+   function delete_kosten($id) {
+    if($this->db->delete('kosten', array('kosten_id' => $id))) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+      //---------------------------------------------------------------------------- 
+  
+  
+  
 }

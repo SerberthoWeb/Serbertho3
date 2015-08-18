@@ -1,12 +1,29 @@
+ <h2><?php echo $page_heading ; ?></h2> 
 
-
+<button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/kunden/new_kunde';return false;"><?php echo $this->lang->line('common_form_elements_new_kunde');?></button>         
+ <button class="btn btn-primary"  onClick="window.location.href = '<?php echo base_url();?>index.php/makepdf/kunden';return false;"><?php echo $this->lang->line('common_form_elements_make_pdf');?></button>
+    
+     
+     
+     <?php echo form_open('kunden/index') ; ?>
+      <br/>
+      
+        <div class="col-lg-12">
+          <div class="input-group">
+            <input type="text" style=" width: 90%; float: left;" class="form-control" name="search_string" placeholder="<?php echo $this->lang->line('kunden_view_search'); ?>">
+            <span class="input-group-btn" style="float: left;"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                 <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            </span>
+          </div><!-- /input-group --><br/>
+        </div>
+      
+          <?php echo form_close() ; ?>
+      
 <!--/*
  * Listet alle User die im System sind und erlaubt dem Admin User zu
  * editieren und zu löschen.
  */-->
 
-
-<h2><?php echo $page_heading ; ?></h2>
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -38,7 +55,8 @@
 		          <td><?php echo anchor('kunden/edit_kunde/'.
 		            $row->kunde_id,$this->lang->line('common_form_elements_action_edit')) . 
 		            ' ' . anchor('kunden/delete_kunde/'.
-		            $row->kunde_id,$this->lang->line('common_form_elements_action_delete')) ; ?>
+		            $row->kunde_id,$this->lang->line('common_form_elements_action_delete')) ; ?>		           
+
 		      	  </td>
 		        </tr>	        
 		    <?php endforeach ; ?>
@@ -50,9 +68,7 @@
                     <div class="form-group">
       
  
-     <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/kunden/new_kunde';return false;"><?php echo $this->lang->line('common_form_elements_new_kunde');?></button>         
-           
-             <button class="btn btn-primary" style="float: right;" onClick="window.location.href = '<?php echo base_url();?>index.php/makepdf/kunden';return false;"><?php echo $this->lang->line('common_form_elements_make_pdf');?></button>
+   
                     </div>
 	</tbody>
 </table>

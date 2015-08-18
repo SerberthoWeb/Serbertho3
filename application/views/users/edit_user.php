@@ -45,27 +45,31 @@
 	      <?php echo form_input($usr_add1); ?>
 	    </div>  
                 <div class="form-group">
-	    	<?php echo form_error('usr_zip_pcode'); ?>
-	      <label for="usr_zip_pcode"><?php echo $this->lang->line('usr_zip_pcode');?></label>
-	      <?php echo form_input($usr_zip_pcode); ?>
+	    	<?php echo form_error('usr_plz'); ?>
+	      <label for="usr_plz"><?php echo $this->lang->line('usr_plz');?></label>
+	      <?php echo form_input($usr_plz); ?>
 	    </div>   
 	    <div class="form-group">
 	    	<?php echo form_error('usr_town_city'); ?>
 	      <label for="usr_town_city"><?php echo $this->lang->line('usr_town_city');?></label>
 	      <?php echo form_input($usr_town_city); ?>
 	    </div>         
-	     
+	     	    <div class="form-group">
+	    	<?php echo form_error('usr_phone'); ?>
+	      <label for="usr_phone"><?php echo $this->lang->line('usr_phone');?></label>
+	      <?php echo form_input($usr_phone); ?>
+	    </div>       
 	    <div class="form-group">
 	    	<?php echo form_error('usr_access_level'); ?>
 	      <label id="usr_access_level" for="usr_access_level"><?php echo $this->lang->line('usr_access_level');?></label>
 	      <?php echo form_dropdown('usr_access_level', $usr_access_level_options, $usr_access_level); ?> 1 = Admin, 2 = User
 	    </div>  
-	    <div class="form-group">
-	    	<?php echo form_error('usr_is_active'); ?>
-	      <label for="usr_is_active"><?php echo $this->lang->line('usr_is_active');?></label> 
-	      <input type="radio" name="usr_is_active" <?php if ($usr_is_active == 1) { echo 'checked' ;} ?> /> Aktiv
-	      <input type="radio" name="usr_is_active" <?php if ($usr_is_active == 0) { echo 'checked' ;} ?> /> Inaktiv
-	    </div>
+                <div class="form-group">	    	
+                <?php echo form_error('usr_is_active'); ?>
+	      <label id="usr_is_active" for="usr_is_active"><?php echo $this->lang->line('usr_is_active');?></label>
+	      <?php echo form_dropdown('usr_is_active', $usr_is_active_options, $usr_is_active); ?> 1 = Aktiv, 2 = Inaktiv
+	    </div>  
+
 
 	    <?php echo form_hidden($id); ?>
 

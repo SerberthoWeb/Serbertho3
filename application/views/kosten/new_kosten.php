@@ -29,9 +29,46 @@
     <div class="form-group">
       <?php echo form_error('kosten'); ?>
       <label for="kosten"><?php echo $this->lang->line('kosten');?></label>
-      <?php echo form_input($kosten); ?>
-    </div>     
+      <div class="input-group">
+  <span class="input-group-addon">sFr.</span>
+  <?php echo form_input($kosten); ?>
+</div>
+      </div>
+      
+      
+  <div class="row">
+  <div class="col-lg-6">
+       <?php echo form_error('kosten'); ?>
+          <label for="kosten"><?php echo $this->lang->line('kosten');?></label>
+    <div class="input-group">
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">CHF<span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li><a onClick="window.location.href = '<?php echo base_url();?>index.php/kosten/umrechnen';return false;"><?php echo $this->lang->line('euro');?></a></li>
+        </ul>
+      </div><!-- /btn-group -->
+        <?php echo form_input($kosten); ?>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->    
+<br/>
 
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
     <div class="form-group">
       <?php echo form_error('r_nummer'); ?>
       <label for="r_nummer"><?php echo $this->lang->line('r_nummer');?></label>
@@ -82,7 +119,7 @@
         <div class="col-md-2">
           <?php echo form_error('start_y'); ?>
           <select name="start_y" class="form-control">
-          <?php for ($i = date("Y",strtotime(date("Y"))); $i <= date("Y",strtotime(date("Y").' +3 year')); $i++) : ?>
+          <?php for ($i = date("Y",strtotime(date("Y"))); $i <= date("Y",strtotime(date("Y").' +5 year')); $i++) : ?>
             <option value="<?php echo $i;?>"><?php echo $i;?></option>
           <?php endfor ; ?>
           </select>

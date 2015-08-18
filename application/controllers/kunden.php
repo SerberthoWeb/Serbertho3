@@ -19,6 +19,10 @@ class Kunden extends MY_Controller {
     parent::__construct();
    
     $this->load->model('Kunden_model');
+    $this->load->helper('string');
+    $this->load->helper('text');
+    $this->load->library('form_validation');
+    $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
      
   }
   
@@ -30,14 +34,33 @@ class Kunden extends MY_Controller {
   //mit zwei Optionen: Edit und Löschen.
   
   public function index() {
-  $data['page_heading'] = 'Kundenübersicht';
-  $data['query'] = $this->Kunden_model->get_all_kunden();
-  $this->load->view('common/header', $data);
-  $this->load->view('nav/top_nav', $data);
-  $this->load->view('kunden/view_all_kunden', $data);
-  $this->load->view('common/footer', $data);
-} 
+    $this->form_validation->set_rules('search_string', $this->lang->line('search_string'), 'required|min_length[1]|max_length[125]');
+      $page_data['query'] = $this->Kunden_model->get_all_kunden($this->input->post('search_string'));
 
+    if ($this->form_validation->run() == FALSE) {
+      $page_data['search_string'] = array('name' => 'search_string', 'class' => 'form-control', 'id' => 'search_string', 'value' => set_value('search_string', $this->input->post('search_string')), 'maxlength'   => '100', 'size' => '35');
+
+    
+      
+      
+      
+  $page_data['query'] = $this->Kunden_model->get_all_kunden($this->input->post('search_string'));
+  $page_data['page_heading'] = 'Kundenübersicht';
+  
+  $this->load->view('common/header');
+  $this->load->view('nav/top_nav');
+  $this->load->view('kunden/view_all_kunden', $page_data);
+  $this->load->view('common/footer');
+  
+      } else {
+          
+      $page_data['page_heading'] = 'Kundenübersicht';
+      $this->load->view('common/header');
+      $this->load->view('nav/top_nav');
+      $this->load->view('kunden/view_all_kunden', $page_data);
+      $this->load->view('common/footer');      
+    }    
+  }
 //-----------------------------------------------------------------------------
 
 //Kümmert sich um die Kundenerstellung innerhalb des Systems. 

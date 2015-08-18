@@ -6,7 +6,7 @@
  * informiert ihn über sein Password. EMail-Script ist unter /views/email_scripts/welcome.txt
  */-->
 
-<?php echo validation_errors() ; ?>
+
 <div class="page-header">
   <h1><?php echo $page_heading ; ?></h1>
 </div> 

@@ -21,14 +21,18 @@ class Rechnung extends MY_Controller {
 
     if ($this->form_validation->run() == FALSE) {
       $page_data['search_string'] = array('name' => 'search_string', 'class' => 'form-control', 'id' => 'search_string', 'value' => set_value('search_string', $this->input->post('search_string')), 'maxlength'   => '100', 'size' => '35');
-$page_data['page_heading'] = 'Übersicht';
+
+      $page_data['page_heading'] = 'Übersicht';
       $page_data['query'] = $this->Rechnung_model->get_rechnung($this->input->post('search_string'));
+      
       $this->load->view('common/header');
       $this->load->view('nav/top_nav');
       $this->load->view('rechnung/view', $page_data);
       $this->load->view('common/footer');
+      
     } else {
-        $page_data['page_heading'] = 'Übersicht';
+        
+      $page_data['page_heading'] = 'Übersicht';
       $this->load->view('common/header');
       $this->load->view('nav/top_nav');
       $this->load->view('rechnung/view', $page_data);
@@ -52,7 +56,7 @@ $page_data['page_heading'] = 'Übersicht';
 
     $page_data['query'] = $this->Rechnung_model->get_uebersicht($page_data['tour_id']);
     $page_data['querykunden'] = $this->Rechnung_model->get_uebersicht_kunden($page_data['tour_id']);
-     $page_data['querykosten'] = $this->Rechnung_model->get_gesamtkosten($page_data['tour_id']);
+    $page_data['querykosten'] = $this->Rechnung_model->get_gesamtkosten($page_data['tour_id']);
     $page_data['queryeinnahmen'] = $this->Rechnung_model->get_einnahmen($page_data['tour_id']);
 
     if ($page_data['query']->num_rows() != 0) {

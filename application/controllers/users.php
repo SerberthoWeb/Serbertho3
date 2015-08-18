@@ -49,14 +49,15 @@ class Users extends MY_Controller {
 
 public function new_user() {
    // Setzt Validationsregeln
-    $this->form_validation->set_rules('usr_fname', $this->lang->line('usr_fname'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_lname', $this->lang->line('usr_lname'), 'required|min_length[1]|max_length[125]');
+    $this->form_validation->set_rules('usr_fname', $this->lang->line('usr_fname'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_uname', $this->lang->line('usr_uname'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_email', $this->lang->line('usr_email'), 'required|min_length[1]|max_length[255]|valid_email|is_unique[users.usr_email]');
     $this->form_validation->set_rules('usr_confirm_email', $this->lang->line('usr_confirm_email'), 'required|min_length[1]|max_length[255]|valid_email|matches[usr_email]');
     $this->form_validation->set_rules('usr_add1', $this->lang->line('usr_add1'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_town_city', $this->lang->line('usr_town_city'), 'required|min_length[1]|max_length[125]');
-    $this->form_validation->set_rules('usr_zip_pcode', $this->lang->line('usr_zip_pcode'), 'required|min_length[1]|max_length[125]');
+    $this->form_validation->set_rules('usr_plz', $this->lang->line('usr_plz'), 'required|min_length[1]|max_length[125]');
+     $this->form_validation->set_rules('usr_phone', $this->lang->line('usr_phone'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_access_level', $this->lang->line('usr_access_level'), 'min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_is_active', $this->lang->line('usr_is_active'), 'min_length[1]|max_length[1]|integer|is_natural');
   
@@ -76,9 +77,10 @@ public function new_user() {
       $data['usr_confirm_email'] = array('name' => 'usr_confirm_email', 'class' => 'form-control', 'id' => 'usr_confirm_email', 'value' => set_value('usr_confirm_email', ''), 'maxlength'   => '100', 'size' => '35');
       $data['usr_add1'] = array('name' => 'usr_add1', 'class' => 'form-control', 'id' => 'usr_add1', 'value' => set_value('usr_add1', ''), 'maxlength'   => '100', 'size' => '35');
       $data['usr_town_city'] = array('name' => 'usr_town_city', 'class' => 'form-control', 'id' => 'usr_town_city', 'value' => set_value('usr_town_city', ''), 'maxlength'   => '100', 'size' => '35');
-      $data['usr_zip_pcode'] = array('name' => 'usr_zip_pcode', 'class' => 'form-control', 'id' => 'usr_zip_pcode', 'value' => set_value('usr_zip_pcode', ''), 'maxlength'   => '100', 'size' => '35');
+      $data['usr_plz'] = array('name' => 'usr_plz', 'class' => 'form-control', 'id' => 'usr_plz', 'value' => set_value('usr_plz', ''), 'maxlength'   => '100', 'size' => '35');
+      $data['usr_phone'] = array('name' => 'usr_phone', 'class' => 'form-control', 'id' => 'usr_phone', 'value' => set_value('usr_phone', ''), 'maxlength'   => '100', 'size' => '35');
       $data['usr_access_level'] = array(1=>1, 2=>2);
-     
+      $data['usr_is_active'] = array(1=>1, 0=>2);
 
       
       
@@ -106,14 +108,15 @@ public function new_user() {
         'usr_hash' => $hash,
         'usr_add1' => $this->input->post('usr_add1'),
         'usr_town_city' => $this->input->post('usr_town_city'),
-        'usr_zip_pcode' => $this->input->post('usr_zip_pcode'),
+        'usr_plz' => $this->input->post('usr_plz'),
+        'usr_phone' => $this->input->post('usr_phone'),
         'usr_access_level' => $this->input->post('usr_access_level'),
         'usr_is_active' => $this->input->post('usr_is_active')
       );
 
 
 //Wenn es in $data array gespeichert ist, wird versucht der Hashwert in der Datenbank
-//zu speichern mit process_create_user() des users_model.
+//zu speichern mit process_create_user().
       if ($this->Users_model->process_create_user($data)) {
         $file = read_file('/application/views/email_scripts/welcome.txt');
         $file = str_replace('%usr_fname%', $data['usr_fname'], $file);
@@ -143,7 +146,8 @@ public function edit_user() {
     $this->form_validation->set_rules('usr_confirm_email', $this->lang->line('usr_confirm_email'), 'required|min_length[1]|max_length[255]|valid_email|matches[usr_email]');
     $this->form_validation->set_rules('usr_add1', $this->lang->line('usr_add1'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_town_city', $this->lang->line('usr_town_city'), 'required|min_length[1]|max_length[125]');
-    $this->form_validation->set_rules('usr_zip_pcode', $this->lang->line('usr_zip_pcode'), 'required|min_length[1]|max_length[125]');
+    $this->form_validation->set_rules('usr_plz', $this->lang->line('usr_plz'), 'required|min_length[1]|max_length[125]');
+    $this->form_validation->set_rules('usr_phone', $this->lang->line('usr_phone'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_access_level', $this->lang->line('usr_access_level'), 'min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_is_active', $this->lang->line('usr_is_active'), 'min_length[1]|max_length[2]');
   
@@ -172,7 +176,8 @@ public function edit_user() {
         $usr_email = $row->usr_email;
         $usr_add1 = $row->usr_add1;
         $usr_town_city = $row->usr_town_city;
-        $usr_zip_pcode = $row->usr_zip_pcode;
+        $usr_plz = $row->usr_plz;
+        $usr_plz = $row->usr_phone;
         $usr_access_level = $row->usr_access_level;
         $usr_is_active = $row->usr_is_active;
       }
@@ -185,9 +190,11 @@ public function edit_user() {
       $data['usr_confirm_email'] = array('name' => 'usr_confirm_email', 'class' => 'form-control', 'id' => 'usr_confirm_email', 'value' => set_value('usr_confirm_email', $usr_email), 'maxlength'   => '100', 'size' => '35');
       $data['usr_add1'] = array('name' => 'usr_add1', 'class' => 'form-control', 'id' => 'usr_add1', 'value' => set_value('usr_add1', $usr_add1), 'maxlength'   => '100', 'size' => '35');
       $data['usr_town_city'] = array('name' => 'usr_town_city', 'class' => 'form-control', 'id' => 'usr_town_city', 'value' => set_value('usr_town_city', $usr_town_city), 'maxlength'   => '100', 'size' => '35');
-      $data['usr_zip_pcode'] = array('name' => 'usr_zip_pcode', 'class' => 'form-control', 'id' => 'usr_zip_pcode', 'value' => set_value('usr_zip_pcode', $usr_zip_pcode), 'maxlength'   => '100', 'size' => '35');
+      $data['usr_plz'] = array('name' => 'usr_plz', 'class' => 'form-control', 'id' => 'usr_plz', 'value' => set_value('usr_plz', $usr_plz), 'maxlength'   => '100', 'size' => '35');
+       $data['usr_phone'] = array('name' => 'usr_phone', 'class' => 'form-control', 'id' => 'usr_phone', 'value' => set_value('usr_phone', $usr_plz), 'maxlength'   => '100', 'size' => '35');
       $data['usr_access_level_options'] = array(1=>1, 2=>2);
       $data['usr_access_level'] = array('value' => set_value('usr_access_level', $usr_access_level));
+      $data['usr_is_active_options'] = array(1=>1, 0=>2);
       $data['usr_is_active'] = array('value' => set_value('usr_is_active', $usr_is_active));;
       $data['id'] = array('usr_id' => set_value('usr_id', $usr_id));
       
@@ -207,7 +214,8 @@ public function edit_user() {
         'usr_email' => $this->input->post('usr_email'),
         'usr_add1' => $this->input->post('usr_add1'),
         'usr_town_city' => $this->input->post('usr_town_city'),
-        'usr_zip_pcode' => $this->input->post('usr_zip_pcode'),
+        'usr_plz' => $this->input->post('usr_plz'),
+        'usr_phone' => $this->input->post('usr_phone'),
         'usr_access_level' => $this->input->post('usr_access_level'),
         'usr_is_active' => $this->input->post('usr_is_active')
       );

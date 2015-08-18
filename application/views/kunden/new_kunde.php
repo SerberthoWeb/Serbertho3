@@ -6,7 +6,7 @@
  * informiert ihn über sein Password. EMail-Script ist unter /views/email_scripts/welcome.txt
  */-->
 
-<?php echo validation_errors() ; ?>
+
 <div class="page-header">
   <h1><?php echo $page_heading ; ?></h1>
 </div> 
@@ -24,10 +24,13 @@
       <?php echo form_input($lname); ?>
     </div>     
     <div class="form-group">
+        <?php echo form_error('strasse'); ?>
       <label for="strasse"><?php echo $this->lang->line('strasse');?></label>
       <?php echo form_input($strasse); ?>
     </div>   
     <div class="form-group">
+        <?php echo form_error('plz'); ?>
+        
       <label for="plz"><?php echo $this->lang->line('plz');?></label>
       <?php echo form_input($plz); ?>
     </div>   
@@ -39,6 +42,7 @@
 
 
     <div class="form-group">
+        <?php echo form_error('telnr'); ?>
       <label for="telnr"><?php echo $this->lang->line('telnr');?></label>
       <?php echo form_input($telnr); ?>
     </div>          

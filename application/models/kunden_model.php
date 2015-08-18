@@ -15,18 +15,28 @@ class Kunden_model extends CI_Model {
 //----------------------------------------------------------------------------
 
 
-  function get_all_kunden() {    
- 
+  function get_all_kunden($search_string) {    
+ if ($search_string == null) {
       $query = "SELECT * FROM `kunde`, `tour` WHERE 
               `tour`.`tour_id` = `kunde`.`tour_id` "; 
-    
-    $result = $this->db->query($query, array());
+       } else {
+      $query = "SELECT * FROM `kunde`, `tour` WHERE 
+                `lname` LIKE ? AND 
+              `tour`.`tour_id` = `kunde`.`tour_id`
+              
+               
+             "; 
+      
+    }
+    $result = $this->db->query($query, array($search_string, $search_string));
     if ($result) {
       return $result;
     } else {
       return false;
     }    
   }
+  
+  
  //----------------------------------------------------------------------------
   
   
