@@ -22,7 +22,7 @@
             <?php endif ; ?>
               
             <?php if ($this->session->userdata('usr_access_level') == 2) : ?>
-              <li <?php if ($this->uri->segment(1) == 'me') {echo 'class="active"';} ; ?>><?php echo anchor('users/me', $this->lang->line('top_nav_profil')) ; ?></li>
+              <li <?php if ($this->uri->segment(1) == 'me') {echo 'class="active"';} ; ?>><?php echo anchor('me', $this->lang->line('top_nav_profil')) ; ?></li>
               
             <?php else : ?>
 
@@ -37,13 +37,7 @@
         
               
               <li <?php if ($this->uri->segment(1) == 'rechnung') {echo 'class="active"';} ; ?>><?php echo anchor('rechnung', $this->lang->line('top_nav_Kosten_erfassen')) ; ?></li>
-                  
-              
-              
-              
-        
-
-          
+      
           
           </ul>
           

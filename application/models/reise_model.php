@@ -1,7 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access    allowed');
 
 /*
- * Beinhaltet Funktionen für die CRUD-Operationen für Users an Admin-Funktionen.
+ * Beinhaltet Funktionen für die CRUD-Operationen für die zur Verfügung stehenden
+ * Reiseorte --> Reiseort und deren Kurzbeschreibung.
  */
 
 
@@ -90,8 +91,6 @@ class Reise_model extends CI_Model {
   } 
 
 //----------------------------------------------------------------------------
-
-
 
 
 

@@ -111,21 +111,17 @@
     
 
     <table class="table table-bordered">
-	
     <tbody>
     	<?php if ($querykosten->num_rows() > 0) : ?>
 			<?php foreach ($querykosten->result() as $row) : ?>
-       
-             <td>Gesamtkosten
+            <tr> 
+    <td>Gesamtkosten
               </td>
               <td><?php echo $row->TotalKosten ; ?>
               </td>   
-              <tr>
+            </tr>
                         <?php endforeach ; ?>
-		<?php else : ?>
-	        <tr>
-	          <td colspan="5" class="info">Keine Kosten erfasst!</td>
-	        </tr>			
+		<?php else : ?>		
 		<?php endif; ?>
                     <div class="form-group">      
                     </div>
@@ -136,20 +132,18 @@
     <!-- Einnahmen -->
     
           
-    <table class="table table-bordered">
-	
+    <table class="table table-bordered">	
     <tbody>
            	<?php if ($queryeinnahmen->num_rows() > 0) : ?>
           <?php $row = $queryeinnahmen->result()[0];?>
-        
+        <tr>
              <td>Gesamteinnahmen
               </td>
-              <td><?php echo $row->TotalKosten ; ?>
-              </td>   
-              <tr>		
+              <td><?php echo $row->TotalEinnahmen ; ?>
+              </td>  
+        </tr>
 		<?php endif; ?>
-                    <div class="form-group">   
-                        
+                    <div class="form-group">         
                     </div>
 	</tbody>
 </table>          
@@ -186,7 +180,7 @@
                         <?php endforeach ; ?>
 		<?php else : ?>
 	        <tr>
-	          <td colspan="5" class="info">Keine Kosten erfasst!</td>
+	          <td colspan="8" class="info">Keine Kunden erfasst!</td>
 	        </tr>			
 		<?php endif; ?>
    <button class="btn btn-primary" style="float: left;" onClick="window.location.href = '<?php echo base_url();?>index.php/makepdf/users';return false;"><?php echo $this->lang->line('common_form_elements_make_pdf');?></button> 

@@ -7,7 +7,6 @@
  */-->
 
 
-<h2><?php echo $page_heading ; ?></h2>
 <p class="lead"><?php echo $this->lang->line('delete_confirm_message');?></p>
 <?php echo form_open('kunden/delete_kunde'); ?>
     <?php if (validation_errors()) : ?>
@@ -15,10 +14,10 @@
         <p><?php echo validation_errors(); ?></p>
     <?php endif; ?>
     <?php foreach ($query->result() as $row) : ?>
-        <?php echo $row->fname . ' ' . $row->lname; ?>
+        <?php echo $row->fname . ' ' . $row->lname . ', ' . $row->plz . ' ' . $row->ort ; ?>
         <br /><br />
         <?php echo form_submit('submit', $this->lang->line('common_form_elements_action_delete'), 'class="btn btn-primary"'); ?>
         <?php echo anchor('kunden',$this->lang->line('common_form_elements_cancel'), 'class="btn btn-primary"');?>
-        <?php echo form_hidden('id', $row->kunde_id); ?>
+        <?php echo form_hidden('id', $row->kunde_id); ?> 
     <?php endforeach; ?>
-<?php echo form_close() ; ?>
+<?php echo form_close() ; ?><br/>

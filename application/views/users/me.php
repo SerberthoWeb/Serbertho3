@@ -5,7 +5,6 @@
  */-->
 
 
-<?php echo validation_errors() ; ?>
 <div class="page-header">
   <h1><?php echo $page_heading ; ?></h1>
 </div> 
@@ -42,20 +41,30 @@
 	      <label for="usr_add1"><?php echo $this->lang->line('usr_add1');?></label>
 	      <?php echo form_input($usr_add1); ?>
 	    </div>  
+            	    <div class="form-group">
+	      <label for="usr_plz"><?php echo $this->lang->line('usr_plz');?></label>
+	      <?php echo form_input($usr_plz); ?>
+	    </div>        
 	    <div class="form-group">
 	      <label for="usr_town_city"><?php echo $this->lang->line('usr_town_city');?></label>
 	      <?php echo form_input($usr_town_city); ?>
 	    </div>         
-	    <div class="form-group">
-	      <label for="usr_zip_pcode"><?php echo $this->lang->line('usr_zip_pcode');?></label>
-	      <?php echo form_input($usr_zip_pcode); ?>
-	    </div>        
-
+            	    <div class="form-group">
+	      <label for="usr_phone"><?php echo $this->lang->line('usr_phone');?></label>
+	      <?php echo form_input($usr_phone); ?>
+	    </div>     
 	    <?php echo form_hidden($id); ?>
 
 	    <div class="form-group">
-	      <button type="submit" class="btn btn-primary"><?php echo $this->lang->line('common_form_elements_go');?></button><button type="submit" class="btn btn-primary"><?php echo anchor('users',$this->lang->line('common_form_elements_cancel'));?><button type="submit" class="btn btn-primary"><?php echo anchor('me/change_password/','Change Password') ; ?>
-	    </div>
+
+	   
+         <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/users/new_user';return false;"><?php echo $this->lang->line('common_form_elements_go');?></button>     
+         <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/users';return false;"><?php echo $this->lang->line('common_form_elements_cancel');?></button>     
+         <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/me/change_password';return false;"><?php echo $this->lang->line('common_form_elements_change_pw');?></button>     
+            
+            
+            
+            </div>
 		<?php echo form_close() ; ?>
 	</div>
 

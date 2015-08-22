@@ -21,7 +21,6 @@ function __construct() {
   $this->load->helper('url');
   $this->load->helper('security');
   $this->load->helper('file'); // for html emails
-  $this->load->helper('language');
   $this->load->model('Users_model');
   $this->load->library('session');
   
@@ -51,9 +50,9 @@ function __construct() {
     $this->form_validation->set_rules('usr_email', $this->lang->line('usr_email'), 'required|min_length[1]|max_length[255]|valid_email');
     $this->form_validation->set_rules('usr_confirm_email', $this->lang->line('usr_confirm_email'), 'required|min_length[1]|max_length[255]|valid_email|matches[usr_email]');
     $this->form_validation->set_rules('usr_add1', $this->lang->line('usr_add1'), 'required|min_length[1]|max_length[125]');
+    $this->form_validation->set_rules('usr_plz', $this->lang->line('usr_plz'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_town_city', $this->lang->line('usr_town_city'), 'required|min_length[1]|max_length[125]');
-    $this->form_validation->set_rules('usr_zip_pcode', $this->lang->line('usr_zip_pcode'), 'required|min_length[1]|max_length[125]');
-    
+    $this->form_validation->set_rules('usr_phone', $this->lang->line('usr_phone'), 'required|min_length[1]|max_length[125]');
     $data['id'] = $this->session->userdata('usr_id');
   
     $data['page_heading'] = 'Mein Profil';
@@ -71,8 +70,10 @@ function __construct() {
                  $usr_uname = $row->usr_uname;
                  $usr_email = $row->usr_email;
                  $usr_add1 = $row->usr_add1;
+                 $usr_plz = $row->usr_plz;
                  $usr_town_city = $row->usr_town_city;
-                 $usr_zip_pcode = $row->usr_zip_pcode;
+                 
+                 $usr_phone = $row->usr_phone;
 }
 
 
@@ -87,9 +88,11 @@ function __construct() {
       $data['usr_email'] = array('name' => 'usr_email', 'class' => 'form-control', 'id' => 'usr_email', 'value' => set_value('usr_email', $usr_email), 'maxlength'   => '100', 'size' => '35');
       $data['usr_confirm_email'] = array('name' => 'usr_confirm_email', 'class' => 'form-control', 'id' => 'usr_confirm_email', 'value' => set_value('usr_confirm_email', $usr_email), 'maxlength'   => '100', 'size' => '35');
       $data['usr_add1'] = array('name' => 'usr_add1', 'class' => 'form-control', 'id' => 'usr_add1', 'value' => set_value('usr_add1', $usr_add1), 'maxlength'   => '100', 'size' => '35');
+      $data['usr_plz'] = array('name' => 'usr_plz', 'class' => 'form-control', 'id' => 'usr_plz', 'value' => set_value('usr_plz', $usr_plz), 'maxlength'   => '100', 'size' => '35');
       $data['usr_town_city'] = array('name' => 'usr_town_city', 'class' => 'form-control', 'id' => 'usr_town_city', 'value' => set_value('usr_town_city', $usr_town_city), 'maxlength'   => '100', 'size' => '35');
-      $data['usr_zip_pcode'] = array('name' => 'usr_zip_pcode', 'class' => 'form-control', 'id' => 'usr_zip_pcode', 'value' => set_value('usr_zip_pcode', $usr_zip_pcode), 'maxlength'   => '100', 'size' => '35');
-  
+    
+      $data['usr_phone'] = array('name' => 'usr_phone', 'class' => 'form-control', 'id' => 'usr_phone', 'value' => set_value('usr_phone', $usr_phone), 'maxlength'   => '100', 'size' => '35');
+      
   $this->load->view('common/header', $data);
   $this->load->view('nav/top_nav', $data);
   $this->load->view('users/me', $data);
@@ -107,8 +110,10 @@ function __construct() {
         'usr_uname' => $this->input->post('usr_uname'),
         'usr_email' => $this->input->post('usr_email'),
         'usr_add1' => $this->input->post('usr_add1'),
-        'usr_town_city' => $this->input->post('usr_town_city'),
-        'usr_zip_pcode' => $this->input->post('usr_zip_pcode')
+      'usr_plz' => $this->input->post('usr_plz'),  
+      'usr_town_city' => $this->input->post('usr_town_city'),
+        
+        'usr_phone' => $this->input->post('usr_phone')
     );
   
   
@@ -158,7 +163,9 @@ function __construct() {
  
   
   //--------------------------------------------------------------------------
-
-  
   
 }
+
+
+/* End of file me.php */
+/* Location: ./application/controllers/me.php */

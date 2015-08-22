@@ -21,7 +21,6 @@ class Kunden extends MY_Controller {
     $this->load->model('Kunden_model');
     $this->load->helper('string');
     $this->load->helper('text');
-    $this->load->library('form_validation');
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
      
   }
@@ -132,15 +131,15 @@ public function new_kunde() {
 
 public function edit_kunde() {
   //Validationsregeln setzen
-     $this->form_validation->set_rules('kunde_id', $this->lang->line('kunde_id'), 'required|min_length[1]|max_length[125]');
-     $this->form_validation->set_rules('fname', $this->lang->line('fname'), 'required|min_length[1]|max_length[125]');
+    $this->form_validation->set_rules('kunde_id', $this->lang->line('kunde_id'), 'required|min_length[1]|max_length[125]');
+    $this->form_validation->set_rules('fname', $this->lang->line('fname'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('lname', $this->lang->line('lname'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('strasse', $this->lang->line('strasse'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('plz', $this->lang->line('plz'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('ort', $this->lang->line('ort'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('telnr', $this->lang->line('telnr'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('email', $this->lang->line('email'), 'required|min_length[1]|max_length[255]|valid_email|is_unique[users.usr_email]');
-     $this->form_validation->set_rules('tour_id', $this->lang->line('tour_id'), 'required|min_length[1]|max_length[125]');   
+    $this->form_validation->set_rules('tour_id', $this->lang->line('tour_id'), 'required|min_length[1]|max_length[125]');   
   //Der Primärschlüssel des Kunden (kunden.kunde_id) wird an den Edit link angehängt und an
   //die edit_kunde() Funktion angehängt, um nachzuschauen dass der kunde in der Tabelle ist.
   //Die get_kunde_details($id) Funktion des kunden_model nimmt einen Parameterwert von $id -
@@ -172,11 +171,11 @@ public function edit_kunde() {
         $ort = $row->ort;
         $telnr = $row->telnr;
         $email = $row->email;
-      $tour_id = $row->tour_id;
+        $tour_id = $row->tour_id;
       }
       
       
-  $data['fname'] = array('name' => 'fname', 'class' => 'form-control', 'id' => 'fname', 'value' => set_value('fname', $fname), 'maxlength'   => '100', 'size' => '35');
+      $data['fname'] = array('name' => 'fname', 'class' => 'form-control', 'id' => 'fname', 'value' => set_value('fname', $fname), 'maxlength'   => '100', 'size' => '35');
       $data['lname'] = array('name' => 'lname', 'class' => 'form-control', 'id' => 'lname', 'value' => set_value('lname', $lname), 'maxlength'   => '100', 'size' => '35');
       $data['strasse'] = array('name' => 'strasse', 'class' => 'form-control', 'id' => 'strasse', 'value' => set_value('strasse', $strasse), 'maxlength'   => '100', 'size' => '35');
       $data['plz'] = array('name' => 'plz', 'class' => 'form-control', 'id' => 'plz', 'value' => set_value('plz', $plz), 'maxlength'   => '100', 'size' => '35');
@@ -254,3 +253,7 @@ public function edit_kunde() {
   
 
 }
+
+
+/* End of file kunden.php */
+/* Location: ./application/controllers/kunden.php */

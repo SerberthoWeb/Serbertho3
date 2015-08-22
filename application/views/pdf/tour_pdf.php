@@ -24,10 +24,7 @@
 		          <td><?php echo $row->tour_id ; ?></td>
 		          <td><?php echo $row->reiseort ; ?></td>
 		          <td><?php echo $row->reiseabfahrt ; ?></td>
-                          <td><?php echo $row->reiseankunft ; ?></td>
-                     
-                     
-		          
+                          <td><?php echo $row->reiseankunft ; ?></td>         
 		        </tr>	        
 		    <?php endforeach ; ?>
 		<?php else : ?>

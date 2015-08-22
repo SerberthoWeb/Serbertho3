@@ -175,5 +175,17 @@ class Kosten_model extends CI_Model {
       //---------------------------------------------------------------------------- 
   
   
+    function process_update_kosten($id, $data) {    
+      $this->db->where('kosten_id', $id);    
+      if ($this->db->update('kosten', $data)) {      
+          return true;    
+          
+      } else {      
+          return false;    
+          
+      }  
+  }
+  
+      //---------------------------------------------------------------------------- 
   
 }

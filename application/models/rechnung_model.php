@@ -14,7 +14,7 @@ class Rechnung_model extends CI_Model {
 //    // mit deutschem Datum
 //    $mysql = "SELECT DATE_FORMAT (datum, „%e.%m.%y”) AS datum FROM tabelle;";
 
-      //funktioniert
+      //Reiseansicht in rechnung/view
       
     function get_rechnung($search_string) {
 if ($search_string == null) {
@@ -34,8 +34,29 @@ if ($search_string == null) {
 
   //---------------------------------------------------------------------------- 
   
-   
-  //funktioniert      
+      //vergangene Reisenansicht in rechnung/past
+  
+  function get_past_rechnung($search_string) {
+if ($search_string == null) {
+      $query = "SELECT * FROM `tour` WHERE DATE(NOW()) > DATE(`reiseankunft`) ";
+    } else {
+      $query = "SELECT * FROM `tour` WHERE `tour_title` LIKE ? 
+             ";
+    }
+
+    $result = $this->db->query($query, array($search_string, $search_string));
+    if ($result) {
+      return $result;
+    } else {
+      return false;
+    }
+  }   
+  
+  
+    //---------------------------------------------------------------------------- 
+  
+  
+  //Datenübersicht der ausselektierten Reise in rechnung/apply
     
       function get_uebersicht($tour_id) {
   $query = "SELECT * FROM `tour`, `reiseort`, `users`, `kosten`, `kostenstelle`  WHERE 
@@ -45,7 +66,7 @@ if ($search_string == null) {
       `kostenstelle`.`kostenstelle_id` = `kosten`.`kostenstelle_id` AND 
       `tour`.`tour_id` =  ".$tour_id ;  //anfällig für hacken - mit ? geschützt - abklären
        
-$result = $this->db->query($query, array($tour_id));   
+    $result = $this->db->query($query, array($tour_id));   
      
     if ($result) {
       return $result;
@@ -55,7 +76,7 @@ $result = $this->db->query($query, array($tour_id));
   } 
      //---------------------------------------------------------------------------- 
   
-  //funktioniert
+  //Kundenübersicht in der ausselektierten Reise in rechnung/apply
   
       function get_uebersicht_kunden($tour_id) {
 
@@ -79,7 +100,7 @@ $result = $this->db->query($query, array($tour_id));
       //---------------------------------------------------------------------------- 
 
     
-  //funktioniert
+  //Gesamtkosten der ausselektierten Reise in rechnung/apply
   
   function get_gesamtkosten($tour_id) {
 
@@ -104,25 +125,25 @@ $result = $this->db->query($query, array($tour_id));
   
    //---------------------------------------------------------------------------- 
   
+  //Gesamteinnahmen der ausselektieren Reise in rechnung/apply
   
-  
-          function get_einnahmen($tour_id) {
+     function get_einnahmen($tour_id) {
 
-$query = "SELECT `preis`, 
-            SUM(`preis`) AS TotalKosten
-            FROM `tour`, `kunde`
-            WHERE
-            `tour`.`tour_id` =  `kunde`.`tour_id` AND
-            `tour`.`tour_id` =  ".$tour_id ;
+        $query = "SELECT `preis`, 
+                 SUM(`preis`) AS TotalEinnahmen   
+                 FROM `tour`, `kunde`
+                 WHERE
+                `tour`.`tour_id` =  `kunde`.`tour_id` AND
+                `tour`.`tour_id` =  ".$tour_id ;
 
 
-$result = $this->db->query($query, array($tour_id));
+         $result = $this->db->query($query, array($tour_id));
 
      
-    if ($result) {
-      return $result;
+          if ($result) {
+             return $result;
     } else {
-      return false;
+             return false;
     }    
   } 
   
@@ -140,11 +161,6 @@ $result = $this->db->query($query, array($tour_id));
    //----------------------------------------------------------------------------  
   
 
-
-
- 
- 
-
   function get_kostenstelle() {
     return $this->db->get('kostenstelle');
   }
@@ -153,7 +169,28 @@ $result = $this->db->query($query, array($tour_id));
    //---------------------------------------------------------------------------- 
 
   
+ // Gesamtkosten aller Reisen
   
+   function get_gesamtkosten_all($tour_id) {
+
+$query = "SELECT `kosten`,
+            SUM(`kosten`) AS TotalKostenAll
+            FROM `kosten`, `tour`
+            WHERE `tour`.`tour_id` = ".$tour_id ;
+            
+   
+      
+$result = $this->db->query($query, array($tour_id));
+
+     
+    if ($result) {
+      return $result;
+    } else {
+      return false;
+    }    
+  }
+
+  //---------------------------------------------------------------------------- 
   
   
 }

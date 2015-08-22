@@ -51,7 +51,7 @@
 	    </div>   
      
             
-                      <div class="form-group">
+    <div class="form-group">
       <?php echo form_error('tour_id'); ?>
       <label for="tour_id"><?php echo $this->lang->line('reise');?></label>
       <select name="tour_id" class="form-control">

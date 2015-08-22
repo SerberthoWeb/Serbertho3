@@ -12,6 +12,7 @@
     <link href="<?php echo base_url('bootstrap/css/bootstrap-theme.min.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('bootstrap/css/bootstrap-theme.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('bootstrap/css/bootstrap.css'); ?>" rel="stylesheet">
+     <link href="<?php echo base_url('bootstrap/css/pagination.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('bootstrap/fonts/glyphicons-halflings-regular.eot'); ?>" rel="stylesheet">
    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     

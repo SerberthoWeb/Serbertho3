@@ -21,9 +21,10 @@ class Users extends MY_Controller {
     $this->load->model('Users_model');
     $this->load->model('Password_model');
 
-        if ( ($this->session->userdata('logged_in') == FALSE) || 
-       ($this->session->userdata('usr_access_level') != 1) ) {
-        redirect('signin');
+
+     if ( ($this->session->userdata('logged_in') == FALSE) || 
+            ($this->session->userdata('usr_access_level') != 1) ) {
+                redirect('signin');
     }  
   }
   
@@ -34,9 +35,35 @@ class Users extends MY_Controller {
   //wird zu users/view_all_users.php geleitet. Zeigt alle Users in einem Tabellenformat an
   //mit zwei Optionen: Edit und Delete.
   
-  public function index() {
+  public function index($page_number=1,$sortfield='usr_id',$order='asc') {	
+	
+	//pagination
+	/* Get the page number from the URI (/index.php/pagination/index/{pageid}) */
+	$page_number = $this->uri->segment(3);	// it returns the 3rd segement from the url.In my requirement http://localhost:8080/ci/admin/users/2 is the url,  user 2 is page number(3rd segment)
+	 
+	$config['base_url'] = base_url().'index.php/users/index'; // page url, where we can display all users
+	
+	
+	$config['per_page'] = 3; // set this value how many users per page.
+	//$config['num_links'] = 5; // this allow the pagination with 5 links,like 1,2,3,4,5
+	if(empty($page_number)) $page_number = 1;
+	$offset = ($page_number-1) * $config['per_page'];
+	
+	$config['use_page_numbers'] = TRUE; // set this value true,so that page number value will be like users/1 , users/2 , users/3 etc, otherwise it will be like users/10 , users/20 , users/30 etc
+	
+	$data["usersdata"] = $this->Users_model->usersdata($config['per_page'],$offset,$sortfield,$order); // here i calling the model function with perpage , offset , sortfield and order		
+	$config['total_rows'] = $this->db->count_all('users'); // it returns total count of records of tbl_users table.
+	
+	$config['full_tag_open'] = '<div id="pagination">';
+	$config['full_tag_close'] = '</div>';		
+	
+	$this->pagination->cur_page = $offset;
+			
+	$this->pagination->initialize($config);
+	$data['page_links'] = $this->pagination->create_links(); // It will returns the pagination links	
+		
+          
   $data['page_heading'] = 'Userübersicht';
-  $data['query'] = $this->Users_model->get_all_users();
   $this->load->view('common/header', $data);
   $this->load->view('nav/top_nav', $data);
   $this->load->view('users/view_all_users', $data);
@@ -79,8 +106,8 @@ public function new_user() {
       $data['usr_town_city'] = array('name' => 'usr_town_city', 'class' => 'form-control', 'id' => 'usr_town_city', 'value' => set_value('usr_town_city', ''), 'maxlength'   => '100', 'size' => '35');
       $data['usr_plz'] = array('name' => 'usr_plz', 'class' => 'form-control', 'id' => 'usr_plz', 'value' => set_value('usr_plz', ''), 'maxlength'   => '100', 'size' => '35');
       $data['usr_phone'] = array('name' => 'usr_phone', 'class' => 'form-control', 'id' => 'usr_phone', 'value' => set_value('usr_phone', ''), 'maxlength'   => '100', 'size' => '35');
-      $data['usr_access_level'] = array(1=>1, 2=>2);
-      $data['usr_is_active'] = array(1=>1, 0=>2);
+      $data['usr_access_level'] = array(1=>'Admin', 2=>'User');
+      $data['usr_is_active'] = array(1=>'Aktiv', 0=>'Inaktiv');
 
       
       
@@ -145,10 +172,10 @@ public function edit_user() {
     $this->form_validation->set_rules('usr_email', $this->lang->line('usr_email'), 'required|min_length[1]|max_length[255]|valid_email');
     $this->form_validation->set_rules('usr_confirm_email', $this->lang->line('usr_confirm_email'), 'required|min_length[1]|max_length[255]|valid_email|matches[usr_email]');
     $this->form_validation->set_rules('usr_add1', $this->lang->line('usr_add1'), 'required|min_length[1]|max_length[125]');
+    $this->form_validation->set_rules('usr_plz', $this->lang->line('usr_plz'), 'required|min_length[4]|max_length[10]');
     $this->form_validation->set_rules('usr_town_city', $this->lang->line('usr_town_city'), 'required|min_length[1]|max_length[125]');
-    $this->form_validation->set_rules('usr_plz', $this->lang->line('usr_plz'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_phone', $this->lang->line('usr_phone'), 'required|min_length[1]|max_length[125]');
-    $this->form_validation->set_rules('usr_access_level', $this->lang->line('usr_access_level'), 'min_length[1]|max_length[125]');
+    $this->form_validation->set_rules('usr_access_level', $this->lang->line('usr_access_level'), 'min_length[1]|max_length[10]');
     $this->form_validation->set_rules('usr_is_active', $this->lang->line('usr_is_active'), 'min_length[1]|max_length[2]');
   
   //Der Primärschlüssel des Users (users.usr_id) wird an den Edit link angehängt und an
@@ -175,9 +202,9 @@ public function edit_user() {
         $usr_uname = $row->usr_uname;
         $usr_email = $row->usr_email;
         $usr_add1 = $row->usr_add1;
-        $usr_town_city = $row->usr_town_city;
         $usr_plz = $row->usr_plz;
-        $usr_plz = $row->usr_phone;
+        $usr_town_city = $row->usr_town_city;
+        $usr_phone = $row->usr_phone;
         $usr_access_level = $row->usr_access_level;
         $usr_is_active = $row->usr_is_active;
       }
@@ -189,12 +216,12 @@ public function edit_user() {
       $data['usr_email'] = array('name' => 'usr_email', 'class' => 'form-control', 'id' => 'usr_email', 'value' => set_value('usr_email', $usr_email), 'maxlength'   => '100', 'size' => '35');
       $data['usr_confirm_email'] = array('name' => 'usr_confirm_email', 'class' => 'form-control', 'id' => 'usr_confirm_email', 'value' => set_value('usr_confirm_email', $usr_email), 'maxlength'   => '100', 'size' => '35');
       $data['usr_add1'] = array('name' => 'usr_add1', 'class' => 'form-control', 'id' => 'usr_add1', 'value' => set_value('usr_add1', $usr_add1), 'maxlength'   => '100', 'size' => '35');
-      $data['usr_town_city'] = array('name' => 'usr_town_city', 'class' => 'form-control', 'id' => 'usr_town_city', 'value' => set_value('usr_town_city', $usr_town_city), 'maxlength'   => '100', 'size' => '35');
       $data['usr_plz'] = array('name' => 'usr_plz', 'class' => 'form-control', 'id' => 'usr_plz', 'value' => set_value('usr_plz', $usr_plz), 'maxlength'   => '100', 'size' => '35');
-       $data['usr_phone'] = array('name' => 'usr_phone', 'class' => 'form-control', 'id' => 'usr_phone', 'value' => set_value('usr_phone', $usr_plz), 'maxlength'   => '100', 'size' => '35');
-      $data['usr_access_level_options'] = array(1=>1, 2=>2);
+      $data['usr_town_city'] = array('name' => 'usr_town_city', 'class' => 'form-control', 'id' => 'usr_town_city', 'value' => set_value('usr_town_city', $usr_town_city), 'maxlength'   => '100', 'size' => '35');
+      $data['usr_phone'] = array('name' => 'usr_phone', 'class' => 'form-control', 'id' => 'usr_phone', 'value' => set_value('usr_phone', $usr_phone), 'maxlength'   => '100', 'size' => '35');
+      $data['usr_access_level_options'] = array(1=>'Admin', 2=>'User');
       $data['usr_access_level'] = array('value' => set_value('usr_access_level', $usr_access_level));
-      $data['usr_is_active_options'] = array(1=>1, 0=>2);
+      $data['usr_is_active_options'] = array(1=>'Aktiv', 0=>'Inaktiv');
       $data['usr_is_active'] = array('value' => set_value('usr_is_active', $usr_is_active));;
       $data['id'] = array('usr_id' => set_value('usr_id', $usr_id));
       
@@ -213,8 +240,8 @@ public function edit_user() {
         'usr_uname' => $this->input->post('usr_uname'),
         'usr_email' => $this->input->post('usr_email'),
         'usr_add1' => $this->input->post('usr_add1'),
-        'usr_town_city' => $this->input->post('usr_town_city'),
         'usr_plz' => $this->input->post('usr_plz'),
+        'usr_town_city' => $this->input->post('usr_town_city'),
         'usr_phone' => $this->input->post('usr_phone'),
         'usr_access_level' => $this->input->post('usr_access_level'),
         'usr_is_active' => $this->input->post('usr_is_active')
@@ -279,3 +306,5 @@ public function edit_user() {
   
 }
 
+/* End of file users.php */
+/* Location: ./application/controllers/users.php */

@@ -5,35 +5,57 @@
             <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/makepdf/kosten';return false;"><?php echo $this->lang->line('common_form_elements_make_pdf');?></button>
 
 
-      
-    <?php echo form_open('kosten/index') ; ?>
-      <br/>
-      
+            
+
+            <div>
+    <?php echo form_open('kosten/index') ; ?><br/>
+      <div class="row" style="float: left; position: relative; left: 0px;">
         <div class="col-lg-12">
           <div class="input-group">
-            <input type="text" style=" width: 90%; float: left;" class="form-control" name="search_string" placeholder="<?php echo $this->lang->line('kosten_view_search_ks'); ?>">
-            <span class="input-group-btn" style="float: left;"> 	
-              <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+              <input type="text" style=" width: 90%; float: left;" class="form-control" name="search_string" placeholder="<?php echo $this->lang->line('kosten_view_search_ks'); ?>">
+            <span class="input-group-btn" style="float: left;">
+                 <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
             </span>
           </div><!-- /input-group -->
-        </div>
-
+        </div><!-- /.col-lg-6 -->
+      </div><!-- /.row -->
     <?php echo form_close() ; ?>
-     
+  
+
+   <?php echo form_open('rechnung/past') ; ?>
+      <div class="row" style="float: left; position: relative; left: 25px;">
+        <div class="col-lg-12">
+          <div class="input-group">
+              <input type="text" style=" width: 90%; float: left;" class="form-control" name="search_string" placeholder="<?php echo $this->lang->line('reisename'); ?>">
+            <span class="input-group-btn" style="float: left;">
+                 <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            </span>
+          </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+      </div><!-- /.row -->
+    <?php echo form_close() ; ?>
+  
+  
     <?php echo form_open('kosten/rn') ; ?>
-      <br/>
-      
+      <div class="row" style="float: left; position: absolute; left: 50px;">
         <div class="col-lg-12">
           <div class="input-group">
-            <input type="text" style=" width: 90%;" class="form-control" name="search_string" placeholder="<?php echo $this->lang->line('kosten_view_search_rn'); ?>">
-            <span class="input-group-btn" style="float: left;"> 
-              <button class="btn btn-default" type="submit" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+              <input type="text" style=" width: 90%; float: left;" class="form-control" name="search_string" placeholder="<?php echo $this->lang->line('kosten_view_search_rn'); ?>">
+            <span class="input-group-btn" style="float: left;">
+                 <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
             </span>
           </div><!-- /input-group -->
-        </div>
-
+        </div><!-- /.col-lg-6 -->
+      </div><!-- /.row -->
     <?php echo form_close() ; ?>
+  
 
+      
+        
+
+  
+ 
+</div><br/><br/>
 <!--/*
  * Listet alle User die im System sind und erlaubt dem Admin User zu
  * editieren und zu löschen.
@@ -42,16 +64,15 @@
 
 
 <table class="table table-bordered">
-    <br/><br/><br/>
     <thead>
         <tr>
 <!--          <th>#</th>-->
           <th>Kostenstelle</th>
-          <th>Reise</th>
+          <th>Reisename</th>
           <th>Kosten</th>
           <th>Rechnungsnummer</th>
            <th>Erfassungsdatum</th>
-                    <td>Aktionen</td>    
+                    <th>Aktion</th>    
 	              
         </tr>
     </thead>	
@@ -65,9 +86,11 @@
                           <td><?php echo $row->kosten ; ?></td>
                           <td><?php echo $row->r_nummer ; ?></td>
                           <td><?php echo $row->datum ; ?></td>
-                           <td><button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/kosten/edit_kosten/';return false;"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>  
-                           <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/kosten/delete_kosten/';return false;"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>  
-                        
+                          <td>&nbsp;&nbsp;&nbsp;<?php echo anchor('kosten/edit_kosten/'.
+		            $row->kosten_id, '<span class="glyphicon glyphicon-pencil"></span>', $this->lang->line('common_form_elements_action_edit')); ?> </button>
+		           &nbsp;&nbsp;&nbsp;
+                           <?php echo anchor('kosten/delete_kosten/'.
+		            $row->kosten_id, '<span class="glyphicon glyphicon-remove"></span>', $this->lang->line('common_form_elements_action_delete')); ?> </button> 
                           </td>
                         </tr>	        
 		    <?php endforeach ; ?>
@@ -86,3 +109,4 @@
                     </div>
 	</tbody>
 </table>
+</div>

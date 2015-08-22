@@ -22,7 +22,7 @@ class Rechnung extends MY_Controller {
     if ($this->form_validation->run() == FALSE) {
       $page_data['search_string'] = array('name' => 'search_string', 'class' => 'form-control', 'id' => 'search_string', 'value' => set_value('search_string', $this->input->post('search_string')), 'maxlength'   => '100', 'size' => '35');
 
-      $page_data['page_heading'] = 'Übersicht';
+      $page_data['page_heading'] = 'Reiseübersicht';
       $page_data['query'] = $this->Rechnung_model->get_rechnung($this->input->post('search_string'));
       
       $this->load->view('common/header');
@@ -32,7 +32,7 @@ class Rechnung extends MY_Controller {
       
     } else {
         
-      $page_data['page_heading'] = 'Übersicht';
+      $page_data['page_heading'] = 'Reiseübersicht';
       $this->load->view('common/header');
       $this->load->view('nav/top_nav');
       $this->load->view('rechnung/view', $page_data);
@@ -72,7 +72,7 @@ class Rechnung extends MY_Controller {
       redirect('rechnung');    
     }
    
-   $page_data['page_heading'] = 'Übersicht';
+   $page_data['page_heading'] = 'Reiseübersicht';
     $this->load->view('common/header');
     $this->load->view('nav/top_nav');
     $this->load->view('rechnung/apply', $page_data); 
@@ -83,7 +83,32 @@ class Rechnung extends MY_Controller {
   
   //----------------------------------------------------------------------------
   
+  public function past() {
+    $this->form_validation->set_rules('search_string', $this->lang->line('search_string'), 'required|min_length[1]|max_length[125]');
+    $page_data['query'] = $this->Rechnung_model->get_past_rechnung($this->input->post('search_string'));
 
+    if ($this->form_validation->run() == FALSE) {
+      $page_data['search_string'] = array('name' => 'search_string', 'class' => 'form-control', 'id' => 'search_string', 'value' => set_value('search_string', $this->input->post('search_string')), 'maxlength'   => '100', 'size' => '35');
+
+      $page_data['page_heading'] = 'Reiseübersicht';
+      $page_data['query'] = $this->Rechnung_model->get_past_rechnung($this->input->post('search_string'));
+      
+      $this->load->view('common/header');
+      $this->load->view('nav/top_nav');
+      $this->load->view('rechnung/past', $page_data);
+      $this->load->view('common/footer');
+      
+    } else {
+        
+      $page_data['page_heading'] = 'Reiseübersicht';
+      $this->load->view('common/header');
+      $this->load->view('nav/top_nav');
+      $this->load->view('rechnung/past', $page_data);
+      $this->load->view('common/footer');      
+    }    
+  }
+  
+  //----------------------------------------------------------------------------
    
 }
 /* End of file rechnung.php */

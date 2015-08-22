@@ -25,7 +25,7 @@ $lang['common_form_elements_from'] = "von";
 $lang['common_form_elements_history'] = "History";
 $lang['common_form_elements_new_kosten'] = "Kosten erfassen";
 $lang['common_form_elements_kostenstelle'] = "Kostenstelle erfassen";
-
+$lang['common_form_elements_change_pw'] = "Passwort ändern";
 
 // Marke
 $lang['system_system_name'] = "Serbertho Reisen";
@@ -42,6 +42,7 @@ $lang['top_nav_reisen'] = "Reisen";
 $lang['top_nav_teilnehmer'] = "Teilnehmer";
 $lang['top_nav_tour'] = "Tour";
 $lang['top_nav_Kosten_erfassen'] = "Rechnung";
+$lang['top_nav_profil'] = "Profil";
 
 
 // Login
@@ -86,7 +87,7 @@ $lang['usr_is_active'] = "User Aktivlevel: ";
 $lang['is_active'] = "User aktiv?";
 $lang['usr_new_user'] = "Neuen User erstellen";
 $lang['usr_phone'] = "Mobiltelefon";
-
+$lang['common_form_elements_new_user'] = "Neuer User erfassen";
 
 
 // Passwort vergessen
@@ -129,34 +130,28 @@ $lang['common_form_elements_new_reise'] = "Neue Reise erstellen";
 
 
 
-//Teilnehmer
-
-
-
-
-
 //Kosten
 $lang['kosten'] = "Kosten";
 $lang['kostenstelle'] = "Kostenstelle";
-$lang['reise'] = "Reiseort";
+$lang['reise'] = "Reisename";
 $lang['datum'] = "Erfassungsdatum";
 $lang['r_nummer'] = "Rechnungsnummer";
 $lang['kosten_view_apply'] = "Anschauen";
 $lang['kosten_view_search_ks'] = "Kostenstelle";
 $lang['kosten_view_search_rn'] = "Rechnungsnummer";
-
+$lang['kosten_form_instruction_save'] = "Kosten erfassen";
 
 //Rechnung
 $lang['rechnung_view_search_tour'] = "Reisename";
 $lang['rechnung_view_apply'] = "Anschauen";
+$lang['past_reisen'] = "Vergangene Reisen anschauen";
+
 
 //Währungsrechnung
 $lang['euro'] = "Euro";
 
 //Tour
-
 $lang['common_form_elements_new_tour'] = "Neue Tour erfassen";
-
 $lang['tour_teilnehmer_liste'] = "Teilnehmerliste";
 $lang['tour_gesamt_kosten'] = "Gesamtkosten";
 $lang['reiseort'] = "Reiseort";
@@ -168,16 +163,17 @@ $lang['teilnehmerliste'] = "Teilnehmerlistennummer";
 $lang['teilnehmerliste'] = "Teilnehmerlistennummer";
 
 
+
 //PDF
 $lang['common_form_elements_make_pdf'] = "PDF erstellen";
+
 
 
 //Kostenstelle
 $lang['kostenstelle_name'] = "Bezeichnung der Kostenstelle";
 $lang['kosten_form_instruction_new'] = "Kostenstelle erfassen";
 
-//Form instruction
-$lang['kosten_form_instruction_save'] = "Kosten erfassen";
+
 
 
 

@@ -12,6 +12,7 @@ class Kunden_model extends CI_Model {
         parent::__construct();  
 }
 
+
 //----------------------------------------------------------------------------
 
 
@@ -86,7 +87,6 @@ class Kunden_model extends CI_Model {
  }
  
    
- 
  //----------------------------------------------------------------------------
  
  
@@ -119,9 +119,7 @@ class Kunden_model extends CI_Model {
   
 
 //----------------------------------------------------------------------------
- function get_reiseort() {
-    return $this->db->get('tour');
-  }
+
 }
 
 

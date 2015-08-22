@@ -65,12 +65,12 @@
     <div class="form-group">
                  <?php echo form_error('usr_access_level'); ?>
       <label for="usr_access_level"><?php echo $this->lang->line('usr_access_level');?></label>
-      <?php echo form_dropdown('usr_access_level', $usr_access_level, 'large'); ?>  1 = Admin, 2 = User
+      <?php echo form_dropdown('usr_access_level', $usr_access_level, 'large'); ?> 
     </div>  
     <div class="form-group">
                  <?php echo form_error('usr_is_active'); ?>
       <label for="usr_is_active"><?php echo $this->lang->line('usr_is_active');?></label>
-      <?php echo form_dropdown('usr_is_active', $usr_is_active, 'large'); ?>  1 = Aktiv, 2 = Inaktiv
+      <?php echo form_dropdown('usr_is_active', $usr_is_active, 'large'); ?> 
     </div>     
 
     <div class="form-group">

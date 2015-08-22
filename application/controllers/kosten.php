@@ -11,7 +11,6 @@ class Kosten extends MY_Controller {
     $this->load->helper('text');
     $this->load->model('Tour_model');
     $this->load->model('Kosten_model');
-    $this->load->library('form_validation');
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
   }
 
@@ -24,10 +23,7 @@ class Kosten extends MY_Controller {
     if ($this->form_validation->run() == FALSE) {
       $page_data['search_string'] = array('name' => 'search_string', 'class' => 'form-control', 'id' => 'search_string', 'value' => set_value('search_string', $this->input->post('search_string')), 'maxlength'   => '100', 'size' => '35');
 
-    
-      
-      
-      
+   
 
   $page_data['query'] = $this->Kosten_model->get_kosten($this->input->post('search_string'));
   $page_data['page_heading'] = 'Kostenübersicht';
@@ -56,10 +52,7 @@ class Kosten extends MY_Controller {
     if ($this->form_validation->run() == FALSE) {
       $page_data['search_string'] = array('name' => 'search_string', 'class' => 'form-control', 'id' => 'search_string', 'value' => set_value('search_string', $this->input->post('search_string')), 'maxlength'   => '100', 'size' => '35');
 
-    
-      
-      
-      
+ 
 
   $page_data['query'] = $this->Kosten_model->get_kosten_rn($this->input->post('search_string'));
 $page_data['page_heading'] = 'Kostenübersicht';
@@ -111,9 +104,6 @@ $page_data['page_heading'] = 'Kostenübersicht';
         $page_data['start_y']              = array('name' => 'start_y', 'class' => 'form-control', 'id' => 'start_y', 'value' => set_value('start_y', ''), 'maxlength'   => '100', 'size' => '35');
       
         
-        
-
-
       
       $this->load->view('common/header');
       $this->load->view('nav/top_nav');
@@ -175,9 +165,6 @@ $page_data['page_heading'] = 'Kostenübersicht';
         $page_data['start_y']              = array('name' => 'start_y', 'class' => 'form-control', 'id' => 'start_y', 'value' => set_value('start_y', ''), 'maxlength'   => '100', 'size' => '35');
       
         
-        
-
-
       
       $this->load->view('common/header');
       $this->load->view('nav/top_nav');
@@ -311,7 +298,87 @@ $page_data['page_heading'] = 'Kostenübersicht';
     }
  //--------------------------------------------------------------------------------- 
 
+    
+    public function edit_kosten() {
+  //Validationsregeln setzen
+     $this->form_validation->set_rules('kosten_id', $this->lang->line('kosten_id'), 'required|min_length[1]|max_length[125]');
+     $this->form_validation->set_rules('kostenstele_id', $this->lang->line('kostenstelle_id'), 'required|min_length[1]|max_length[125]');
+    $this->form_validation->set_rules('kosten', $this->lang->line('kosten'), 'required|min_length[1]|max_length[125]');
+    $this->form_validation->set_rules('tour_id', $this->lang->line('tour_id'), 'required|min_length[1]|max_length[125]');
+    $this->form_validation->set_rules('r_nummer', $this->lang->line('r_nummer'), 'required|min_length[1]|max_length[125]');
+   
+    
+  //Der Primärschlüssel des Kunden (kunden.kunde_id) wird an den Edit link angehängt und an
+  //die edit_kunde() Funktion angehängt, um nachzuschauen dass der kunde in der Tabelle ist.
+  //Die get_kunde_details($id) Funktion des kunden_model nimmt einen Parameterwert von $id -
+  //und schaut nach dem Kunden. Ist diese gefunden, werden die Details der Abfrage in eine lokale
+  //variable geschrieben und im data array gespeichert. Wird an edit_kunde.php weitergegeben,
+  //wo dies gebarucht wird um die Formitems mit den korrekten Daten zu füllen.
+  
+    if ($this->input->post()) {
+      $id = $this->input->post('kosten_id');
+    } else {
+      $id = $this->uri->segment(3); 
+    }
+    
+    $data['page_heading'] = 'Kosten';                
+    //Bestätigung beginnt
+    if ($this->form_validation->run() == FALSE) {      
+        
+        
+      $query = $this->Kosten_model->get_kosten_details($id);
+  
+      
+      
+      foreach ($query->result() as $row) {
+        $kosten_id = $row->kosten_id;
+        $kostenstelle_id = $row->kostenstelle_id;
+        $kosten = $row->kosten;
+        $tour_id = $row->tour_id;
+        $r_nummer = $row->r_nummer;
+   
+      }
+      
+      
+      $data['kostenstelle_id'] = array('name' => 'kostenstelle_id', 'class' => 'form-control', 'id' => 'kostenstelle_id', 'value' => set_value('kostenstelle_id', $kostenstelle_id), 'maxlength'   => '100', 'size' => '35');
+      $data['kosten'] = array('name' => 'kosten', 'class' => 'form-control', 'id' => 'kosten', 'value' => set_value('kosten', $kosten), 'maxlength'   => '100', 'size' => '35');
+      $data['tour_id'] = array('name' => 'tour_id', 'class' => 'form-control', 'id' => 'tour_id', 'value' => set_value('tour_id', $tour_id), 'maxlength'   => '100', 'size' => '35');
+      $data['r_nummer'] = array('name' => 'r_nummer', 'class' => 'form-control', 'id' => 'r_nummer', 'value' => set_value('r_nummer', $r_nummer), 'maxlength'   => '100', 'size' => '35');
+
+      $data['id'] = array('kosten_id' => set_value('kosten_id', $kosten_id));
+      
+      $data['tour'] = $this->Kosten_model->get_tour();
+      $data['kostenstelle'] = $this->Kosten_model->get_kostenstelle();
+      $this->load->view('common/header', $data);
+      $this->load->view('nav/top_nav', $data);
+      $this->load->view('kosten/edit_kosten', $data);
+      $this->load->view('common/footer', $data);
+    } else { // Validation bestanden
+    
+//Falls die Formulareingaben stimmen, werden die Kundeninformationen im $data array
+//gespeichert.
+      $data = array(
+        'kostenstelle_id' => $this->input->post('kostenstelle_id'),
+        'kosten' => $this->input->post('kosten'),
+        'tour_id' => $this->input->post('tour_id'),
+        'r_nummer' => $this->input->post('r_nummer'),
+
+      );
+    
+    //Sobald alles hinzugefügt wurde, werden die Kundendetails geupdatet durch
+    //process_update_kunde() Funktion des Kunden_model.
+
+        if ($this->Kosten_model->process_update_kosten($id, $data)) {
+            redirect('kosten');
+    }
+  }
 }
 
-/* End of file jobs.php */
+
+ //--------------------------------------------------------------------------------- 
+
+
+}
+
+/* End of file kosten.php */
 /* Location: ./application/controllers/kosten.php */

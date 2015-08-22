@@ -59,7 +59,7 @@
       <?php foreach ($tour->result() as $row) : ?>
         <option value="<?php echo $row->tour_id ; ?>"><?php echo $row->tour_title ; ?></option>
       <?php endforeach ; ?>
-      </select>
+      </select><br/>
     </div>    
 
     <div class="form-group">
@@ -68,7 +68,7 @@
 <?php echo form_close() ; ?>
   </div>
 </div>
-
+<br/>
 
 
 

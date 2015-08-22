@@ -12,10 +12,7 @@ class Password extends CI_Controller {
   function __construct() {
     parent::__construct();
     $this->load->library('session');
-    $this->load->helper('form');
     $this->load->helper('file');
-    $this->load->helper('url');
-    $this->load->helper('security');
     $this->load->model('Users_model');
     $this->lang->load('de_admin', 'deutsch'); 
     $this->load->library('form_validation');
@@ -230,7 +227,8 @@ if ($this->Users_model->update_user_code($data)) { // Update okay, EMail senden
   }
 
 
-
+/* End of file password.php */
+/* Location: ./application/controllers/password.php */
 
 
 

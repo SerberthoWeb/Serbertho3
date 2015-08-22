@@ -51,7 +51,7 @@ class Reisen extends MY_Controller {
 public function new_reise() {
    // Setzt Validationsregeln
     $this->form_validation->set_rules('reiseort', $this->lang->line('reiseort'), 'required|min_length[1]|max_length[125]');
-    $this->form_validation->set_rules('kzbeschreib', $this->lang->line('kzbeschreib'), 'required|min_length[1]|max_length[3000]');
+    $this->form_validation->set_rules('kzbeschreib', $this->lang->line('kzbeschreib'), 'required|min_length[1]|max_length[125]');
    
 
     
@@ -65,7 +65,7 @@ public function new_reise() {
     
     if ($this->form_validation->run() == FALSE) {
       $data['reiseort'] = array('name' => 'reiseort', 'class' => 'form-control', 'id' => 'reiseort', 'value' => set_value('reiseort', ''), 'maxlength'   => '100', 'size' => '35');
-      $data['kzbeschreib'] = array('name' => 'kzbeschreib', 'class' => 'form-control', 'id' => 'kzbeschreib', 'value' => set_value('kzbeschreib', ''), 'maxlength'   => '3000', 'rows' => '6', 'cols' => '35');
+      $data['kzbeschreib'] = array('name' => 'kzbeschreib', 'class' => 'form-control', 'id' => 'kzbeschreib', 'value' => set_value('kzbeschreib', ''), 'maxlength'   => '2000', 'rows' => '20', 'cols' => '35');
       
      
 
@@ -198,3 +198,7 @@ public function edit_reise() {
   
 
 }
+
+
+/* End of file reisen.php */
+/* Location: ./application/controllers/reisen.php */

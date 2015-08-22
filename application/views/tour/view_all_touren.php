@@ -15,9 +15,7 @@
           <th>Reiseabfahrt</th>
           <th>Reiseankunft</th>
           <th>Preis</th>
-         
-
-	      <td>Aktionen</td>                     
+	      <th>Aktion</th>                     
         </tr>
     </thead>	
     <tbody>
@@ -29,10 +27,11 @@
 		          <td><?php echo $row->reiseabfahrt ; ?></td>
                           <td><?php echo $row->reiseankunft ; ?></td>
                           <td><?php echo $row->preis ; ?></td>
-
-                          
-		          <td><?php echo anchor('tour/delete_tour/'.
-		            $row->tour_id,$this->lang->line('common_form_elements_action_delete')) ; ?>
+                          <td>&nbsp;&nbsp;&nbsp;<?php echo anchor('tour/edit_tour/'.
+		            $row->tour_id, '<span class="glyphicon glyphicon-pencil"></span>', $this->lang->line('common_form_elements_action_edit')); ?> </button>
+		           &nbsp;&nbsp;&nbsp;
+                           <?php echo anchor('tour/delete_tour/'.
+		            $row->tour_id, '<span class="glyphicon glyphicon-remove"></span>', $this->lang->line('common_form_elements_action_delete')); ?> </button> 
 		      	  </td>
 		        </tr>	        
 		    <?php endforeach ; ?>

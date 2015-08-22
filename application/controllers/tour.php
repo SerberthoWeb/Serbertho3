@@ -23,7 +23,6 @@ class Tour extends MY_Controller {
        $this->load->helper('string');
     $this->load->helper('text');
     $this->load->model('Tour_model');
-    $this->load->library('form_validation');
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
      
   }
@@ -121,20 +120,10 @@ public function new_tour() {
   } 
 
   
-  
-  
-  
-  
-  
-
 //--------------------------------------------------------------------------
 
 
-
 //Wenn die Edit Funktion gewählt wird, wird die edit_reise() Funktion aufgerufen.
-
-
-
 
 
 //Wenn Delete benutz wird in users/view_all_users.php, wird der users controller gerufen
@@ -172,3 +161,7 @@ public function new_tour() {
   
 
 }
+
+
+/* End of file tour.php */
+/* Location: ./application/controllers/tour.php */
