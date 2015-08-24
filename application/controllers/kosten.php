@@ -116,7 +116,7 @@ $page_data['page_heading'] = 'Kostenübersicht';
         'kosten' => $this->input->post('kosten'),
         'r_nummer' => $this->input->post('r_nummer'),
         'tour_id' => $this->input->post('tour_id'),
-        'datum' => $this->input->post('start_y').'-'.$this->input->post('start_m').'-'.$this->input->post('start_d'),
+        'datum' => $this->input->post('start_y').'.'.$this->input->post('start_m').'.'.$this->input->post('start_d'),
         );
 
       if ($this->Kosten_model->save_kosten($save_data)) {

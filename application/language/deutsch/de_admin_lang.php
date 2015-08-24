@@ -174,6 +174,8 @@ $lang['kostenstelle_name'] = "Bezeichnung der Kostenstelle";
 $lang['kosten_form_instruction_new'] = "Kostenstelle erfassen";
 
 
+//Datum
+$lang['start_m'] = "Januar";
 
 
 

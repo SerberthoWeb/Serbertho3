@@ -6,10 +6,10 @@
  * informiert ihn über sein Password. EMail-Script ist unter /views/email_scripts/welcome.txt
  */-->
 
+<div class="form">
 
-<div class="page-header">
   <h1><?php echo $page_heading ; ?></h1>
-</div> 
+
   <p class="lead"><?php echo $this->lang->line('kunde_form_instruction_edit');?></p>
   <div class="span8"> 
 <?php echo form_open('kunden/new_kunde','role="form" class="form"') ; ?>
@@ -63,7 +63,8 @@
     </div>    
 
     <div class="form-group">
-      <button type="submit" class="btn btn-primary"><?php echo $this->lang->line('common_form_elements_go');?></button>   <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/kunden';return false;"><?php echo $this->lang->line('common_form_elements_cancel');?></button> 
+      <button type="submit" class="btn btn-primary"><?php echo $this->lang->line('common_form_elements_go');?></button>   
+      <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/kunden';return false;"><?php echo $this->lang->line('common_form_elements_cancel');?></button> 
     </div> 
 <?php echo form_close() ; ?>
   </div>

@@ -11,21 +11,27 @@
 
 class Users extends MY_Controller {
     
-    
+ 
     //--------------------------------------------------------------------------
 
     
   function __construct() {
     parent::__construct();
     $this->load->helper('file'); // für html-Emails
+    $this->load->helper('url');
     $this->load->model('Users_model');
     $this->load->model('Password_model');
+    $this->load->helper('form'); 
+    
+  
 
 
      if ( ($this->session->userdata('logged_in') == FALSE) || 
             ($this->session->userdata('usr_access_level') != 1) ) {
                 redirect('signin');
-    }  
+                
+       
+  }
   }
   
   //-----------------------------------------------------------------------------
@@ -35,33 +41,35 @@ class Users extends MY_Controller {
   //wird zu users/view_all_users.php geleitet. Zeigt alle Users in einem Tabellenformat an
   //mit zwei Optionen: Edit und Delete.
   
-  public function index($page_number=1,$sortfield='usr_id',$order='asc') {	
-	
-	//pagination
-	/* Get the page number from the URI (/index.php/pagination/index/{pageid}) */
-	$page_number = $this->uri->segment(3);	// it returns the 3rd segement from the url.In my requirement http://localhost:8080/ci/admin/users/2 is the url,  user 2 is page number(3rd segment)
-	 
-	$config['base_url'] = base_url().'index.php/users/index'; // page url, where we can display all users
-	
-	
-	$config['per_page'] = 3; // set this value how many users per page.
-	//$config['num_links'] = 5; // this allow the pagination with 5 links,like 1,2,3,4,5
-	if(empty($page_number)) $page_number = 1;
-	$offset = ($page_number-1) * $config['per_page'];
-	
-	$config['use_page_numbers'] = TRUE; // set this value true,so that page number value will be like users/1 , users/2 , users/3 etc, otherwise it will be like users/10 , users/20 , users/30 etc
-	
-	$data["usersdata"] = $this->Users_model->usersdata($config['per_page'],$offset,$sortfield,$order); // here i calling the model function with perpage , offset , sortfield and order		
-	$config['total_rows'] = $this->db->count_all('users'); // it returns total count of records of tbl_users table.
-	
-	$config['full_tag_open'] = '<div id="pagination">';
-	$config['full_tag_close'] = '</div>';		
-	
-	$this->pagination->cur_page = $offset;
-			
-	$this->pagination->initialize($config);
-	$data['page_links'] = $this->pagination->create_links(); // It will returns the pagination links	
-		
+  function index() {	
+
+$this->load->model('Users_model', 'sql', TRUE);
+
+        //********************SET UP PAGINATION VALUES****************************
+        //set up per_page_value, per_page_seg, cur_page_seg and $data['pbase_url']
+        //************************************************************************
+       $this->load->library('pagination');
+        $this->load->library('pagination_pi');
+
+        $per_page_value = 5;  //default - unless overridden later
+        $per_page_seg = 5;    //the uri segment for the per page value
+        $cur_page_seg = 6;      //the url segment for the current page value (generally +1 of per page seg)
+
+        $per_page = get_per_page($per_page_value, $per_page_seg); 
+        $offset = get_offset($cur_page_seg, $per_page); 
+
+        //generate the query
+        $data['query'] = $this->Users_model->usersdata($offset, $per_page);
+
+        //find out the total amount of records
+        $total_rows = count($this->Users_model->record_count(NULL, NULL));
+
+        $data['pbase_url'] = base_url().'users/view_all_users/';
+        $data['pagination'] = init_paginate($cur_page_seg, $total_rows, $per_page, $per_page_seg, $data['pbase_url']); 
+
+       
+
+ 
           
   $data['page_heading'] = 'Userübersicht';
   $this->load->view('common/header', $data);
@@ -70,11 +78,16 @@ class Users extends MY_Controller {
   $this->load->view('common/footer', $data);
 } 
 
+
 //-----------------------------------------------------------------------------
+// ------------------------------------------------------------------------
+
+
+
 
 //Handelt die Usererstellung innerhalb des Systems. 
 
-public function new_user() {
+ function new_user() {
    // Setzt Validationsregeln
     $this->form_validation->set_rules('usr_lname', $this->lang->line('usr_lname'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_fname', $this->lang->line('usr_fname'), 'required|min_length[1]|max_length[125]');
@@ -113,7 +126,7 @@ public function new_user() {
       
       $this->load->view('common/header', $data);
       $this->load->view('nav/top_nav', $data);
-      $this->load->view('users/new_user',$data);
+      $this->load->view('users/view_all_users',$data);
       $this->load->view('common/footer', $data);
     } else { // Validation bestanden
   
@@ -163,7 +176,7 @@ public function new_user() {
 
 //Wenn der Admin die Edit Funktion wählt wird die edit_user() Funktion aufgerufen.
 
-public function edit_user() {
+ function edit_user() {
   //Validationsregeln setzen
     $this->form_validation->set_rules('usr_id', $this->lang->line('usr_id'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_fname', $this->lang->line('usr_fname'), 'required|min_length[1]|max_length[125]');
@@ -266,7 +279,7 @@ public function edit_user() {
 //weitergegeben
     
     
-     public function delete_user() {
+    function delete_user() {
     //Setzen Validationsregeln
    $this->form_validation->set_rules('id', $this->lang->line('usr_id'), 'required|min_length[1]|max_length[11]|integer|is_natural');
 
@@ -293,7 +306,7 @@ public function edit_user() {
   
   //----------------------------------------------------------------
   
-  public function pwd_email() {
+ function pwd_email() {
     $id = $this->uri->segment(3);
     send_email($data, 'reset');
     redirect('users');
