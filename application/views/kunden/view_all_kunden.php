@@ -26,9 +26,9 @@
  * editieren und zu löschen.
  */-->
 
-<table class="table table-bordered">
+<table class="table table-hover table-bordered table-condensed">
     <thead>
-        <tr>
+        <tr class="info">
           <th>Vorname</th>
           <th>Nachname</th>
           <th>Strasse</th>
@@ -53,10 +53,10 @@
 		          <td><?php echo $row->email ; ?></td>
                           <td><?php echo $row->tour_title ; ?></td>
 		          <td>&nbsp;&nbsp;&nbsp;<?php echo anchor('kunden/edit_kunde/'.
-		            $row->kunde_id, '<span class="glyphicon glyphicon-pencil"></span>', $this->lang->line('common_form_elements_action_edit')); ?> </button>
+		            $row->kunde_id, '<span class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="Bearbeiten"></span>', $this->lang->line('common_form_elements_action_edit')); ?> </button>
 		           &nbsp;&nbsp;&nbsp;
                            <?php echo anchor('kunden/delete_kunde/'.
-		            $row->kunde_id, '<span class="glyphicon glyphicon-remove"></span>', $this->lang->line('common_form_elements_action_delete')); ?> </button> 
+		            $row->kunde_id, '<span class="glyphicon glyphicon-remove" data-toggle="tooltip" title="Löschen"></span>', $this->lang->line('common_form_elements_action_delete')); ?> </button> 
                   
 <!--//'<button class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></button>'-->
 

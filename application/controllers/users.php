@@ -11,27 +11,22 @@
 
 class Users extends MY_Controller {
     
- 
+    
     //--------------------------------------------------------------------------
 
     
   function __construct() {
     parent::__construct();
     $this->load->helper('file'); // für html-Emails
-    $this->load->helper('url');
     $this->load->model('Users_model');
     $this->load->model('Password_model');
     $this->load->helper('form'); 
-    
-  
 
 
      if ( ($this->session->userdata('logged_in') == FALSE) || 
             ($this->session->userdata('usr_access_level') != 1) ) {
                 redirect('signin');
-                
-       
-  }
+    }  
   }
   
   //-----------------------------------------------------------------------------
@@ -41,35 +36,32 @@ class Users extends MY_Controller {
   //wird zu users/view_all_users.php geleitet. Zeigt alle Users in einem Tabellenformat an
   //mit zwei Optionen: Edit und Delete.
   
-  function index() {	
+public function index($page_num=1,$sortfield='usr_id',$order='asc') {	
+	$page_number = $this->uri->segment(3);	// Gibt das 3te Segement von der URL.In http://localhost/Serbertho3/index.php/users/2 ist die URL,  User 2 ist die Seitenzahl(= 3. Segment)
+	 
+	$config['base_url'] = base_url().'index.php/users/index/'; // URL, hier werden alle Users gelistet
+	
+        //Anzahl Einträge die der User auswählt
 
-$this->load->model('Users_model', 'sql', TRUE);
-
-        //********************SET UP PAGINATION VALUES****************************
-        //set up per_page_value, per_page_seg, cur_page_seg and $data['pbase_url']
-        //************************************************************************
-       $this->load->library('pagination');
-        $this->load->library('pagination_pi');
-
-        $per_page_value = 5;  //default - unless overridden later
-        $per_page_seg = 5;    //the uri segment for the per page value
-        $cur_page_seg = 6;      //the url segment for the current page value (generally +1 of per page seg)
-
-        $per_page = get_per_page($per_page_value, $per_page_seg); 
-        $offset = get_offset($cur_page_seg, $per_page); 
-
-        //generate the query
-        $data['query'] = $this->Users_model->usersdata($offset, $per_page);
-
-        //find out the total amount of records
-        $total_rows = count($this->Users_model->record_count(NULL, NULL));
-
-        $data['pbase_url'] = base_url().'users/view_all_users/';
-        $data['pagination'] = init_paginate($cur_page_seg, $total_rows, $per_page, $per_page_seg, $data['pbase_url']); 
-
-       
-
- 
+                 $config['per_page'] = 5;
+             // Default-Wert, wieviele Einträge angezeigt werden
+	//$config['num_links'] = 3; // Anzahl der Links für die Pagination, z.B. 1,2,3
+	if(empty($page_number)) $page_number = 1;
+	$offset = ($page_number-1) * $config['per_page'];
+	
+	$config['use_page_numbers'] = TRUE; // Ist der Wert auf true, der Wert der Seitennummer ist: users/1, users/2 etc.. Wird die page_number config auf 2 gestellt (2 Einträge auf der Seite) werden bei ungerader Anzahl, bei der nur ein Einträg existiert, ohne true, eine fehlermeldung produziert
+	
+	$data["usersdata"] = $this->Users_model->usersdata($config['per_page'],$offset,$sortfield,$order); 	
+	$config['total_rows'] = $this->db->count_all('users'); // Gibt die Totalanzahl der Records von der Tabelle user.
+	
+	$config['full_tag_open'] = '<div id="pagination">';
+	$config['full_tag_close'] = '</div>';		
+	
+	$this->pagination->cur_page = $offset;
+			
+	$this->pagination->initialize($config);
+	$data['page_links'] = $this->pagination->create_links(); // Übergibt die Links der $data	
+	
           
   $data['page_heading'] = 'Userübersicht';
   $this->load->view('common/header', $data);
@@ -77,17 +69,11 @@ $this->load->model('Users_model', 'sql', TRUE);
   $this->load->view('users/view_all_users', $data);
   $this->load->view('common/footer', $data);
 } 
-
-
 //-----------------------------------------------------------------------------
-// ------------------------------------------------------------------------
-
-
-
 
 //Handelt die Usererstellung innerhalb des Systems. 
 
- function new_user() {
+public function new_user() {
    // Setzt Validationsregeln
     $this->form_validation->set_rules('usr_lname', $this->lang->line('usr_lname'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_fname', $this->lang->line('usr_fname'), 'required|min_length[1]|max_length[125]');
@@ -97,7 +83,7 @@ $this->load->model('Users_model', 'sql', TRUE);
     $this->form_validation->set_rules('usr_add1', $this->lang->line('usr_add1'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_town_city', $this->lang->line('usr_town_city'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_plz', $this->lang->line('usr_plz'), 'required|min_length[1]|max_length[125]');
-     $this->form_validation->set_rules('usr_phone', $this->lang->line('usr_phone'), 'required|min_length[1]|max_length[125]');
+    $this->form_validation->set_rules('usr_phone', $this->lang->line('usr_phone'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_access_level', $this->lang->line('usr_access_level'), 'min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_is_active', $this->lang->line('usr_is_active'), 'min_length[1]|max_length[1]|integer|is_natural');
   
@@ -176,7 +162,7 @@ $this->load->model('Users_model', 'sql', TRUE);
 
 //Wenn der Admin die Edit Funktion wählt wird die edit_user() Funktion aufgerufen.
 
- function edit_user() {
+public function edit_user() {
   //Validationsregeln setzen
     $this->form_validation->set_rules('usr_id', $this->lang->line('usr_id'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_fname', $this->lang->line('usr_fname'), 'required|min_length[1]|max_length[125]');
@@ -279,7 +265,7 @@ $this->load->model('Users_model', 'sql', TRUE);
 //weitergegeben
     
     
-    function delete_user() {
+     public function delete_user() {
     //Setzen Validationsregeln
    $this->form_validation->set_rules('id', $this->lang->line('usr_id'), 'required|min_length[1]|max_length[11]|integer|is_natural');
 
@@ -306,7 +292,7 @@ $this->load->model('Users_model', 'sql', TRUE);
   
   //----------------------------------------------------------------
   
- function pwd_email() {
+  public function pwd_email() {
     $id = $this->uri->segment(3);
     send_email($data, 'reset');
     redirect('users');

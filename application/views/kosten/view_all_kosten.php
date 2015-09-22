@@ -26,7 +26,7 @@
       <div class="row" style="float: left; position: relative; left: 25px;">
         <div class="col-lg-12">
           <div class="input-group">
-              <input type="text" style=" width: 90%; float: left;" class="form-control" name="search_string" placeholder="<?php echo $this->lang->line('reisename'); ?>">
+              <input type="text" style=" width: 90%; float: left;" class="form-control" name="search_string" placeholder="<?php echo $this->lang->line('kosten_view_search_reisename'); ?>">
             <span class="input-group-btn" style="float: left;">
                  <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
             </span>
@@ -37,7 +37,7 @@
   
   
     <?php echo form_open('kosten/rn') ; ?>
-      <div class="row" style="float: left; position: absolute; left: 50px;">
+      <div class="row" style="float: left; position: relative; left: 50px;">
         <div class="col-lg-12">
           <div class="input-group">
               <input type="text" style=" width: 90%; float: left;" class="form-control" name="search_string" placeholder="<?php echo $this->lang->line('kosten_view_search_rn'); ?>">
@@ -63,9 +63,9 @@
 
 
 
-<table class="table table-bordered">
+<table class="table table-hover table-bordered table-condensed">
     <thead>
-        <tr>
+        <tr class="info">
 <!--          <th>#</th>-->
           <th>Kostenstelle</th>
           <th>Reisename</th>
@@ -79,7 +79,7 @@
     <tbody>
     	<?php if ($query->num_rows() > 0) : ?>
 			<?php foreach ($query->result() as $row) : ?>
-		        <tr>
+		        <tr >
 <!--		          <td><?php echo $row->kosten_id ; ?></td>-->
 		          <td><?php echo $row->kostenstelle_name ; ?></td>
 		          <td><?php echo $row->tour_title ; ?></td>
@@ -87,10 +87,10 @@
                           <td><?php echo $row->r_nummer ; ?></td>
                           <td><?php echo $row->datum ; ?></td>
                           <td>&nbsp;&nbsp;&nbsp;<?php echo anchor('kosten/edit_kosten/'.
-		            $row->kosten_id, '<span class="glyphicon glyphicon-pencil"></span>', $this->lang->line('common_form_elements_action_edit')); ?> </button>
+		            $row->kosten_id, '<span class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="Bearbeiten"></span>', $this->lang->line('common_form_elements_action_edit')); ?> </button>
 		           &nbsp;&nbsp;&nbsp;
                            <?php echo anchor('kosten/delete_kosten/'.
-		            $row->kosten_id, '<span class="glyphicon glyphicon-remove"></span>', $this->lang->line('common_form_elements_action_delete')); ?> </button> 
+		            $row->kosten_id, '<span class="glyphicon glyphicon-remove" data-toggle="tooltip" title="Löschen"></span>', $this->lang->line('common_form_elements_action_delete')); ?> </button> 
                           </td>
                         </tr>	        
 		    <?php endforeach ; ?>

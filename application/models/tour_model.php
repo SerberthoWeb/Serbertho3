@@ -16,8 +16,9 @@ class Tour_model extends CI_Model {
 
 
   function get_all_tour() {
-    $query = "SELECT * FROM `tour`, `reiseort` WHERE 
-              `reiseort`.`reiseort_id` = `tour`.`reiseort_id` 
+    $query = "SELECT * FROM `tour`, `reiseort`, `users`  WHERE 
+              `reiseort`.`reiseort_id` = `tour`.`reiseort_id` AND
+              `users`.`usr_id` = `tour`.`usr_id` 
           "; 
     
     $result = $this->db->query($query, array());
@@ -28,9 +29,10 @@ class Tour_model extends CI_Model {
     }    
   }
       
+  //---------------------------------------------------------------------------- 
   
- //----------------------------------------------------------------------------
-  
+ 
+
   
   function process_create_tour($data) {    
       if ($this->db->insert('tour', $data)) {      
@@ -45,7 +47,7 @@ class Tour_model extends CI_Model {
    //----------------------------------------------------------------------------
    
    
-  function process_update_tour($id, $data) {    
+  function edit_tour($id, $data) {    
       $this->db->where('tour_id', $id);    
       if ($this->db->update('tour', $data)) {      
           return true;    
@@ -123,7 +125,11 @@ class Tour_model extends CI_Model {
     return $this->db->get('users');
   }
  
+    //----------------------------------------------------------------------------
   
+  function get_tour() {
+        return $this->db->get('tour');
+  }
 }
 
 

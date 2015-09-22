@@ -1,15 +1,36 @@
-<h2><?php echo $page_heading ; ?></h2>
-<p class="lead"><?php echo $this->lang->line('delete_confirm_message');?></p>
-<?php echo form_open('kosten/delete_kostenstelle'); ?>
-    <?php if (validation_errors()) : ?>
-        <h3>Ups! Ein Fehler ist aufgetreten:</h3>
-        <p><?php echo validation_errors(); ?></p>
-    <?php endif; ?>
-    <?php foreach ($query->result() as $row) : ?>
-        <?php echo $row->kostenstelle_id; ?>
-        <br /><br />
-        <?php echo form_submit('submit', $this->lang->line('common_form_elements_action_delete'), 'class="btn btn-primary"'); ?>
-        <?php echo anchor('kosten/kostenstelle',$this->lang->line('common_form_elements_cancel'));?>
-        <?php echo form_hidden('id', $row->kostenstelle_id); ?>
-    <?php endforeach; ?>
+
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        
+<div class="page-header">
+  <h1><?php echo $page_heading ; ?></h1>
+</div> 
+  <p class="lead"><?php echo $this->lang->line('usr_form_instruction_edit');?></p>
+  <div class="span8"> 
+<?php echo form_open('users/new_user','role="form" class="form"') ; ?>
+    <div class="form-group">
+      <?php echo form_error('usr_fname'); ?>
+      <label for="usr_fname"><?php echo $this->lang->line('usr_fname');?></label>
+      <?php echo form_input($usr_fname); ?>
+    </div>
+    
 <?php echo form_close() ; ?>
+  </div>
+</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+        

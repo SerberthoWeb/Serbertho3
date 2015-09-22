@@ -73,7 +73,7 @@ $lang['email_subject_reset_password'] = "Passwort zurücksetzen.";
 // User
 $lang['usr_form_instruction_new'] = "Neue Userdetails";
 $lang['usr_form_instruction_edit'] = "Neuer User";
-$lang['usr_id'] = "ID";
+$lang['usr_id'] = "Reiseleiter";
 $lang['usr_fname'] = "Vorname";
 $lang['usr_lname'] = "Nachname";
 $lang['usr_uname'] = "Username";
@@ -140,6 +140,8 @@ $lang['kosten_view_apply'] = "Anschauen";
 $lang['kosten_view_search_ks'] = "Kostenstelle";
 $lang['kosten_view_search_rn'] = "Rechnungsnummer";
 $lang['kosten_form_instruction_save'] = "Kosten erfassen";
+$lang['kosten_view_search_reisename'] = "Reisename";
+
 
 //Rechnung
 $lang['rechnung_view_search_tour'] = "Reisename";
@@ -157,6 +159,7 @@ $lang['tour_gesamt_kosten'] = "Gesamtkosten";
 $lang['reiseort'] = "Reiseort";
 $lang['tour_title'] = "Tourname";
 $lang['reiseabfahrt'] = "Reiseabfahrt";
+$lang['reiseankunft'] = "Reiseankunft";
 $lang['rückfahrtsankunft'] = "Rückfahrtsankunft";
 $lang['reiseleiter'] = "Reiseleiter";
 $lang['teilnehmerliste'] = "Teilnehmerlistennummer";

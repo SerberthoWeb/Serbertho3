@@ -110,9 +110,8 @@ function __construct() {
         'usr_uname' => $this->input->post('usr_uname'),
         'usr_email' => $this->input->post('usr_email'),
         'usr_add1' => $this->input->post('usr_add1'),
-      'usr_plz' => $this->input->post('usr_plz'),  
-      'usr_town_city' => $this->input->post('usr_town_city'),
-        
+        'usr_plz' => $this->input->post('usr_plz'),  
+        'usr_town_city' => $this->input->post('usr_town_city'),
         'usr_phone' => $this->input->post('usr_phone')
     );
   

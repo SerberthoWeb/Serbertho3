@@ -7,15 +7,16 @@
 
 
 <h2><?php echo $page_heading ; ?></h2>
-<table class="table table-bordered">
+<table class="table table-hover table-bordered table-condensed">
     <thead>
-        <tr>
+        <tr class="info">
           <th>Tourname</th>
           <th>Reiseort</th>
           <th>Reiseabfahrt</th>
           <th>Reiseankunft</th>
           <th>Preis</th>
-	      <th>Aktion</th>                     
+          <th>Reiseleiter</th>
+	  <th class="info">Aktion</th>                     
         </tr>
     </thead>	
     <tbody>
@@ -27,17 +28,18 @@
 		          <td><?php echo $row->reiseabfahrt ; ?></td>
                           <td><?php echo $row->reiseankunft ; ?></td>
                           <td><?php echo $row->preis ; ?></td>
-                          <td>&nbsp;&nbsp;&nbsp;<?php echo anchor('tour/edit_tour/'.
-		            $row->tour_id, '<span class="glyphicon glyphicon-pencil"></span>', $this->lang->line('common_form_elements_action_edit')); ?> </button>
+                          <td><?php echo $row->usr_lname . " " .$row->usr_fname ; ?></td>
+                          <td class="info">&nbsp;&nbsp;&nbsp;<?php echo anchor('tour/edit_tour/'.
+		            $row->tour_id, '<span class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="Bearbeiten"></span>', $this->lang->line('common_form_elements_action_edit')); ?> </button>
 		           &nbsp;&nbsp;&nbsp;
                            <?php echo anchor('tour/delete_tour/'.
-		            $row->tour_id, '<span class="glyphicon glyphicon-remove"></span>', $this->lang->line('common_form_elements_action_delete')); ?> </button> 
+		            $row->tour_id, '<span class="glyphicon glyphicon-remove" data-toggle="tooltip" title="Löschen"></span>', $this->lang->line('common_form_elements_action_delete')); ?> </button> 
 		      	  </td>
 		        </tr>	        
 		    <?php endforeach ; ?>
 		<?php else : ?>
 	        <tr>
-	          <td colspan="5" class="info">Keine Kunden hier!</td>
+	          <td colspan="12" class="info">Keine Touren hier!</td>
 	        </tr>			
 		<?php endif; ?>
                     <div class="form-group">

@@ -13,7 +13,7 @@
       <div class="blog-post">
         	<?php if ($query->num_rows() > 0) : ?>
           <?php $row = $query->result()[0];?>
-          <h3 class="blog-post-title"><?php echo $row->tour_title ; ?></h3>
+          <h3><b><?php echo $row->tour_title ; ?></b></h3>
         
           <table class="table">
             <tr>
@@ -63,20 +63,15 @@
                 
         <!--Kostenübersicht-->        
                 
-
+        <br/>
 <h3>Rechnungsübersicht</h3>
 <table class="table table-bordered">
-    <thead>
-        <tr>
-<!--          <th>#</th>-->
+     <thead class="thead-inverse">
+        <tr class="info">
           <th>Kostenstelle</th>
            <th>Erfassungsdatum</th>
            <th>Rechnungsnummer</th>
-          <th>Kosten</th>
-          
-         
-
-	              
+          <th>Kosten</th>        
         </tr>
     </thead>	
     <tbody>
@@ -88,74 +83,64 @@
                           <td><?php echo $row->datum ; ?></td>
                           <td><?php echo $row->r_nummer ; ?></td>
                           <td><?php echo $row->kosten ; ?></td>
-                          
-
-		        </tr>
-                        
+               	        </tr> 
                         <?php endforeach ; ?>
 		<?php else : ?>
 	        <tr>
-	          <td colspan="5" class="info">Keine Kosten erfasst!</td>
+	          <td colspan="12" class="info">Keine Kosten erfasst!</td>
 	        </tr>			
 		<?php endif; ?>
-                    <div class="form-group"> 
-                          <button class="btn btn-primary" style="float: left;" onClick="window.location.href = '<?php echo base_url();?>index.php/makepdf/users';return false;"><?php echo $this->lang->line('common_form_elements_make_pdf');?></button> 
-                    <br/> <br/>
-                    </div>
-    
 	</tbody>
 </table>
     
+
+
    
     <!--Gesamtkosten-->
     
-
-    <table class="table table-bordered">
+<table class="table table-bordered">
     <tbody>
     	<?php if ($querykosten->num_rows() > 0) : ?>
 			<?php foreach ($querykosten->result() as $row) : ?>
             <tr> 
-    <td>Gesamtkosten
-              </td>
-              <td><?php echo $row->TotalKosten ; ?>
-              </td>   
+                <td colspan="8">Gesamtkosten</td>
+                <td colspan="4"><?php echo $row->TotalKosten ; ?></td>   
             </tr>
-                        <?php endforeach ; ?>
+                <?php endforeach ; ?>
 		<?php else : ?>		
 		<?php endif; ?>
-                    <div class="form-group">      
-                    </div>
 	</tbody>
 </table>
                
     
+    
+    
     <!-- Einnahmen -->
     
-          
-    <table class="table table-bordered">	
+<table class="table table-bordered">	
     <tbody>
            	<?php if ($queryeinnahmen->num_rows() > 0) : ?>
           <?php $row = $queryeinnahmen->result()[0];?>
         <tr>
-             <td>Gesamteinnahmen
-              </td>
-              <td><?php echo $row->TotalEinnahmen ; ?>
-              </td>  
+             <td colspan="8">Gesamteinnahmen</td>
+             <td colspan="4"><?php echo $row->TotalEinnahmen ; ?></td>  
         </tr>
-		<?php endif; ?>
-                    <div class="form-group">         
-                    </div>
+		<?php endif; ?>         
 	</tbody>
 </table>          
+     <button class="btn btn-primary" style="float: left;" onClick="window.location.href = '<?php echo base_url();?>index.php/makepdf/users';return false;"><?php echo $this->lang->line('common_form_elements_make_pdf');?></button> 
+     <br/><br/>
+     
+     
     
 
-<!-- Kundenübersicht -->
+<!-- Reiseteilnehmerübersicht -->
 
-
-    <h3>Kundenübersicht</h3>
+    <br/>
+    <h3>Reiseteilnehmerübersicht</h3> 
     <table class="table table-bordered">
     <thead>
-        <tr>
+        <tr class="info">
           <th>Vorname</th>
           <th>Nachname</th>
           <th>Strasse</th>
@@ -180,12 +165,11 @@
                         <?php endforeach ; ?>
 		<?php else : ?>
 	        <tr>
-	          <td colspan="8" class="info">Keine Kunden erfasst!</td>
+	          <td colspan="12" class="info">Keine Kunden erfasst!</td>
 	        </tr>			
 		<?php endif; ?>
-   <button class="btn btn-primary" style="float: left;" onClick="window.location.href = '<?php echo base_url();?>index.php/makepdf/users';return false;"><?php echo $this->lang->line('common_form_elements_make_pdf');?></button> 
-                    <br/> <br/>
-                    <div class="form-group">      
-                    </div>
 	</tbody>
+        <br/>
 </table>
+ 
+    <button class="btn btn-primary" style="float: left;" onClick="window.location.href = '<?php echo base_url();?>index.php/makepdf/users';return false;"><?php echo $this->lang->line('common_form_elements_make_pdf');?></button> 

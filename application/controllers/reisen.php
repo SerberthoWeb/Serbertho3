@@ -22,7 +22,7 @@ class Reisen extends MY_Controller {
     parent::__construct();
    
     $this->load->model('Reise_model');
-        $this->load->helper('string');
+    $this->load->helper('string');
     $this->load->helper('text');
     $this->load->library('form_validation');
      
@@ -52,7 +52,6 @@ public function new_reise() {
    // Setzt Validationsregeln
     $this->form_validation->set_rules('reiseort', $this->lang->line('reiseort'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('kzbeschreib', $this->lang->line('kzbeschreib'), 'required|min_length[1]|max_length[125]');
-   
 
     
     $data['page_heading'] = 'Neuen Reiseort anlegen';
@@ -67,8 +66,6 @@ public function new_reise() {
       $data['reiseort'] = array('name' => 'reiseort', 'class' => 'form-control', 'id' => 'reiseort', 'value' => set_value('reiseort', ''), 'maxlength'   => '100', 'size' => '35');
       $data['kzbeschreib'] = array('name' => 'kzbeschreib', 'class' => 'form-control', 'id' => 'kzbeschreib', 'value' => set_value('kzbeschreib', ''), 'maxlength'   => '2000', 'rows' => '20', 'cols' => '35');
       
-     
-
 
       $this->load->view('common/header', $data);
       $this->load->view('nav/top_nav', $data);
@@ -84,6 +81,7 @@ public function new_reise() {
 
       );
 
+      
       if ($this->Reise_model->process_create_reise($data)) {
         redirect('reisen');
       } else {
@@ -100,10 +98,10 @@ public function new_reise() {
 
 public function edit_reise() {
   //Validationsregeln setzen
-    $this->form_validation->set_rules('reiseort_id', $this->lang->line('reiseort_id'), 'required|min_length[1]|max_length[125]');
+     $this->form_validation->set_rules('reiseort_id', $this->lang->line('reiseort_id'), 'required|min_length[1]|max_length[125]');
      $this->form_validation->set_rules('reiseort', $this->lang->line('reiseort'), 'required|min_length[1]|max_length[125]');
-    $this->form_validation->set_rules('kzbeschreib', $this->lang->line('kzbeschreib'), 'required|min_length[1]|max_length[500]');
-    $this->form_validation->set_rules('preis', $this->lang->line('preis'), 'required|min_length[1]|max_length[125]');
+     $this->form_validation->set_rules('kzbeschreib', $this->lang->line('kzbeschreib'), 'required|min_length[1]|max_length[500]');
+   
     
   
   //Der Primärschlüssel des Reiseortes(reiseort.reiseort_id) wird an den Edit link angehängt und an

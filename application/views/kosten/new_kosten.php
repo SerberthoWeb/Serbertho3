@@ -6,106 +6,124 @@
  * informiert ihn über sein Password. EMail-Script ist unter /views/email_scripts/welcome.txt
  */-->
 
-      
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" >
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        
+<div class="form">
 <div class="page-header">
-  <h1><?php echo $page_heading ; ?></h1>
+ <h1><?php echo $page_heading ; ?></h1>
 </div> 
-  <p class="lead"><?php echo $this->lang->line('usr_form_instruction_edit');?></p>
+  <p class="lead"><?php echo $this->lang->line('kosten_form_instruction_save');?></p>
   <div class="span8"> 
-<?php echo form_open('kosten/new_kosten','role="form" class="form"') ; ?>
+<?php echo form_open('kosten/new_kosten','role="form" class="form"') ; ?> 
+
+      
+          <div class="form-group">
+      <?php echo form_error('kostenstelle_id'); ?>
+      <label for="kostenstelle_id"><?php echo $this->lang->line('kostenstelle');?></label>
+      <select name="kostenstelle_id" class="form-control">
+      <?php foreach ($kostenstelle->result() as $row) : ?>
+        <option value="<?php echo $row->kostenstelle_id ; ?>"><?php echo $row->kostenstelle_name ; ?></option>
+      <?php endforeach ; ?>
+      </select>
+    </div>    
+      
+      
     <div class="form-group">
       <?php echo form_error('kosten'); ?>
       <label for="kosten"><?php echo $this->lang->line('kosten');?></label>
-      <?php echo form_input($kosten); ?>
-    </div>
-    <div class="form-group">
-      <?php echo form_error('usr_lname'); ?>
-      <label for="usr_lname"><?php echo $this->lang->line('usr_lname');?></label>
-      <?php echo form_input($usr_lname); ?>
-    </div>  
-    <div class="form-group">
-      <?php echo form_error('usr_uname'); ?>
-      <label for="usr_uname"><?php echo $this->lang->line('usr_uname');?></label>
-      <?php echo form_input($usr_uname); ?>
-    </div>   
-    
-    <div class="form-group">
-        <?php echo form_error('usr_email'); ?>
-      <label for="usr_email"><?php echo $this->lang->line('usr_email');?></label>
-      <?php echo form_input($usr_email); ?>
-    </div>   
-    <div class="form-group">
-        <?php echo form_error('confirm_email'); ?>
-      <label for="usr_confirm_email"><?php echo $this->lang->line('usr_confirm_email');?></label>
-      <?php echo form_input($usr_confirm_email); ?>
-    </div>   
-
-    <div class="form-group">
-        <?php echo form_error('usr_add1'); ?>
-      <label for="usr_add1"><?php echo $this->lang->line('usr_add1');?></label>
-      <?php echo form_input($usr_add1); ?>
-    </div>  
+      <div class="input-group">
+  <span class="input-group-addon">sFr.</span>
+  <?php echo form_input($kosten); ?>
+</div>
+      </div>
       
-          <div class="form-group">
-               <?php echo form_error('usr_plz'); ?>
-      <label for="usr_plz"><?php echo $this->lang->line('usr_plz');?></label>
-      <?php echo form_input($usr_plz); ?>
-    </div>          
+      
+  <div class="row">
+  <div class="col-lg-6">
+       <?php echo form_error('kosten'); ?>
+          <label for="kosten"><?php echo $this->lang->line('kosten');?></label>
+    <div class="input-group">
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">CHF<span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li><a onClick="window.location.href = '<?php echo base_url();?>index.php/kosten/umrechnen';return false;"><?php echo $this->lang->line('euro');?></a></li>
+        </ul>
+      </div><!-- /btn-group -->
+        <?php echo form_input($kosten); ?>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->    
+<br/>
 
+
+      
+      
+      
     <div class="form-group">
-             <?php echo form_error('usr_town_city'); ?>
-      <label for="usr_town_city"><?php echo $this->lang->line('usr_town_city');?></label>
-      <?php echo form_input($usr_town_city); ?>
-    </div>         
-   <div class="form-group">
-             <?php echo form_error('usr_phone'); ?>
-      <label for="usr_phone"><?php echo $this->lang->line('usr_phone');?></label>
-      <?php echo form_input($usr_phone); ?>
-    </div>         
-    <div class="form-group">
-                 <?php echo form_error('usr_access_level'); ?>
-      <label for="usr_access_level"><?php echo $this->lang->line('usr_access_level');?></label>
-      <?php echo form_dropdown('usr_access_level', $usr_access_level, 'large'); ?> 
-    </div>  
-    <div class="form-group">
-                 <?php echo form_error('usr_is_active'); ?>
-      <label for="usr_is_active"><?php echo $this->lang->line('usr_is_active');?></label>
-      <?php echo form_dropdown('usr_is_active', $usr_is_active, 'large'); ?> 
+      <?php echo form_error('r_nummer'); ?>
+      <label for="r_nummer"><?php echo $this->lang->line('r_nummer');?></label>
+      <?php echo form_input($r_nummer); ?>
     </div>     
 
+          <div class="form-group">
+      <?php echo form_error('tour_id'); ?>
+      <label for="tour_id"><?php echo $this->lang->line('reise');?></label>
+      <select name="tour_id" class="form-control">
+      <?php foreach ($tour->result() as $row) : ?>
+        <option value="<?php echo $row->tour_id ; ?>"><?php echo $row->tour_title ; ?></option>
+      <?php endforeach ; ?>
+      </select>
+    </div>    
+      
+      
+      
+      <!--Erfassung Datum-->
+      
+       <label for="start_d"><?php echo $this->lang->line('datum');?></label>
+    <div class="row">
+      <div class="form-group">
+        <div class="col-md-6">
+          <?php echo form_error('start_d'); ?>        
+          <select name="start_d" class="form-control">
+          <?php for ( $i = 1; $i <= 30; $i++) : ?>
+            <?php if (date('j', time()) == $i) : ?> 
+              <option selected value="<?php echo $i ; ?>"><?php echo date('jS', mktime($i,0,0,0, $i, date('Y'))) ; ?></option>
+            <?php else : ?>
+              <option value="<?php echo $i ; ?>"><?php echo date('jS', mktime($i,0,0,0, $i, date('Y'))) ; ?></option>
+            <?php endif ; ?>
+          <?php endfor ; ?>
+          </select>
+        </div>
+          <div class="col-md-6">      
+          <?php echo form_error('start_m'); ?>
+          <select name="start_m" class="form-control">
+          <?php for ( $i = 1; $i <= 12; $i++) : ?>
+            <?php if (date('m', time()) == $i) : ?> 
+              <option selected value="<?php echo $i ; ?>"><?php echo date('F', mktime(0,0,0,$i, 1, date('Y'))) ; ?></option>
+            <?php else : ?>
+              <option value="<?php echo $i ; ?>"><?php echo date('F', mktime(0,0,0,$i, 1, date('Y'))) ; ?></option>
+            <?php endif ; ?>
+          <?php endfor ; ?>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <?php echo form_error('start_y'); ?>
+          <select name="start_y" class="form-control">
+          <?php for ($i = date("Y",strtotime(date("Y"))); $i <= date("Y",strtotime(date("Y").' +5 year')); $i++) : ?>
+            <option value="<?php echo $i;?>"><?php echo $i;?></option>
+          <?php endfor ; ?>
+          </select>
+        </div> 
+      </div>  
+    </div> 
+   <br/>        
+
     <div class="form-group">
-      <button type="submit" class="btn btn-primary"><?php echo $this->lang->line('common_form_elements_go');?></button>     <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/users';return false;"><?php echo $this->lang->line('common_form_elements_cancel');?></button> 
-    </div>             
+        <br/>
+      <button type="submit" class="btn btn-primary"><?php echo $this->lang->line('common_form_elements_go');?></button>   <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/kosten';return false;"><?php echo $this->lang->line('common_form_elements_cancel');?></button> 
+    </div> 
 <?php echo form_close() ; ?>
   </div>
-</div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
+
   </div>
-</div>
-            
-            
-
-
 
 
 

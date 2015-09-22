@@ -42,6 +42,11 @@
 	      <label for="r_nummer"><?php echo $this->lang->line('r_nummer');?></label>
 	      <?php echo form_input($r_nummer); ?>
 	    </div>
+            	    <div class="form-group">
+	    	<?php echo form_error('datum'); ?>
+	      <label for="datum"><?php echo $this->lang->line('datum');?></label>
+	      <?php echo form_input($datum); ?>
+	    </div>
 
      
             

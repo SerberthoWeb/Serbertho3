@@ -41,7 +41,7 @@
   <label for="start_d"><?php echo $this->lang->line('reiseabfahrt');?></label>
     <div class="row">
       <div class="form-group">
-        <div class="col-md-2">
+        <div class="col-md-4">
           <?php echo form_error('start_d'); ?>        
           <select name="start_d" class="form-control">
           <?php for ( $i = 1; $i <= 30; $i++) : ?>
@@ -53,7 +53,7 @@
           <?php endfor ; ?>
           </select>
         </div>
-          <div class="col-md-2">      
+          <div class="col-md-4">      
           <?php echo form_error('start_m'); ?>
           <select name="start_m" class="form-control">
           <?php for ( $i = 1; $i <= 12; $i++) : ?>
@@ -65,7 +65,7 @@
           <?php endfor ; ?>
           </select>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
           <?php echo form_error('start_y'); ?>
           <select name="start_y" class="form-control">
           <?php for ($i = date("Y",strtotime(date("Y"))); $i <= date("Y",strtotime(date("Y").' +3 year')); $i++) : ?>
@@ -84,7 +84,7 @@
     <label for="sunset_d"><?php echo $this->lang->line('rückfahrtsankunft');?></label>
     <div class="row">
       <div class="form-group">
-        <div class="col-md-2">
+        <div class="col-md-4">
           <?php echo form_error('sunset_d'); ?>        
           <select name="sunset_d" class="form-control">
           <?php for ( $i = 1; $i <= 30; $i++) : ?>
@@ -96,7 +96,7 @@
           <?php endfor ; ?>
           </select>
         </div>
-        <div class="col-md-2">      
+        <div class="col-md-4">      
           <?php echo form_error('sunset_m'); ?>
           <select name="sunset_m" class="form-control">
           <?php for ( $i = 1; $i <= 12; $i++) : ?>
@@ -108,7 +108,7 @@
           <?php endfor ; ?>
           </select>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
           <?php echo form_error('sunset_y'); ?>
           <select name="sunset_y" class="form-control">
           <?php for ($i = date("Y",strtotime(date("Y"))); $i <= date("Y",strtotime(date("Y").' +3 year')); $i++) : ?>

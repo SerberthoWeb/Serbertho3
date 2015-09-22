@@ -15,24 +15,31 @@ class Users_model extends CI_Model {
 //----------------------------------------------------------------------------
 
 
-  function usersdata($offset, $limit) {
+  function usersdata($per_page,$offset,$sortfield,$order) {
       
-        $this->db->select('*');    
-        //$this->db->having($having);
+  
+		
+		$this->db->select('*')->from('users');
+		$this->db->order_by("$sortfield", "$order");
+		$this->db->limit($per_page,$offset);
+		$query_result = $this->db->get();		
+		
+		if($query_result->num_rows() > 0) {
+			foreach ($query_result->result_array() as $row)
+			{
+                            $sdata[] = array('usr_fname' => $row['usr_fname'],
+                                             'usr_lname' => $row['usr_lname'],
+                                             'usr_email' => $row['usr_email'],
+                                             'usr_id' => $row['usr_id']);
+			}				
+			return $sdata;
+		} else {
+			return false;	
+		}
+	}
+	
 
-                if ($offset != NULL)
-            $this->db->offset($offset);
-        if ($limit != NULL)
-            $this->db->limit($limit);
 
-        if ($limit == NULL && $offset == NULL)
-        {
-            $count = $this->db->get('users');
-            return $count->result_array();
-        }
-        else
-            return $this->db->get('users');
-    }
   
  //----------------------------------------------------------------------------
 

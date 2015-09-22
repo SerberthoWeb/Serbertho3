@@ -58,7 +58,7 @@ if ($search_string == null) {
   
   //Datenübersicht der ausselektierten Reise in rechnung/apply
     
-      function get_uebersicht($tour_id) {
+      function get_uebersicht_kosten($tour_id) {
   $query = "SELECT * FROM `tour`, `reiseort`, `users`, `kosten`, `kostenstelle`  WHERE 
       `reiseort`.`reiseort_id` = `tour`.`reiseort_id` AND 
       `users`.`usr_id` = `tour`.`usr_id` AND 

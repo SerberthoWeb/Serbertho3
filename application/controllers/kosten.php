@@ -11,6 +11,7 @@ class Kosten extends MY_Controller {
     $this->load->helper('text');
     $this->load->model('Tour_model');
     $this->load->model('Kosten_model');
+    $this->load->helper('date');
     $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
   }
 
@@ -18,27 +19,28 @@ class Kosten extends MY_Controller {
   
   public function index() {
     $this->form_validation->set_rules('search_string', $this->lang->line('search_string'), 'required|min_length[1]|max_length[125]');
-    $page_data['query'] = $this->Kosten_model->get_kosten($this->input->post('search_string'));
+    $data['query'] = $this->Kosten_model->get_kosten($this->input->post('search_string'));
 
     if ($this->form_validation->run() == FALSE) {
-      $page_data['search_string'] = array('name' => 'search_string', 'class' => 'form-control', 'id' => 'search_string', 'value' => set_value('search_string', $this->input->post('search_string')), 'maxlength'   => '100', 'size' => '35');
+      $data['search_string'] = array('name' => 'search_string', 'class' => 'form-control', 'id' => 'search_string', 'value' => set_value('search_string', $this->input->post('search_string')), 'maxlength'   => '100', 'size' => '35');
 
    
 
-  $page_data['query'] = $this->Kosten_model->get_kosten($this->input->post('search_string'));
-  $page_data['page_heading'] = 'Kostenübersicht';
+  $data['query'] = $this->Kosten_model->get_kosten($this->input->post('search_string'));
+  
+  $data['page_heading'] = 'Kostenübersicht';
   $this->load->view('common/header');
   $this->load->view('nav/top_nav');
-  $this->load->view('kosten/view_all_kosten', $page_data);
+  $this->load->view('kosten/view_all_kosten', $data);
   $this->load->view('common/footer');
   
       } else {
           
-      $page_data['page_heading'] = 'Kostenübersicht';
-      $this->load->view('common/header', $page_data);
-      $this->load->view('nav/top_nav', $page_data);
-      $this->load->view('kosten/view_all_kosten', $page_data);
-      $this->load->view('common/footer', $page_data);      
+      $data['page_heading'] = 'Kostenübersicht';
+      $this->load->view('common/header', $data);
+      $this->load->view('nav/top_nav', $data);
+      $this->load->view('kosten/view_all_kosten', $data);
+      $this->load->view('common/footer', $data);      
     }    
   }
    
@@ -197,28 +199,25 @@ $page_data['page_heading'] = 'Kostenübersicht';
         public function new_kostenstelle() {
             
             
-             $this->form_validation->set_rules('kostenstelle_name', $this->lang->line('kostenstelle_name'), 'required|min_length[1]|max_length[50]');
+         $this->form_validation->set_rules('kostenstelle_name', $this->lang->line('kostenstelle_name'), 'required|min_length[1]|max_length[50]');
              
-      $page_data['page_heading'] = 'Kostenstelle';
-  $page_data['query'] = $this->Kosten_model->get_kostenstelle();
+         $page_data['page_heading'] = 'Kostenstelle';
+         $page_data['query'] = $this->Kosten_model->get_kostenstelle();
   
-          if ($this->form_validation->run() == FALSE) {
-   
-    
-      $page_data['kostenstelle_name'] = array('name' => 'kostenstelle_name', 'class' => 'form-control', 'id' => 'kostenstelle_name', 'value' => set_value('kostenstelle_name', ''), 'maxlength'   => '100', 'size' => '35');   
+         if ($this->form_validation->run() == FALSE) {
+         $page_data['kostenstelle_name'] = array('name' => 'kostenstelle_name', 'class' => 'form-control', 'id' => 'kostenstelle_name', 'value' => set_value('kostenstelle_name', ''), 'maxlength'   => '100', 'size' => '35');   
     
 
- $this->load->view('common/header');
+      $this->load->view('common/header');
       $this->load->view('nav/top_nav');
       $this->load->view('kosten/new_kostenstelle', $page_data);
       $this->load->view('common/footer');      
     } else {
       $save_data = array(
         'kostenstelle_name' => $this->input->post('kostenstelle_name'),
-      
         );
 
-      if ($this->Kosten_model->save_kostenstelle($save_data)) {
+        if ($this->Kosten_model->save_kostenstelle($save_data)) {
         $this->session->set_flashdata('flash_message', $this->lang->line('save_success_okay'));
         redirect ('kosten/kostenstelle'); 
       } else {
@@ -302,11 +301,9 @@ $page_data['page_heading'] = 'Kostenübersicht';
     public function edit_kosten() {
   //Validationsregeln setzen
      $this->form_validation->set_rules('kosten_id', $this->lang->line('kosten_id'), 'required|min_length[1]|max_length[125]');
-     $this->form_validation->set_rules('kostenstele_id', $this->lang->line('kostenstelle_id'), 'required|min_length[1]|max_length[125]');
-    $this->form_validation->set_rules('kosten', $this->lang->line('kosten'), 'required|min_length[1]|max_length[125]');
-    $this->form_validation->set_rules('tour_id', $this->lang->line('tour_id'), 'required|min_length[1]|max_length[125]');
+    $this->form_validation->set_rules('kosten', $this->lang->line('kosten'), 'required|min_length[1]|max_length[125]'); 
     $this->form_validation->set_rules('r_nummer', $this->lang->line('r_nummer'), 'required|min_length[1]|max_length[125]');
-   
+    $this->form_validation->set_rules('datum', $this->lang->line('datum'), 'required|min_length[1]|max_length[125]');
     
   //Der Primärschlüssel des Kunden (kunden.kunde_id) wird an den Edit link angehängt und an
   //die edit_kunde() Funktion angehängt, um nachzuschauen dass der kunde in der Tabelle ist.
@@ -328,15 +325,13 @@ $page_data['page_heading'] = 'Kostenübersicht';
         
       $query = $this->Kosten_model->get_kosten_details($id);
   
-      
-      
       foreach ($query->result() as $row) {
         $kosten_id = $row->kosten_id;
         $kostenstelle_id = $row->kostenstelle_id;
         $kosten = $row->kosten;
         $tour_id = $row->tour_id;
         $r_nummer = $row->r_nummer;
-   
+        $datum = $row->datum;
       }
       
       
@@ -344,7 +339,7 @@ $page_data['page_heading'] = 'Kostenübersicht';
       $data['kosten'] = array('name' => 'kosten', 'class' => 'form-control', 'id' => 'kosten', 'value' => set_value('kosten', $kosten), 'maxlength'   => '100', 'size' => '35');
       $data['tour_id'] = array('name' => 'tour_id', 'class' => 'form-control', 'id' => 'tour_id', 'value' => set_value('tour_id', $tour_id), 'maxlength'   => '100', 'size' => '35');
       $data['r_nummer'] = array('name' => 'r_nummer', 'class' => 'form-control', 'id' => 'r_nummer', 'value' => set_value('r_nummer', $r_nummer), 'maxlength'   => '100', 'size' => '35');
-
+      $data['datum'] = array('name' => 'datum', 'class' => 'form-control', 'id' => 'datum', 'value' => set_value('datum', $datum), 'maxlength'   => '100', 'size' => '35');
       $data['id'] = array('kosten_id' => set_value('kosten_id', $kosten_id));
       
       $data['tour'] = $this->Kosten_model->get_tour();
@@ -362,7 +357,7 @@ $page_data['page_heading'] = 'Kostenübersicht';
         'kosten' => $this->input->post('kosten'),
         'tour_id' => $this->input->post('tour_id'),
         'r_nummer' => $this->input->post('r_nummer'),
-
+        'datum' => $this->input->post('datum')
       );
     
     //Sobald alles hinzugefügt wurde, werden die Kundendetails geupdatet durch
@@ -376,8 +371,6 @@ $page_data['page_heading'] = 'Kostenübersicht';
 
 
  //--------------------------------------------------------------------------------- 
-
-
 }
 
 /* End of file kosten.php */

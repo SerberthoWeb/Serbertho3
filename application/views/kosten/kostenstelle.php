@@ -1,5 +1,5 @@
 <h2><?php echo $page_heading ; ?></h2>
-<table class="table table-bordered">
+<table class="table table-hover table-bordered table-condensed">
     <thead>
         <tr>
       
@@ -14,7 +14,7 @@
 		        <tr>
 		          <td><?php echo $row->kostenstelle_name ; ?></td>
                           <td><?php echo anchor('kosten/delete_kostenstelle/'.
-		            $row->kostenstelle_id, '<span class="glyphicon glyphicon-remove"></span>', $this->lang->line('common_form_elements_action_delete')); ?> </button> 
+		            $row->kostenstelle_id, '<span class="glyphicon glyphicon-remove" data-toggle="modal" data-target="#myModal"></span>', $this->lang->line('common_form_elements_action_delete')); ?> 
 		      	  </td>
                         </tr>	        
 		    <?php endforeach ; ?>
