@@ -1,16 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /*
- * Erlaubt Reiseorte zu erfassen in der Struktur:
+ * Erlaubt Reiseorte zu erfassen, editieren und löschen in der Struktur:
  * - Reiseort
  * - Kurzbeschreibung
- * - Preis
- * Diese können gemanaget werden.
+ * Diese können somit gemanaget werden.
  * 
  */
-
-
-
 
 class Tour extends MY_Controller {
     
@@ -23,7 +19,6 @@ class Tour extends MY_Controller {
         $this->load->helper('string');
         $this->load->helper('text');
         $this->load->model('Tour_model');
-
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
      
   }
@@ -53,43 +48,39 @@ class Tour extends MY_Controller {
 
 public function new_tour() {
    // Setzt Validationsregeln
-   $this->form_validation->set_rules('tour_title', $this->lang->line('tour_title'), 'required|min_length[1]|max_length[125]');
+    $this->form_validation->set_rules('tour_title', $this->lang->line('tour_title'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('reiseort_id', $this->lang->line('reiseort_id'), 'required|min_length[1]|max_length[125]');
-   $this->form_validation->set_rules('start_d', $this->lang->line('start_d'), 'min_length[1]|max_length[2]');
+    $this->form_validation->set_rules('start_d', $this->lang->line('start_d'), 'min_length[1]|max_length[2]');
     $this->form_validation->set_rules('start_m', $this->lang->line('start_m'), 'min_length[1]|max_length[2]');
     $this->form_validation->set_rules('start_y', $this->lang->line('start_y'), 'min_length[1]|max_length[4]');
-   $this->form_validation->set_rules('sunset_d', $this->lang->line('sunset_d'), 'min_length[1]|max_length[2]');
+    $this->form_validation->set_rules('sunset_d', $this->lang->line('sunset_d'), 'min_length[1]|max_length[2]');
     $this->form_validation->set_rules('sunset_m', $this->lang->line('sunset_m'), 'min_length[1]|max_length[2]');
     $this->form_validation->set_rules('sunset_y', $this->lang->line('sunset_y'), 'min_length[1]|max_length[4]');
     $this->form_validation->set_rules('preis', $this->lang->line('preis'), 'required|min_length[1]|max_length[125]');
-   
     $this->form_validation->set_rules('usr_id', $this->lang->line('usr_id'), 'required|min_length[1]|max_length[125]');
     
     
     
-     $data['page_heading'] = 'Tour';   
+    $data['page_heading'] = 'Tour';   
     $data['reiseort'] = $this->Tour_model->get_reiseort();
     $data['users'] = $this->Tour_model->get_users();
 
     
-    
- 
-    
-    
+
   //Nachdem die Bestätigungsregeln gesetzt wurden, wird der return Wert von $this->form->validation() 
   //getestet. Ist es das erste mal, dass die Seite aufgerufen wird oder ein Formitem scheitert an
   //der Bestätigung wird ein FALSE zurück gegeben. Es werden Einstellungen für die HTML Elemente 
   //in kunden/new_kunde.php erstellt.
     
     if ($this->form_validation->run() == FALSE) {
-        $data['tour_title'] = array('name' => 'tour_title', 'class' => 'form-control', 'id' => 'tour_title', 'value' => set_value('tour_title', ''), 'maxlength'   => '100', 'size' => '35');
+       $data['tour_title'] = array('name' => 'tour_title', 'class' => 'form-control', 'id' => 'tour_title', 'value' => set_value('tour_title', ''), 'maxlength'   => '100', 'size' => '35');
        $data['preis'] = array('name' => 'preis', 'class' => 'form-control', 'id' => 'preis', 'value' => set_value('preis', ''), 'maxlength'   => '100', 'size' => '35');
-     $data['start_d']              = array('name' => 'start_d', 'class' => 'form-control', 'id' => 'start_d', 'value' => set_value('start_d', ''), 'maxlength'   => '100', 'size' => '35');
-      $data['start_m']              = array('name' => 'start_m', 'class' => 'form-control', 'id' => 'start_m', 'value' => set_value('start_m', ''), 'maxlength'   => '100', 'size' => '35');
-      $data['start_y']              = array('name' => 'start_y', 'class' => 'form-control', 'id' => 'start_y', 'value' => set_value('start_y', ''), 'maxlength'   => '100', 'size' => '35');
-          $data['sunset_d']             = array('name' => 'sunset_d', 'class' => 'form-control', 'id' => 'sunset_d', 'value' => set_value('sunset_d', ''), 'maxlength'   => '100', 'size' => '35');
-      $data['sunset_m']             = array('name' => 'sunset_m', 'class' => 'form-control', 'id' => 'sunset_m', 'value' => set_value('sunset_m', ''), 'maxlength'   => '100', 'size' => '35');
-      $data['sunset_y']             = array('name' => 'sunset_y', 'class' => 'form-control', 'id' => 'sunset_y', 'value' => set_value('sunset_y', ''), 'maxlength'   => '100', 'size' => '35');
+       $data['start_d']              = array('name' => 'start_d', 'class' => 'form-control', 'id' => 'start_d', 'value' => set_value('start_d', ''), 'maxlength'   => '100', 'size' => '35');
+       $data['start_m']              = array('name' => 'start_m', 'class' => 'form-control', 'id' => 'start_m', 'value' => set_value('start_m', ''), 'maxlength'   => '100', 'size' => '35');
+       $data['start_y']              = array('name' => 'start_y', 'class' => 'form-control', 'id' => 'start_y', 'value' => set_value('start_y', ''), 'maxlength'   => '100', 'size' => '35');
+       $data['sunset_d']             = array('name' => 'sunset_d', 'class' => 'form-control', 'id' => 'sunset_d', 'value' => set_value('sunset_d', ''), 'maxlength'   => '100', 'size' => '35');
+       $data['sunset_m']             = array('name' => 'sunset_m', 'class' => 'form-control', 'id' => 'sunset_m', 'value' => set_value('sunset_m', ''), 'maxlength'   => '100', 'size' => '35');
+       $data['sunset_y']             = array('name' => 'sunset_y', 'class' => 'form-control', 'id' => 'sunset_y', 'value' => set_value('sunset_y', ''), 'maxlength'   => '100', 'size' => '35');
      
       
      
@@ -121,7 +112,7 @@ public function new_tour() {
 
   
 //--------------------------------------------------------------------------
-//Wenn die Edit Funktion gewählt wird, wird die edit_kunde() Funktion aufgerufen.
+//Wenn die Edit-Funktion gewählt wird, wird die edit_tour() Funktion aufgerufen.
 
 public function edit_tour() {
   //Validationsregeln setzen
@@ -131,12 +122,6 @@ public function edit_tour() {
     $this->form_validation->set_rules('reiseankunft', $this->lang->line('reiseankunft'), 'required|min_length[1]|max_length[125]');  
 
     $this->form_validation->set_rules('preis', $this->lang->line('preis'), 'required|min_length[1]|max_length[125]');   
-  //Der Primärschlüssel des Kunden (kunden.kunde_id) wird an den Edit link angehängt und an
-  //die edit_kunde() Funktion angehängt, um nachzuschauen dass der kunde in der Tabelle ist.
-  //Die get_kunde_details($id) Funktion des kunden_model nimmt einen Parameterwert von $id -
-  //und schaut nach dem Kunden. Ist diese gefunden, werden die Details der Abfrage in eine lokale
-  //variable geschrieben und im data array gespeichert. Wird an edit_kunde.php weitergegeben,
-  //wo dies gebarucht wird um die Formitems mit den korrekten Daten zu füllen.
   
     if ($this->input->post()) {
       $id = $this->input->post('tour_id');
@@ -147,12 +132,9 @@ public function edit_tour() {
     $data['page_heading'] = 'Tour editieren';                
     //Bestätigung beginnt
     if ($this->form_validation->run() == FALSE) {      
-        
-        
-      $query = $this->Tour_model->get_tour_details($id);
   
-      
-      
+      $query = $this->Tour_model->get_tour_details($id);
+   
       foreach ($query->result() as $row) {
         $tour_id = $row->tour_id;
         $tour_title = $row->tour_title;
@@ -171,7 +153,6 @@ public function edit_tour() {
       $data['reiseankunft'] = array('name' => 'reiseankunft', 'class' => 'form-control', 'id' => 'reiseankunft', 'value' => set_value('reiseankunft', $reiseankunft), 'maxlength'   => '100', 'size' => '35');
       $data['usr_id'] = array('name' => 'usr_id', 'class' => 'form-control', 'id' => 'usr_id', 'value' => set_value('usr_id', $usr_id), 'maxlength'   => '100', 'size' => '35');
       $data['preis'] = array('name' => 'preis', 'class' => 'form-control', 'id' => 'preis', 'value' => set_value('preis', $preis), 'maxlength'   => '100', 'size' => '35');
-
       $data['id'] = array('tour_id' => set_value('tour_id', $tour_id));
       
 
@@ -204,9 +185,6 @@ public function edit_tour() {
 }
 
 //--------------------------------------------------------------------------
-
-
-
 
 //Wenn Delete benutz wird in users/view_all_users.php, wird der users controller gerufen
 //und darin die Funktion delete_user() genutzt. Gebraucht die users_usr_id Primärschlüssel 
@@ -241,7 +219,6 @@ public function edit_tour() {
   
   //----------------------------------------------------------------
   
-
 }
 
 

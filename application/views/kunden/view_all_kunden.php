@@ -1,4 +1,8 @@
- <h2><?php echo $page_heading ; ?></h2> 
+<!--/*
+ *Dieses Formular dient zur Übersicht aller Kunden. Ist die Anlaufstelle von der Navigation her.
+ */-->
+
+<h2><?php echo $page_heading ; ?></h2> 
 
 <button class="btn btn-primary" onClick="window.location.href = '<?php echo base_url();?>index.php/kunden/new_kunde';return false;"><?php echo $this->lang->line('common_form_elements_new_kunde');?></button>         
  <button class="btn btn-primary"  onClick="window.location.href = '<?php echo base_url();?>index.php/makepdf/kunden';return false;"><?php echo $this->lang->line('common_form_elements_make_pdf');?></button>
@@ -14,16 +18,15 @@
             <span class="input-group-btn" style="float: left;">
                  <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
             </span>
-          </div><!-- /input-group -->
-        </div><!-- /.col-lg-6 -->
-      </div><!-- /.row -->
+          </div>
+        </div>
+      </div>
     <?php echo form_close() ; ?>
   
 </div>
 
 <!--/*
- * Listet alle User die im System sind und erlaubt dem Admin User zu
- * editieren und zu löschen.
+ * Listet alle Kunden die im System sind.
  */-->
 
 <table class="table table-hover table-bordered table-condensed">
@@ -65,7 +68,7 @@
 		    <?php endforeach ; ?>
 		<?php else : ?>
 	        <tr>
-	          <td colspan="8" class="info">Keine Kunden hier!</td>
+	          <td colspan="12" class="info">Keine Kunden hier!</td>
 	        </tr>			
 		<?php endif; ?>
                     <div class="form-group">

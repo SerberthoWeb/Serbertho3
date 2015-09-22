@@ -1,8 +1,7 @@
-Dear %usr_fname% %usr_lname%,
+Sehr geehrter %usr_fname% %usr_lname%,
 
-Welcome to the site.  Your password is:
+Willkommen auf der Serbertho-Website. Ihr Passwort ist:
 
 %password%
 
-Regards,
-The Team
+freundliche Grüsse

@@ -1,4 +1,4 @@
-</div> <!-- Ende wrapper -->
+</div> <!-- Ende des Wrapper -->
 </div
     </body>
 
@@ -7,7 +7,7 @@
   
    <p class="pull-right">Serbertho Reisen. Alle Rechte vorbehalten. &copy; Copyright <?=date('Y')?></p>
     
-</div> <!-- /#footer -->
+</div> <!-- /#Footer -->
 </div>
 
 

@@ -1,9 +1,7 @@
 
 
 <!--/*
- * Zeigt ein Formulat für den Admin um einen User zu erstellen.
- * Dem neuen User wird eine Email gesendet welchen ihn Willkommen heisst und
- * informiert ihn über sein Password. EMail-Script ist unter /views/email_scripts/welcome.txt
+ * Formular um einen neuen Kunden zu erfassen.
  */-->
 
 <div class="form">
@@ -30,7 +28,6 @@
     </div>   
     <div class="form-group">
         <?php echo form_error('plz'); ?>
-        
       <label for="plz"><?php echo $this->lang->line('plz');?></label>
       <?php echo form_input($plz); ?>
     </div>   
@@ -39,8 +36,6 @@
 	      <label for="ort"><?php echo $this->lang->line('ort');?></label>
 	      <?php echo form_input($ort); ?>
 	    </div> 
-
-
     <div class="form-group">
         <?php echo form_error('telnr'); ?>
       <label for="telnr"><?php echo $this->lang->line('telnr');?></label>
@@ -51,7 +46,6 @@
       <label for="email"><?php echo $this->lang->line('email');?></label>
       <?php echo form_input($email); ?>
     </div>   
-
                 <div class="form-group">
       <?php echo form_error('tour_id'); ?>
       <label for="tour_id"><?php echo $this->lang->line('reise');?></label>

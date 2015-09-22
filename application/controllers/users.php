@@ -267,11 +267,11 @@ public function edit_user() {
     
      public function delete_user() {
     //Setzen Validationsregeln
-   $this->form_validation->set_rules('id', $this->lang->line('usr_id'), 'required|min_length[1]|max_length[11]|integer|is_natural');
+     $this->form_validation->set_rules('id', $this->lang->line('usr_id'), 'required|min_length[1]|max_length[11]|integer|is_natural');
 
-    if ($this->input->post()) {
+     if ($this->input->post()) {
       $id = $this->input->post('id');
-    } else {
+     } else {
       $id = $this->uri->segment(3);
     }
     

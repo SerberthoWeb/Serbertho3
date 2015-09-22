@@ -6,9 +6,9 @@
 
     <title><?php echo $this->lang->line('system_system_name'); ?></title>
 
-    <!-- Bootstrap core CSS -->
+    <!-- Bootstrap CSS -->
     <link href="<?php echo base_url('bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
-    <!-- Bootstrap theme -->
+    <!-- Bootstrap-Theme -->
     <link href="<?php echo base_url('bootstrap/css/bootstrap-theme.min.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('bootstrap/css/bootstrap-theme.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('bootstrap/css/bootstrap.css'); ?>" rel="stylesheet">
@@ -37,5 +37,5 @@
        
             
             
-         <!-- Beginn des wrapper -->   
+         <!-- Beginn des Wrapper -->   
   <div id="wrap" class="container">
