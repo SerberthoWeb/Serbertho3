@@ -1,4 +1,12 @@
 
+<!--/*
+ * Detailansicht einer Reise mit den Attributen:
+*Reisedetails
+*Rechnungsübersicht
+*Reiseteilnehmerübersicht
+ */-->
+
+
  <?php if ($this->session->flashdata('flash_message')) : ?>
     <div class="alert alert-info" role="alert"><?php echo $this->session->flashdata('flash_message');?></div>
    <?php endif ; ?>
@@ -52,14 +60,7 @@
     </div>
   </div>
     
-    
-    
-    
-  
-                
-                
-                
-                
+ 
                 
         <!--Kostenübersicht-->        
                 
@@ -93,46 +94,40 @@
 	</tbody>
 </table>
     
-
-
    
-    <!--Gesamtkosten-->
-    
+<!--Gesamtkosten/Gesamteinnahmen und Differenz-->
+
 <table class="table table-bordered">
     <tbody>
-    	<?php if ($querykosten->num_rows() > 0) : ?>
-			<?php foreach ($querykosten->result() as $row) : ?>
-            <tr> 
-                <td colspan="8">Gesamtkosten</td>
-                <td colspan="4"><?php echo $row->TotalKosten ; ?></td>   
-            </tr>
-                <?php endforeach ; ?>
-		<?php else : ?>		
-		<?php endif; ?>
-	</tbody>
-</table>
-               
-    
-    
-    
-    <!-- Einnahmen -->
-    
-<table class="table table-bordered">	
-    <tbody>
-           	<?php if ($queryeinnahmen->num_rows() > 0) : ?>
-          <?php $row = $queryeinnahmen->result()[0];?>
+        <?php if ($querykosten->num_rows() > 0) : ?>
+            <?php foreach ($querykosten->result() as $row) : ?>
+                <tr> 
+                    <td colspan="8">Gesamtkosten</td>
+                    <td colspan="4"><?php echo $row->TotalKosten; ?></td>   
+                </tr>
+            <?php endforeach; ?>
+        <?php else : ?>		
+        <?php endif; ?>
+
+        <?php if ($queryeinnahmen->num_rows() > 0) : ?>
+            <?php $row = $queryeinnahmen->result()[0]; ?>
+            <tr>
+                <td colspan="8">Gesamteinnahmen</td>
+                <td colspan="4"><?php echo $row->TotalEinnahmen; ?></td>  
+            </tr>          
+        <?php endif; ?>
         <tr>
-             <td colspan="8">Gesamteinnahmen</td>
-             <td colspan="4"><?php echo $row->TotalEinnahmen ; ?></td>  
-        </tr>
-		<?php endif; ?>         
-	</tbody>
-</table>          
-     <button class="btn btn-primary" style="float: left;" onClick="window.location.href = '<?php echo base_url();?>index.php/makepdf/users';return false;"><?php echo $this->lang->line('common_form_elements_make_pdf');?></button> 
-     <br/><br/>
-     
-     
+            <td colspan="8">Differenz</td>
+            <td colspan="4"><?php echo($row->TotalEinnahmen - $row->TotalKosten); ?></td>  
+        </tr>         
+
+    </tbody>
+</table>
+
+
     
+     
+
 
 <!-- Reiseteilnehmerübersicht -->
 

@@ -1,9 +1,8 @@
 
 
+
 <!--/*
- * Bestätigungsseite für den Admin. Wird aufgerufen, wenn der Admin einen der
- * view_all_users-View einen User löscht. Sie fragt ob der Admin den User
- * wirklich löschen will.
+ * Zeigt Formular um die ausgewählte Reise zu löschen.
  */-->
 
 

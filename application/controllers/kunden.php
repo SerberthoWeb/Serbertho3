@@ -32,7 +32,46 @@ class Kunden extends MY_Controller {
   //zu kunden/view_all_kunden.php geleitet. Zeigt alle Kunden in einem Tabellenformat an
   //mit zwei Optionen: Edit und Löschen.
   
-  public function index() {
+public function index($per_page=5, $order_by='kunde_id', $order='asc', $offset=0) {
+    $data['per_page'] = $per_page;
+    $data['offset'] = $offset;
+    $data['order']['kunde_id'] = 'asc';
+    $data['order']['fname'] = 'asc';
+    $data['order']['lname'] = 'asc';
+    $data['order']['strasse'] = 'asc';
+    $data['order']['plz'] = 'asc';
+    $data['order']['ort'] = 'asc';
+    $data['order']['telnr'] = 'asc';
+    $data['order']['email'] = 'asc';
+    $data['order']['tour_id'] = 'asc';
+    if($order=='asc'){
+        $data['order'][$order_by] = 'desc';
+    } else {
+        $data['order'][$order_by] = 'asc';
+    }
+    $data['total_rows'] = $this->Kunden_model->kundendata()->num_rows();
+    $data['query'] = $this->Kunden_model->kundendata($order_by, $order, $per_page, $offset);
+
+    //initializing & configuring paging
+    $this->load->library('pagination');
+    $config['base_url'] = site_url('/kunden/index/'.$per_page.'/'.$order_by.'/'.$order);
+    $config['per_page'] = $per_page;
+    $config['uri_segment'] = 6;
+    $config['total_rows'] = $data['total_rows'];
+    $config['full_tag_open'] = '<div id="pagination">';
+    $config['full_tag_close'] = '</div>';		
+
+    $this->pagination->initialize($config);
+
+    $data['page_heading'] = 'Kundenübersicht';
+    $this->load->view('common/header', $data);
+    $this->load->view('nav/top_nav', $data);
+    $this->load->view('kunden/view_all_kunden', $data);
+    $this->load->view('common/footer', $data);
+}
+//-----------------------------------------------------------------------------
+  
+  public function search_kunde() {
     $this->form_validation->set_rules('search_string', $this->lang->line('search_string'), 'required|min_length[1]|max_length[125]');
       $data['query'] = $this->Kunden_model->get_all_kunden($this->input->post('search_string'));
 
@@ -60,8 +99,9 @@ class Kunden extends MY_Controller {
       $this->load->view('common/footer', $data);      
     }    
   }
-//-----------------------------------------------------------------------------
-
+  
+  //-----------------------------------------------------------------------------
+  
 //Kümmert sich um die Kundenerstellung innerhalb des Systems. 
 
 public function new_kunde() {

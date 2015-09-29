@@ -48,7 +48,7 @@ class Makepdf extends CI_Controller {
                 function kosten() {
         $data['query'] = $this->Makepdf_model->get_all_kosten();
         $filename = 'Kostenliste';
-        $html = $this->load->view('kosten/kostenpdf', $data, true);
+        $html = $this->load->view('pdf/kosten_pdf', $data, true);
         pdf_create($html, $filename);
     }
     

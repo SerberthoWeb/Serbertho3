@@ -1,9 +1,7 @@
 
 
 <!--/*
- * Zeigt Formular für den Admin. Möchte der Admin einen User in der 
- * view_all_users-Sicht editieren. Gleich wie new_user, ausser dass der 
- * Admin eine Email dem User senden kann um sein Password zurückzusetzen.
+ * Zeigt Formular um die ausgewählte Reise zu editieren.
  */-->
 
 

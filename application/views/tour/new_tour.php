@@ -1,9 +1,7 @@
 
 
 <!--/*
- * Zeigt ein Formulat für den Admin um einen User zu erstellen.
- * Dem neuen User wird eine Email gesendet welchen ihn Willkommen heisst und
- * informiert ihn über sein Password. EMail-Script ist unter /views/email_scripts/welcome.txt
+ * Zeigt ein Formular auf welchem eine neue Tour erfasst werden kann.
  */-->
 
 

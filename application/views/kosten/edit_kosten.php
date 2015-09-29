@@ -17,10 +17,12 @@
         <label for="kostenstelle_id"><?php echo $this->lang->line('kostenstelle_id'); ?></label>
         <select name="kostenstelle_id" class="form-control">
             <?php foreach ($kostenstelle->result() as $row) : ?>
-                <option value="<?php echo $row->kostenstelle_id; ?>"><?php echo $row->kostenstelle_name; ?></option>
+                <option value="<?php echo $row->kostenstelle_id ; ?>"<?php if( $kostenstelle_id['value']==$row->kostenstelle_id){ echo 'selected'; } ?>><?php echo $row->kostenstelle_name ; ?></option>
             <?php endforeach; ?>
         </select>
     </div>    
+    
+    
     <div class="form-group">
         <?php echo form_error('kosten'); ?>
         <label for="kosten"><?php echo $this->lang->line('kosten'); ?></label>
@@ -31,7 +33,7 @@
         <label for="tour_id"><?php echo $this->lang->line('tour_id'); ?></label>
         <select name="tour_id" class="form-control">
             <?php foreach ($tour->result() as $row) : ?>
-                <option value="<?php echo $row->tour_id; ?>"><?php echo $row->tour_title; ?></option>
+              <option value="<?php echo $row->tour_id ; ?>"<?php if( $tour_id['value']==$row->tour_id){ echo 'selected'; } ?>><?php echo $row->tour_title ; ?></option>
             <?php endforeach; ?>
         </select>
     </div>    

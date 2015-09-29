@@ -32,8 +32,33 @@ class Tour_model extends CI_Model {
   //---------------------------------------------------------------------------- 
   
  
+    function tourdata($order_by=null, $order=null, $limit=0, $offset='') {
+         if(isset($order_by) && !is_null($order_by)){
+          $this->db->order_by($order_by, $order);
+      }
+      if($limit!=0){
+          $this->db->limit($limit, $offset);
+      }
+        $this->db->join('reiseort', 'reiseort.reiseort_id = tour.reiseort_id');
+        $this->db->join('users', 'users.usr_id = tour.usr_id');
+        return $this->db->get('tour'); 
+     /*
+      * $query = "SELECT * FROM `kosten`, `kostenstelle`, `tour` WHERE 
+              `kostenstelle`.`kostenstelle_id` = `kosten`.`kostenstelle_id` AND  
+              `tour`.`tour_id` = `kosten`.`tour_id`"; 
 
-  
+     
+                  $result = $this->db->query($query, array());
+    if ($result) {
+      return $result;
+    } else {
+      return false;
+    }
+    */
+    }
+    
+    //---------------------------------------------------------------------------- 
+    
   function process_create_tour($data) {    
       if ($this->db->insert('tour', $data)) {      
           return $this->db->insert_id();    

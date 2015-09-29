@@ -1,11 +1,8 @@
 
 
 <!--/*
- * Zeigt Formular für den Admin. Möchte der Admin einen User in der 
- * view_all_users-Sicht editieren. Gleich wie new_user, ausser dass der 
- * Admin eine Email dem User senden kann um sein Password zurückzusetzen.
+ * Zeigt Formular um die ausgewählte Tour zu editieren.
  */-->
-
 
 <div class="page-header">
   <h1><?php echo $page_heading ; ?></h1>
@@ -24,9 +21,9 @@
                 <div class="form-group">
       <?php echo form_error('reiseort_id'); ?>
       <label for="reiseort_id"><?php echo $this->lang->line('reiseort');?></label>
-      <select name="reiseort_id" class="form-control">
+      <select name="reiseort_id" class="form-control" >
       <?php foreach ($reiseort->result() as $row) : ?>
-        <option value="<?php echo $row->reiseort_id ; ?>"><?php echo $row->reiseort ; ?></option>
+        <option value="<?php echo $row->reiseort_id ; ?>"<?php if( $reiseort_id['value']==$row->reiseort_id){ echo 'selected'; } ?>><?php echo $row->reiseort ; ?></option>
       <?php endforeach ; ?>
       </select>
     </div>   
@@ -48,8 +45,9 @@
       <?php echo form_error('usr_id'); ?>
       <label for="usr_id"><?php echo $this->lang->line('usr_id');?></label>
       <select name="user_id" class="form-control">
+      
       <?php foreach ($users->result() as $row) : ?>
-        <option value="<?php echo $row->usr_id ; ?>"><?php echo $row->usr_lname . " " .$row->usr_fname ; ?></option>
+            <option value="<?php echo $row->usr_id ; ?>" <?php if( $usr_id['value']==$row->usr_id){ echo 'selected'; } ?>><?php echo $row->usr_lname . " " .$row->usr_fname ; ?></option>
       <?php endforeach ; ?>
       </select>
     </div>   

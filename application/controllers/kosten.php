@@ -17,47 +17,85 @@ class Kosten extends MY_Controller {
 
   //---------------------------------------------------------------------------------
   
-  public function index() {
-    $this->form_validation->set_rules('search_string', $this->lang->line('search_string'), 'required|min_length[1]|max_length[125]');
-    $data['query'] = $this->Kosten_model->get_kosten($this->input->post('search_string'));
-
-    if ($this->form_validation->run() == FALSE) {
-      $data['search_string'] = array('name' => 'search_string', 'class' => 'form-control', 'id' => 'search_string', 'value' => set_value('search_string', $this->input->post('search_string')), 'maxlength'   => '100', 'size' => '35');
+  public function index($per_page=5, $order_by='kosten_id', $order='asc', $offset=0) {
 
    
+    $data['per_page'] = $per_page;
+    $data['offset'] = $offset;
+    $data['order']['kosten_id'] = 'asc';
+    $data['order']['kostenstelle_id'] = 'asc';
+    $data['order']['kosten'] = 'asc';
+    $data['order']['tour_id'] = 'asc';
+    $data['order']['r_nummer'] = 'asc';
+    $data['order']['datum'] = 'asc';
+    if($order=='asc'){
+        $data['order'][$order_by] = 'desc';
+    } else {
+        $data['order'][$order_by] = 'asc';
+    }
+   $data['total_rows'] = $this->Kosten_model->kostendata()->num_rows();
+    $data['query'] = $this->Kosten_model->kostendata($order_by, $order, $per_page, $offset);
 
-  $data['query'] = $this->Kosten_model->get_kosten($this->input->post('search_string'));
-  
-  $data['page_heading'] = 'Kostenübersicht';
-  $this->load->view('common/header');
-  $this->load->view('nav/top_nav');
-  $this->load->view('kosten/view_all_kosten', $data);
-  $this->load->view('common/footer');
-  
-      } else {
-          
-      $data['page_heading'] = 'Kostenübersicht';
-      $this->load->view('common/header', $data);
-      $this->load->view('nav/top_nav', $data);
-      $this->load->view('kosten/view_all_kosten', $data);
-      $this->load->view('common/footer', $data);      
-    }    
-  }
+    //initializing & configuring paging
+    $this->load->library('pagination');
+    $config['base_url'] = site_url('/kosten/index/'.$per_page.'/'.$order_by.'/'.$order);
+    $config['per_page'] = $per_page;
+    $config['uri_segment'] = 6;
+    $config['total_rows'] = $data['total_rows'];
+    $config['full_tag_open'] = '<div id="pagination">';
+    $config['full_tag_close'] = '</div>';		
+
+    $this->pagination->initialize($config);
+
+    $data['page_heading'] = 'Kostenübersicht';
+    $this->load->view('common/header', $data);
+    $this->load->view('nav/top_nav', $data);
+    $this->load->view('kosten/view_all_kosten', $data);
+    $this->load->view('common/footer', $data);
+}
    
     
      //---------------------------------------------------------------------------------
 
-  public function rn() {
+  
+  
+  public function kostenstellen() {
     $this->form_validation->set_rules('search_string', $this->lang->line('search_string'), 'required|min_length[1]|max_length[125]');
-    $page_data['query'] = $this->Kosten_model->get_kosten_rn($this->input->post('search_string'));
+    $page_data['query'] = $this->Kosten_model->get_kostenstellen($this->input->post('search_string'));
+
+    if ($this->form_validation->run() == FALSE) {
+      $page_data['search_string'] = array('name' => 'search_string', 'class' => 'form-control', 'id' => 'search_string', 'value' => set_value('search_string', $this->input->post('search_string')), 'maxlength'   => '100', 'size' => '35');
+
+
+  $page_data['query'] = $this->Kosten_model->get_kostenstellen($this->input->post('search_string'));
+  $page_data['page_heading'] = 'Kostenübersicht';
+  $this->load->view('common/header');
+  $this->load->view('nav/top_nav');
+  $this->load->view('kosten/view_all_kosten', $page_data);
+  $this->load->view('common/footer');
+      } else {
+          $page_data['page_heading'] = 'Kostenübersicht';
+      $this->load->view('common/header');
+      $this->load->view('nav/top_nav');
+      $this->load->view('kosten/view_all_kosten', $page_data);
+      $this->load->view('common/footer');      
+    }    
+  }
+    
+     //---------------------------------------------------------------------------------
+  
+  
+  public function rechnungsnummer() {
+    $this->form_validation->set_rules('search_string', $this->lang->line('search_string'), 'required|min_length[1]|max_length[125]');
+    $page_data['query'] = $this->Kosten_model->get_kosten_rechnungsnummer($this->input->post('search_string'));
 
     if ($this->form_validation->run() == FALSE) {
       $page_data['search_string'] = array('name' => 'search_string', 'class' => 'form-control', 'id' => 'search_string', 'value' => set_value('search_string', $this->input->post('search_string')), 'maxlength'   => '100', 'size' => '35');
 
  
 
-  $page_data['query'] = $this->Kosten_model->get_kosten_rn($this->input->post('search_string'));
-$page_data['page_heading'] = 'Kostenübersicht';
+  $page_data['query'] = $this->Kosten_model->get_kosten_rechnungsnummer($this->input->post('search_string'));
+  $page_data['page_heading'] = 'Kostenübersicht';
   $this->load->view('common/header');
   $this->load->view('nav/top_nav');
   $this->load->view('kosten/view_all_kosten', $page_data);
@@ -74,7 +112,33 @@ $page_data['page_heading'] = 'Kostenübersicht';
   
       //---------------------------------------------------------------------------------
 
+  public function reisename() {
+    $this->form_validation->set_rules('search_string', $this->lang->line('search_string'), 'required|min_length[1]|max_length[125]');
+    $page_data['query'] = $this->Kosten_model->get_kosten_reisename($this->input->post('search_string'));
 
+    if ($this->form_validation->run() == FALSE) {
+      $page_data['search_string'] = array('name' => 'search_string', 'class' => 'form-control', 'id' => 'search_string', 'value' => set_value('search_string', $this->input->post('search_string')), 'maxlength'   => '100', 'size' => '35');
+
+ 
+
+  $page_data['query'] = $this->Kosten_model->get_kosten_reisename($this->input->post('search_string'));
+  $page_data['page_heading'] = 'Kostenübersicht';
+  $this->load->view('common/header');
+  $this->load->view('nav/top_nav');
+  $this->load->view('kosten/view_all_kosten', $page_data);
+  $this->load->view('common/footer');
+      } else {
+          $page_data['page_heading'] = 'Kostenübersicht';
+      $this->load->view('common/header');
+      $this->load->view('nav/top_nav');
+      $this->load->view('kosten/view_all_kosten', $page_data);
+      $this->load->view('common/footer');      
+    }    
+  }
+  
+       //--------------------------------------------------------------------------------- 
+       
+       
   //Nachdem die Bestätigungsregeln gesetzt wurden, wird der return Wert von $this->form->validation() 
   //getestet. Ist es das erste mal, dass die Seite aufgerufen wird oder ein Formitem scheitert an
   //der Bestätigung wird ein FALSE zurück gegeben. Es werden Einstellungen für die HTML Elemente 
@@ -145,10 +209,10 @@ $page_data['page_heading'] = 'Kostenübersicht';
          $page_data['umrechnen'] = $resultxyz->rate;
 }         
   
-   $this->form_validation->set_rules('kostenstelle_id', $this->lang->line('job_desc'), 'required|min_length[1]|max_length[11]');
+    $this->form_validation->set_rules('kostenstelle_id', $this->lang->line('job_desc'), 'required|min_length[1]|max_length[11]');
     $this->form_validation->set_rules('kosten', $this->lang->line('kosten'), 'required|min_length[1]|max_length[11]');
     $this->form_validation->set_rules('tour_id', $this->lang->line('tour_id'), 'required|min_length[1]|max_length[125]');
-     $this->form_validation->set_rules('r_nummer', $this->lang->line('r_nummer'), 'required|min_length[1]|max_length[11]');
+    $this->form_validation->set_rules('r_nummer', $this->lang->line('r_nummer'), 'required|min_length[1]|max_length[11]');
     $this->form_validation->set_rules('start_d', $this->lang->line('start_d'), 'min_length[1]|max_length[2]');
     $this->form_validation->set_rules('start_m', $this->lang->line('start_m'), 'min_length[1]|max_length[2]');
     $this->form_validation->set_rules('start_y', $this->lang->line('start_y'), 'min_length[1]|max_length[4]');

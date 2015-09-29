@@ -15,7 +15,23 @@ class Kunden_model extends CI_Model {
 
 //----------------------------------------------------------------------------
 
+  function kundendata($order_by=null, $order=null, $limit=0, $offset=''){
+       if(isset($order_by) && !is_null($order_by)){
+          $this->db->order_by($order_by, $order);
+      }
+      if($limit!=0){
+          $this->db->limit($limit, $offset);
+      }
+  
+        $this->db->join('tour', 'kunde.tour_id = tour.tour_id');
+        
+        return $this->db->get('kunde'); 
 
+  }
+        
+
+         
+//----------------------------------------------------------------------------
   function get_all_kunden($search_string) {    
  if ($search_string == null) {
       $query = "SELECT * FROM `kunde`, `tour` WHERE 

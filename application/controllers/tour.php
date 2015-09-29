@@ -30,18 +30,43 @@ class Tour extends MY_Controller {
   //zu reiseort/view_all_reisen.php weiter geleitet. Zeigt alle Reisen in einem Tabellenformat an
   //mit zwei Optionen: Edit und Löschen.
   
-  public function index() {
-      
+public function index($per_page=5, $order_by='tour_id', $order='asc', $offset=0) {
 
-  $data['page_heading'] = 'Tourübersicht';
-  $data['query'] = $this->Tour_model->get_all_tour();
+   
+    $data['per_page'] = $per_page;
+    $data['offset'] = $offset;
+    $data['order']['tour_id'] = 'asc';
+    $data['order']['tour_title'] = 'asc';
+    $data['order']['reiseort_id'] = 'asc';
+    $data['order']['reiseabfahrt'] = 'asc';
+    $data['order']['reiseankunft'] = 'asc';
+    $data['order']['usr_id'] = 'asc';
+    $data['order']['preis'] = 'asc';
+    if($order=='asc'){
+        $data['order'][$order_by] = 'desc';
+    } else {
+        $data['order'][$order_by] = 'asc';
+    }
+   $data['total_rows'] = $this->Tour_model->tourdata()->num_rows();
+    $data['query'] = $this->Tour_model->tourdata($order_by, $order, $per_page, $offset);
 
-  $this->load->view('common/header', $data);
-  $this->load->view('nav/top_nav', $data);
-  $this->load->view('tour/view_all_touren', $data);
-  $this->load->view('common/footer', $data);
-} 
+    //initializing & configuring paging
+    $this->load->library('pagination');
+    $config['base_url'] = site_url('/tour/index/'.$per_page.'/'.$order_by.'/'.$order);
+    $config['per_page'] = $per_page;
+    $config['uri_segment'] = 6;
+    $config['total_rows'] = $data['total_rows'];
+    $config['full_tag_open'] = '<div id="pagination">';
+    $config['full_tag_close'] = '</div>';		
 
+    $this->pagination->initialize($config);
+
+    $data['page_heading'] = 'Tourübersicht';
+    $this->load->view('common/header', $data);
+    $this->load->view('nav/top_nav', $data);
+    $this->load->view('tour/view_all_touren', $data);
+    $this->load->view('common/footer', $data);
+}
 //-----------------------------------------------------------------------------
 
 //Kümmert sich um die Reiseerstellung innerhalb des Systems. 

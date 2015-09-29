@@ -35,11 +35,6 @@
 	      <?php echo form_input($usr_email); ?>
 	    </div>   
 	    <div class="form-group">
-	    	<?php echo form_error('usr_confirm_email'); ?>	
-	      <label for="usr_confirm_email"><?php echo $this->lang->line('usr_confirm_email');?></label>
-	      <?php echo form_input($usr_confirm_email); ?>
-	    </div>   
-	    <div class="form-group">
 	    	<?php echo form_error('usr_add1'); ?>
 	      <label for="usr_add1"><?php echo $this->lang->line('usr_add1');?></label>
 	      <?php echo form_input($usr_add1); ?>

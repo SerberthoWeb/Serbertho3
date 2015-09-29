@@ -15,42 +15,28 @@ class Users_model extends CI_Model {
 //----------------------------------------------------------------------------
 
 
-  function usersdata($per_page,$offset,$sortfield,$order) {
-      
   
-		
-		$this->db->select('*')->from('users');
-		$this->db->order_by("$sortfield", "$order");
-		$this->db->limit($per_page,$offset);
-		$query_result = $this->db->get();		
-		
-		if($query_result->num_rows() > 0) {
-			foreach ($query_result->result_array() as $row)
-			{
-                            $sdata[] = array('usr_fname' => $row['usr_fname'],
-                                             'usr_lname' => $row['usr_lname'],
-                                             'usr_email' => $row['usr_email'],
-                                             'usr_id' => $row['usr_id']);
-			}				
-			return $sdata;
-		} else {
-			return false;	
-		}
-	}
-	
+  function usersdata($order_by=null, $order=null, $limit=0, $offset=''){
+      if(isset($order_by) && !is_null($order_by)){
+          $this->db->order_by($order_by, $order);
+      }
+      if($limit!=0){
+          $this->db->limit($limit, $offset);
+      }
+      return $this->db->get('users');
+  }
 
+//----------------------------------------------------------------------------
 
-  
- //----------------------------------------------------------------------------
-
-// Count all record of table "contact_info" in database.
+    // Zählt alle Einträge in der Tabelle Users
     public function record_count() {
         return $this->db->count_all("users");
 }
 
+
 //----------------------------------------------------------------------------
 
-
+    //Generiert einen neuen User
   function process_create_user($data) {    
       if ($this->db->insert('users', $data)) {      
           return $this->db->insert_id();    
@@ -61,9 +47,9 @@ class Users_model extends CI_Model {
       }  
    }
    
-   //----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
    
-   
+   //Editiert einen bestehenden User
   function process_update_user($id, $data) {    
       $this->db->where('usr_id', $id);   
       
@@ -76,9 +62,9 @@ class Users_model extends CI_Model {
       }  
   }
   
-  //----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
   
-  
+   //Gibt alle Details eines Users wieder
   function get_user_details($id) {    
       $this->db->where('usr_id', $id);   
       $result = $this->db->get('users');
@@ -94,9 +80,9 @@ class Users_model extends CI_Model {
  }
  
  
- //----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
  
- 
+    //Gibt die Userdetails wieder anhand der Email
   function get_user_details_by_email($email) {    
       $this->db->where('usr_email', $email);   
       $result = $this->db->get('users');
@@ -112,7 +98,7 @@ class Users_model extends CI_Model {
  
  //----------------------------------------------------------------------------
  
- 
+    //Löscht einen bestehenden User
   function delete_user($id) {
     if($this->db->delete('users', array('usr_id' => $id))) {
       return true;
@@ -122,7 +108,7 @@ class Users_model extends CI_Model {
   }
   
   
-  //----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
  
   
   
@@ -149,9 +135,9 @@ class Users_model extends CI_Model {
   }
   
   
-  //----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
       
-      
+      //Zählt die Anzahl User anhand der eindeutig gegebenen Email
   function count_results($email) {
     $this->db->where('usr_email', $email);
     $this->db->from('users');
@@ -176,7 +162,7 @@ class Users_model extends CI_Model {
     }
   }
      
-  //----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
   
   
   function does_code_match($data, $email) {
@@ -198,9 +184,9 @@ class Users_model extends CI_Model {
     }
   }  
  
- //----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
  
-
+  
   function update_user_code($data) {
     $this->db->where('usr_email', $data['usr_email']);  
     if ($this->db->update('users', $data)) {

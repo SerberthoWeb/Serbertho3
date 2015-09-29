@@ -36,39 +36,39 @@ class Users extends MY_Controller {
   //wird zu users/view_all_users.php geleitet. Zeigt alle Users in einem Tabellenformat an
   //mit zwei Optionen: Edit und Delete.
   
-public function index($page_num=1,$sortfield='usr_id',$order='asc') {	
-	$page_number = $this->uri->segment(3);	// Gibt das 3te Segement von der URL.In http://localhost/Serbertho3/index.php/users/2 ist die URL,  User 2 ist die Seitenzahl(= 3. Segment)
-	 
-	$config['base_url'] = base_url().'index.php/users/index/'; // URL, hier werden alle Users gelistet
-	
-        //Anzahl Einträge die der User auswählt
+public function index($per_page=5, $order_by='usr_id', $order='asc', $offset=0) {
+    $data['per_page'] = $per_page;
+    $data['offset'] = $offset;
+    $data['order']['usr_id'] = 'asc';
+    $data['order']['usr_lname'] = 'asc';
+    $data['order']['usr_fname'] = 'asc';
+    $data['order']['usr_email'] = 'asc';
+    if($order=='asc'){
+        $data['order'][$order_by] = 'desc';
+    } else {
+        $data['order'][$order_by] = 'asc';
+    }
+    $data['total_rows'] = $this->Users_model->usersdata()->num_rows();
+    $data['query'] = $this->Users_model->usersdata($order_by, $order, $per_page, $offset);
 
-                 $config['per_page'] = 5;
-             // Default-Wert, wieviele Einträge angezeigt werden
-	//$config['num_links'] = 3; // Anzahl der Links für die Pagination, z.B. 1,2,3
-	if(empty($page_number)) $page_number = 1;
-	$offset = ($page_number-1) * $config['per_page'];
-	
-	$config['use_page_numbers'] = TRUE; // Ist der Wert auf true, der Wert der Seitennummer ist: users/1, users/2 etc.. Wird die page_number config auf 2 gestellt (2 Einträge auf der Seite) werden bei ungerader Anzahl, bei der nur ein Einträg existiert, ohne true, eine fehlermeldung produziert
-	
-	$data["usersdata"] = $this->Users_model->usersdata($config['per_page'],$offset,$sortfield,$order); 	
-	$config['total_rows'] = $this->db->count_all('users'); // Gibt die Totalanzahl der Records von der Tabelle user.
-	
-	$config['full_tag_open'] = '<div id="pagination">';
-	$config['full_tag_close'] = '</div>';		
-	
-	$this->pagination->cur_page = $offset;
-			
-	$this->pagination->initialize($config);
-	$data['page_links'] = $this->pagination->create_links(); // Übergibt die Links der $data	
-	
-          
-  $data['page_heading'] = 'Userübersicht';
-  $this->load->view('common/header', $data);
-  $this->load->view('nav/top_nav', $data);
-  $this->load->view('users/view_all_users', $data);
-  $this->load->view('common/footer', $data);
-} 
+    //initializing & configuring paging
+    $this->load->library('pagination');
+    $config['base_url'] = site_url('/users/index/'.$per_page.'/'.$order_by.'/'.$order);
+    $config['per_page'] = $per_page;
+    $config['uri_segment'] = 6;
+    $config['total_rows'] = $data['total_rows'];
+    $config['full_tag_open'] = '<div id="pagination">';
+    $config['full_tag_close'] = '</div>';		
+
+    $this->pagination->initialize($config);
+
+    $data['page_heading'] = 'Userübersicht';
+    $this->load->view('common/header', $data);
+    $this->load->view('nav/top_nav', $data);
+    $this->load->view('users/view_all_users', $data);
+    $this->load->view('common/footer', $data);
+}
+
 //-----------------------------------------------------------------------------
 
 //Handelt die Usererstellung innerhalb des Systems. 
@@ -112,7 +112,7 @@ public function new_user() {
       
       $this->load->view('common/header', $data);
       $this->load->view('nav/top_nav', $data);
-      $this->load->view('users/view_all_users',$data);
+      $this->load->view('users/new_user',$data);
       $this->load->view('common/footer', $data);
     } else { // Validation bestanden
   
@@ -169,7 +169,6 @@ public function edit_user() {
     $this->form_validation->set_rules('usr_lname', $this->lang->line('usr_lname'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_uname', $this->lang->line('usr_uname'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_email', $this->lang->line('usr_email'), 'required|min_length[1]|max_length[255]|valid_email');
-    $this->form_validation->set_rules('usr_confirm_email', $this->lang->line('usr_confirm_email'), 'required|min_length[1]|max_length[255]|valid_email|matches[usr_email]');
     $this->form_validation->set_rules('usr_add1', $this->lang->line('usr_add1'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_plz', $this->lang->line('usr_plz'), 'required|min_length[4]|max_length[10]');
     $this->form_validation->set_rules('usr_town_city', $this->lang->line('usr_town_city'), 'required|min_length[1]|max_length[125]');
@@ -213,7 +212,6 @@ public function edit_user() {
       $data['usr_lname'] = array('name' => 'usr_lname', 'class' => 'form-control', 'id' => 'usr_lname', 'value' => set_value('usr_lname', $usr_lname), 'maxlength'   => '100', 'size' => '35');
       $data['usr_uname'] = array('name' => 'usr_uname', 'class' => 'form-control', 'id' => 'usr_uname', 'value' => set_value('usr_uname', $usr_uname), 'maxlength'   => '100', 'size' => '35');
       $data['usr_email'] = array('name' => 'usr_email', 'class' => 'form-control', 'id' => 'usr_email', 'value' => set_value('usr_email', $usr_email), 'maxlength'   => '100', 'size' => '35');
-      $data['usr_confirm_email'] = array('name' => 'usr_confirm_email', 'class' => 'form-control', 'id' => 'usr_confirm_email', 'value' => set_value('usr_confirm_email', $usr_email), 'maxlength'   => '100', 'size' => '35');
       $data['usr_add1'] = array('name' => 'usr_add1', 'class' => 'form-control', 'id' => 'usr_add1', 'value' => set_value('usr_add1', $usr_add1), 'maxlength'   => '100', 'size' => '35');
       $data['usr_plz'] = array('name' => 'usr_plz', 'class' => 'form-control', 'id' => 'usr_plz', 'value' => set_value('usr_plz', $usr_plz), 'maxlength'   => '100', 'size' => '35');
       $data['usr_town_city'] = array('name' => 'usr_town_city', 'class' => 'form-control', 'id' => 'usr_town_city', 'value' => set_value('usr_town_city', $usr_town_city), 'maxlength'   => '100', 'size' => '35');

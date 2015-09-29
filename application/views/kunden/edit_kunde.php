@@ -54,7 +54,7 @@
         <label for="tour_id"><?php echo $this->lang->line('reise'); ?></label>
         <select name="tour_id" class="form-control">
             <?php foreach ($tour->result() as $row) : ?>
-                <option value="<?php echo $row->tour_id; ?>"><?php echo $row->tour_title; ?></option>
+              <option value="<?php echo $row->tour_id ; ?>"<?php if( $tour_id['value']==$row->tour_id){ echo 'selected'; } ?>><?php echo $row->tour_title ; ?></option>
             <?php endforeach; ?>
         </select>
     </div>    
