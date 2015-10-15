@@ -65,7 +65,7 @@
         <!--Kostenübersicht-->        
                 
         <br/>
-<h3>Rechnungsübersicht</h3>
+<h3>Kostenübersicht</h3>
 <table class="table table-bordered">
      <thead class="thead-inverse">
         <tr class="info">
@@ -96,7 +96,8 @@
     
    
 <!--Gesamtkosten/Gesamteinnahmen und Differenz-->
-
+        <br/>
+<h3>Gewinn-/Verlustrechnung</h3>
 <table class="table table-bordered">
     <tbody>
         <?php if ($querykosten->num_rows() > 0) : ?>

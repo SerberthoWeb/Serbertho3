@@ -25,7 +25,7 @@ class Kosten extends MY_Controller {
     $data['order']['kosten_id'] = 'asc';
     $data['order']['kostenstelle_id'] = 'asc';
     $data['order']['kosten'] = 'asc';
-    $data['order']['tour_id'] = 'asc';
+    $data['order']['tour_title'] = 'asc';
     $data['order']['r_nummer'] = 'asc';
     $data['order']['datum'] = 'asc';
     if($order=='asc'){

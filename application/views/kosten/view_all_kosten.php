@@ -75,7 +75,7 @@
         <tr class="info">
 <!--          <th>#</th>-->
              <th><a href="<?= site_url('/kosten/index/' . $per_page . '/kostenstelle_name/' . $order['kostenstelle_id'] . '/0') ?>">Kostenstelle</a></th>
-            <th><a href="<?= site_url('/kosten/index/' . $per_page . '/tour_title/' . $order['tour_id'] . '/0') ?>">Reisename</a></th>
+            <th><a href="<?= site_url('/kosten/index/' . $per_page . '/tour_title/' . $order['tour_title'] . '/0') ?>">Reisename</a></th>
             <th><a href="<?= site_url('/kosten/index/' . $per_page . '/kosten/' . $order['kosten'] . '/0') ?>">Kosten</a></th>
             <th><a href="<?= site_url('/kosten/index/' . $per_page . '/r_nummer/' . $order['r_nummer'] . '/0') ?>">Rechnungsnummer</a></th>
             <th><a href="<?= site_url('/kosten/index/' . $per_page . '/datum/' . $order['datum'] . '/0') ?>">Erfassungsdatum</a></th>

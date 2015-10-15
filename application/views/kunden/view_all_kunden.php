@@ -42,7 +42,7 @@
             <th><a href="<?= site_url('/kunden/index/' . $per_page . '/ort/' . $order['ort'] . '/0') ?>">Ort</a></th>
             <th><a href="<?= site_url('/kunden/index/' . $per_page . '/telnr/' . $order['telnr'] . '/0') ?>">Telefonnummer</a></th>
             <th><a href="<?= site_url('/kunden/index/' . $per_page . '/email/' . $order['email'] . '/0') ?>">Email</a></th>
-            <th><a href="<?= site_url('/kunden/index/' . $per_page . '/tour_id/' . $order['tour_id'] . '/0') ?>">Reise</a></th>
+            <th><a href="<?= site_url('/kunden/index/' . $per_page . '/tour_title/' . $order['tour_title'] . '/0') ?>">Reise</a></th>
             <th>Aktion</th>                     
         </tr>
     </thead>	

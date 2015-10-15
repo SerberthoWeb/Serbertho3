@@ -43,7 +43,7 @@ public function index($per_page=5, $order_by='kunde_id', $order='asc', $offset=0
     $data['order']['ort'] = 'asc';
     $data['order']['telnr'] = 'asc';
     $data['order']['email'] = 'asc';
-    $data['order']['tour_id'] = 'asc';
+    $data['order']['tour_title'] = 'asc';
     if($order=='asc'){
         $data['order'][$order_by] = 'desc';
     } else {
